@@ -1,0 +1,89 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url(../img/fondo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: sans-serif;
+    height: 100vh;
+}
+.login-box{
+    width: 320px;
+    height: 420px;
+    background: black;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    border-radius: 10%;
+}
+.login-box .avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+.login-box h1{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 22px;
+}
+.login-box label{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: block;
+}
+.login-box input{
+    width: 90%;
+    margin-bottom: 15px;
+}
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    border: none;
+    border-bottom: 1px solid white;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+.login-box button{
+    border: none;
+    outline: none;
+    height: 35px;
+    width: 40%;
+    position: absolute;
+    margin-top: 20%;
+    left: calc(50% - 75px);
+    background: rgba(80, 80, 80, 0.609);
+    border-radius: 20px;
+    color: #fff;
+}
+.login-box a{
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgrey;
+    left: calc(50% - 80px);
+    margin-top: 40%;
+    position: absolute;
+}
+.footer{
+    position: absolute;
+    color: #fff;
+    left: calc(50% - 80px);
+    margin-top: 37%;
+}
+.footer h1{
+    font-size: 15px;
+    font-family: 'Inconsolata', monospace;
+}

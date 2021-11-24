@@ -1,0 +1,10 @@
+.cerrar_sesion{
+    margin-top: 5px;
+    background: rgba(133, 131, 131, 0.856);
+    color: white;
+    border-radius: 50%;
+    border: black solid 1px;
+    height: 27px;
+    width: 27px;
+    outline: none;
+  }
