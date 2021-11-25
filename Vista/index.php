@@ -33,6 +33,7 @@ if(!isset($_SESSION['S_ID'])){
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../plantilla/plugins/DataTables/datatables.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -96,7 +97,7 @@ if(!isset($_SESSION['S_ID'])){
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo $_SESSION['S_Usuario']; ?></a>
+          <a href="#" class="d-block"><?php echo $_SESSION['USUARIO']; ?></a>
         </div>
       </div>
 
@@ -106,18 +107,18 @@ if(!isset($_SESSION['S_ID'])){
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+            <a  class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+              Bienvenido
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a onclick="cargar_contenido('contenido_principal','usuario/vista_usuario_listar.php')" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                  <p>Usuario</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -613,14 +614,48 @@ if(!isset($_SESSION['S_ID'])){
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Bienvenidos a VisualSat</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
-                
+    <section class="content">
+      <div clas="row" id="contenido_principal">
+      
+      <div class="col-md-12">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Bienvenido a VisualSat</h3>
 
-            
-  </div>
-  <!-- /.content-wrapper -->
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="/pages/widgets.html" data-source-selector="#card-refresh-content"><i class="fas fa-sync-alt"></i></button>
+                  <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+                <!-- /.card-tools -->
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+      </div>
+      </div>
+    </section>
+
   <footer class="main-footer">
     <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
@@ -643,6 +678,37 @@ if(!isset($_SESSION['S_ID'])){
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
+  var idioma_espanol = {
+			select: {
+			rows: "%d fila seleccionada"
+			},
+			"sProcessing":     "Procesando...",
+			"sLengthMenu":     "Mostrar _MENU_ registros",
+			"sZeroRecords":    "No se encontraron resultados",
+			"sEmptyTable":     "Ning&uacute;n dato disponible en esta tabla",
+			"sInfo":           "Registros del (_START_ al _END_) total de _TOTAL_ registros",
+			"sInfoEmpty":      "Registros del (0 al 0) total de 0 registros",
+			"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+			"sInfoPostFix":    "",
+			"sSearch":         "Buscar:",
+			"sUrl":            "",
+			"sInfoThousands":  ",",
+			"sLoadingRecords": "<b>No se encontraron datos</b>",
+			"oPaginate": {
+					"sFirst":    "Primero",
+					"sLast":     "Último",
+					"sNext":     "Siguiente",
+					"sPrevious": "Anterior"
+			},
+			"oAria": {
+					"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+					"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+			}
+	 }
+
+  function cargar_contenido(contenedor,contenido){
+    $("#"+contenedor).load(contenido);
+  }
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
@@ -672,5 +738,7 @@ if(!isset($_SESSION['S_ID'])){
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <script src="https://kit.fontawesome.com/3a4b2807a0.js" crossorigin="anonymous"></script>
+<script src="../plantilla/plugins/DataTables/datatables.min.js" ></script>
+
 </body>
 </html>

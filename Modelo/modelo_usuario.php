@@ -31,5 +31,29 @@
             
             $this->conexion->conectar();
         }
+        function listar_usuario(){
+            $conn = $this->conexion->conectar();
+            $sql  = "select id,nombre,cedula,telefono,email,usuario,clave,idRol,tipoRol from usuario";
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+            $i = 0;
+            $data = [];
+            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+            {
+                $data[$i] = $row;
+                $i++;
+                
+            }
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
+            }
+            
+            $this->conexion->conectar();
+        }
     }
+
 ?>

@@ -59,3 +59,34 @@ function VerificarUsuario(){
 
     })
 }
+function listar_usuario(){
+        var table = $("#tabla_usuario").DataTable({
+       "ordering":false,
+       "paging": false,
+       "searching": { "regex": true },
+       "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+       "pageLength": 10,
+       "destroy":true,
+       "async": false ,
+       "processing": true,
+       "ajax":{
+           "url":"../controlador/usuario/controlador_usuario_listar.php",
+           type:'POST'
+       },
+       "columns":[
+           {"data":"id"},
+           {"data":"nombre"},
+           {"data":"cedula"},
+           {"data":"telefono"},
+           {"data":"email"},
+           {"data":"usuario"},
+           {"data":"clave"},
+           {"data":"idRol",},  
+           {"defaultContent":"<button style='font-size:13px;' type='button' class='editar btn btn-primary'><i class='fa fa-edit'></i></button>"}
+       ],
+
+       "language":idioma_espanol,
+       select: true
+   });
+
+}
