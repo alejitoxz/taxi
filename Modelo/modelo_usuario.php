@@ -43,7 +43,7 @@
             $data = [];
             while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
             {
-                $data[$i] = $row;
+                $data['data'][] = $row;
                 $i++;
                 
             }
