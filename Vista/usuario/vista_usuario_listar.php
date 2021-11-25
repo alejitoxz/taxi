@@ -25,6 +25,7 @@
                           <th>Email</th>
                           <th>Usuario</th>
                           <th>Rol</th>
+                          <th>Compañia</th>
                           <th>Accion</th>
                         </tr>
                       </thead>

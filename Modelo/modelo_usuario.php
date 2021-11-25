@@ -33,7 +33,7 @@
         }
         function listar_usuario(){
             $conn = $this->conexion->conectar();
-            $sql  = "select id,nombre,cedula,telefono,email,usuario,clave,idRol from usuario";
+            $sql  = "select id,nombre,cedula,telefono,email,usuario,clave,idRol,idCompany from usuario";
             
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
