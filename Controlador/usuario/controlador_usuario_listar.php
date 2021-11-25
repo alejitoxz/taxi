@@ -4,6 +4,7 @@
     $MU = new modelo_usuario();
 
     $consulta = $MU->listar_usuario();
+   
     if($consulta){
         echo json_encode($consulta);
     }else {

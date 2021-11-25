@@ -24,12 +24,12 @@
                           <th>Telefono</th>
                           <th>Email</th>
                           <th>Usuario</th>
-                          <th>Conrtraseña</th>
                           <th>Rol</th>
+                          <th>Accion</th>
                         </tr>
                       </thead>
-                      <tfoot id="ListadoUsuarios">
-                      </tfoot>
+                      <tbody id="ListadoUsuarios">
+                      </tbody>
               </table>
             </div>
               <!-- /.card-body -->
@@ -37,7 +37,7 @@
             <!-- /.card -->
     </div>
 </div>
-<script type="text/javascript" src="../js/usuario.js?>"></script>
+<script type="text/javascript" src="../js/usuario.js"></script>
 <script>
     listar_usuario();
 
