@@ -60,6 +60,7 @@ function VerificarUsuario(){
     })
 }
 function listar_usuario(){
+    console.log("Entra aqui");
         var table = $("#tabla_usuario").DataTable({
        "ordering":false,
        "paging": false,
@@ -70,7 +71,7 @@ function listar_usuario(){
        "async": false ,
        "processing": true,
        "ajax":{
-           "url":"../controlador/usuario/controlador_usuario_listar.php",
+           url:"../controlador/usuario/controlador_usuario_listar.php",
            type:'POST'
        },
        "columns":[
@@ -81,7 +82,7 @@ function listar_usuario(){
            {"data":"email"},
            {"data":"usuario"},
            {"data":"clave"},
-           {"data":"idRol",},  
+           {"data":"idRol"},  
            {"defaultContent":"<button style='font-size:13px;' type='button' class='editar btn btn-primary'><i class='fa fa-edit'></i></button>"}
        ],
 

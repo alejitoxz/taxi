@@ -1,4 +1,4 @@
-<script type="text/javascript" src="../js/usuario.js?rev=<?php echo time();?>"></script>
+
 <div class="col-md-12">
     <div class="card card-success">
             <div class="card-header">
@@ -28,17 +28,7 @@
                           <th>Rol</th>
                         </tr>
                       </thead>
-                      <tfoot>
-                        <tr>
-                            <th>#</th>
-                          <th>Nombre</th>
-                          <th>Cedula</th>
-                          <th>Telefono</th>
-                          <th>Email</th>
-                          <th>Usuario</th>
-                          <th>Conrtraseña</th>
-                          <th>Rol</th>
-                        </tr>
+                      <tfoot id="ListadoUsuarios">
                       </tfoot>
               </table>
             </div>
@@ -47,8 +37,8 @@
             <!-- /.card -->
     </div>
 </div>
+<script type="text/javascript" src="../js/usuario.js?>"></script>
 <script>
-$(document).ready(function(){  
     listar_usuario();
-})
+
 </script>
