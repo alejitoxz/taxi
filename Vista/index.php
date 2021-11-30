@@ -34,6 +34,7 @@ if(!isset($_SESSION['S_ID'])){
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="../plantilla/DataTables/datatables.min.css">
+  <link rel="stylesheet" href="../plantilla/select2/select2.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -269,6 +270,7 @@ if(!isset($_SESSION['S_ID'])){
 <script src="dist/js/demo.js"></script>
 <script src="https://kit.fontawesome.com/3a4b2807a0.js" crossorigin="anonymous"></script>
 <script src="../plantilla/DataTables/datatables.min.js" ></script>
-
+<script src="../plantilla/select2/select2.min.js" ></script>
+<script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
 </body>
 </html>
