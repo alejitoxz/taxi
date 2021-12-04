@@ -19,8 +19,8 @@
             p.nombre,
             p.apellido,
             v.nInterno,
-            v.vMovilizacion,
-            v.vSoat
+            CONVERT(varchar,v.vMovilizacion) as vMovilizacion,
+            CONVERT(varchar,v.vSoat) as vSoat
             FROM
             vehiculo AS v
             INNER JOIN company AS co ON (v.idCompañia = co.id)
@@ -46,7 +46,7 @@
             }
             
             $this->conexion->conectar();
-            echo sql;
+           
         }
 
 
