@@ -111,21 +111,21 @@ if(!isset($_SESSION['S_ID'])){
             <a  class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-              Bienvenido
+              Configuracion
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a onclick="cargar_contenido('contenido_principal','usuario/vista_usuario_listar.php')" class="nav-link active">
+                <a onclick="cargar_contenido('contenido_principal','usuario/vista_usuario_listar.php')" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Usuario</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a onclick="cargar_contenido('contenido_principal','vehiculo/vista_vehiculo_listar.php')" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
+                  <p>vehiculo</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -272,5 +272,6 @@ if(!isset($_SESSION['S_ID'])){
 <script src="../plantilla/DataTables/datatables.min.js" ></script>
 <script src="../plantilla/select2/select2.min.js" ></script>
 <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
+
 </body>
 </html>
