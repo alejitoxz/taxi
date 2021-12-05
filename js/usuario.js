@@ -215,22 +215,24 @@ function modificar_usuario(){
 // FUNCION PARA ELIMINAR (ANULAR) REGISTRO
 $('#tabla_usuario').on('click','.eliminar',function(){
     var id = table.row(this).data().id;
-    modificar_estatus(id,0);
+    
     Swal.fire({
-        title: 'Esta seguro de eliminar el usuario?',
-        text: "Una vez hecho esto, se eliminara del sistema!",
+        title: '¿Seguro desea eliminar el registro?',
+        text: "Una vez hecho esto, se eliminara del sistema",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Aceptar!'
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar'
       }).then((result) => {
+          console.log(result);
         if (result.value) {
+        modificar_estatus(id,0);
           Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
+            'Eliminado',
+            '¡Tu registro ha sido eliminado!',
             'success'
-            
           )
         }
       })
