@@ -63,19 +63,19 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Placa</label>
-              <input type="text" class="form-control" id="txt_pla" placeholder="Ingrese los Nombre"><br>
+              <input type="text" class="form-control" id="txt_pla" placeholder="Ingrese Placa"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Marca</label>
-              <input type="text" class="form-control" id="txt_mar" placeholder="Ingrese los Apellidos"><br>
+              <input type="text" class="form-control" id="txt_mar" placeholder="Ingrese la Marca"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Modelo</label>
-              <input type="text" class="form-control" id="txt_mod" placeholder="Ingrese la cedula"><br>
+              <input type="text" class="form-control" id="txt_mod" placeholder="Ingrese el Modelo"><br>
             </div>
           </div>
         </div>
@@ -83,19 +83,19 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Numero Interno</label>
-              <input type="text" class="form-control" id="txt_int" placeholder="Ingrese los Nombre"><br>
+              <input type="text" class="form-control" id="txt_int" placeholder="Ingrese el Numero Interno"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Vencimiento Movilizacion</label>
-              <input type="date" class="form-control" id="txt_mov" placeholder="Ingrese los Apellidos"><br>
+              <input type="date" class="form-control" id="txt_mov" ><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Vencimiento Soat</label>
-              <input type="date" class="form-control" id="txt_soa" placeholder="Ingrese la cedula"><br>
+              <input type="date" class="form-control" id="txt_soa" ><br>
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Entidad responsable</label>
-              <select class="js-example-basic-single"  name="state" id="sel_entResp" style="width:100%; heigth: 40px;">               
+              <select class="js-example-basic-single"  name="state" id="sel_entResp_vehiculo" style="width:100%; heigth: 40px;">               
               </select><br><br>
             </div>
           </div>
@@ -124,15 +124,120 @@
       </div>
     </div>
   </div>
+
+
+
+  <!-- MODAL PARA EDITAR REGISTRO -->
+  <div class="modal fade" id="modal_editar_V" role="dialog">
+
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header modal-primary">
+        <h4 class="modal-title"><b>Editar Usuario</b></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <!-- FORMULARIO REGISTRO DE USUARIOS, CAMPOS -->
+        <form class="form">
+
+        <div class="row">
+          <div class="col-md-4">
+          <input type="hidden" id="id" >
+          <input type="hidden" id="idPersona" >
+            <div class="form-group">
+              <label for="">Placa</label>
+              <input type="text" class="form-control" id="txt_nom_edit" placeholder="Ingrese los Nombre"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Marca</label>
+              <input type="text" class="form-control" id="txt_ape_edit" placeholder="Ingrese los Apellidos"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Modelo</label>
+              <input type="text" class="form-control" id="txt_ced_edit" placeholder="Ingrese la cedula"><br>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Numero Interno</label>
+              <input type="text" class="form-control" id="txt_tel_edit" placeholder="Ingrese el Telefono"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Vencimiento Movilizacion</label>
+              <input type="text" class="form-control" id="txt_ema_edit" placeholder="Ingrese el Email"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Vencimiento Soat</label>
+              <input type="text" class="form-control" id="txt_dir_edit" placeholder="Ingrese la direccion"><br>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Entidad responsable</label>
+              <input type="text" class="form-control" id="txt_usu_edit" placeholder="Ingrese el Usuario"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Contraseña</label>
+              <input type="password" autocomplete="new-password" class="form-control" id="txt_con_edit" placeholder="Ingrese la Contraseña"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Repetir Contraseña</label>
+              <input type="text" class="form-control" id="txt_con2_edit" placeholder="Repita la Contraseña"><br>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Rol</label>
+              <select class="js-example-basic-single"  name="state" id="sel_rol_edit" style="width:100%; heigth: 40px;">
+                
+              </select><br><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Entidad responsable</label>
+              <select class="js-example-basic-single"  name="state" id="sel_ent_edit" style="width:100%; heigth: 40px;">
+                
+              </select><br><br>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"><b>&nbsp;Close</b></i></button>
+          <button type="button" class="btn btn-primary" onclick="modificar_vehiculo()"><i class="fa fa-check"><b>&nbsp;Modificar</b></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
   </form>
 <script type="text/javascript" src="../js/vehiculo.js"></script>
 <script>
   $(document).ready(function(){
     listar_vehiculo();
-    //$('.js-example-basic-single').select2();
-    //listar_rol();
-    //listar_ent();
-    //$("#modal_registro_vehiculo").on('shown.bs.modal',function(){
-    //});
+    $('.js-example-basic-single').select2();
+    listar_pro();
+    listar_ent_vehiculo();
+    $("#modal_registro_vehiculo").on('shown.bs.modal',function(){
+    });
   });
 </script>

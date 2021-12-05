@@ -49,5 +49,75 @@
            
         }
 
-
+        
+    function listar_ent_vehiculo(){
+        $conn = $this->conexion->conectar();
+        $sql  = "SELECT id, entResp from company";
+        $resp = sqlsrv_query($conn, $sql);
+        if( $resp === false) {
+            return 0;
+        }
+        $i = 0;
+        $data = [];
+        while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+        {
+            $data[$i] = $row;
+            $i++;
+        }
+        if($data>0){
+            return $data;
+        }else{
+            return 0;
+        }
+        
+        $this->conexion->conectar();
     }
+
+    function listar_pro(){
+        $conn = $this->conexion->conectar();
+        $sql  = "SELECT 
+        pro.id,
+        (p.nombre + ' ' +p.apellido) as dueno
+        from 
+        propietario as pro
+        INNER JOIN persona AS p ON (pro.idPersona = p.id)
+        ";
+        $resp = sqlsrv_query($conn, $sql);
+        if( $resp === false) {
+            return 0;
+        }
+        $i = 0;
+        $data = [];
+        while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+        {
+            $data[$i] = $row;
+            $i++;
+        }
+        if($data>0){
+            return $data;
+        }else{
+            return 0;
+        }
+        
+        $this->conexion->conectar();
+    }
+    
+    function registrar_vehiculo($placa,$marca,$modelo,$entResp,$idPropietario,$nInterno,$vMovilizacion,$vSoat){
+        $conn = $this->conexion->conectar();
+        $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompañia,idPropietario,nInterno,vMovilizacion,vSoat)
+                 VALUES('$placa','$marca','$modelo','$nInterno','$vMovilizacion','$vSoat','$entResp','$idPropietario')
+                 ";
+               
+        $resp = sqlsrv_query($conn, $sql);
+        
+        if( $resp === false) {
+            return 0;
+        }else{
+            return 1;
+        }
+        
+        $this->conexion->conectar();
+    }
+
+
+}
