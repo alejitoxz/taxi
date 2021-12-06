@@ -45,8 +45,8 @@ function listar_vehiculo(){
     
 }
 function AbrirModalRegistroVehiculo(){
-    $("#modal_registro_company").modal({backdrop:'static',keyboard:false})
-    $("#modal_registro_company").modal('show');
+    $("#modal_registro_vehiculo").modal({backdrop:'static',keyboard:false})
+    $("#modal_registro_vehiculo").modal('show');
 }
 function listar_ent_vehiculo(){
     $.ajax({

@@ -69,8 +69,8 @@
         </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"><b>&nbsp;Close</b></i></button>
-          <button type="button" class="btn btn-primary" onclick="registrar_usuario()"><i class="fa fa-check"><b>&nbsp;Guardar</b></i></button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> </i> Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="registrar_usuario()"><i class="fa fa-check"> </i> Guardar</button>
         </div>
       </div>
     </div>
@@ -107,8 +107,8 @@
         </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"><b>&nbsp;Close</b></i></button>
-          <button type="button" class="btn btn-primary" onclick="modificar_company()"><i class="fa fa-check"><b>&nbsp;Modificar</b></i></button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> </i> Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="modificar_company()"><i class="fa fa-check"> </i> Modificar</button>
         </div>
       </div>
     </div>
