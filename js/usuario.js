@@ -86,6 +86,10 @@ function listar_usuario(){
             {
                 "targets": [ 2 ],
                 "visible": false
+            },
+            {
+                "targets": [ 11 ],
+                "visible": false
             }
         ],
         "columns": [

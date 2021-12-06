@@ -121,7 +121,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Repetir Contraseña</label>
-              <input type="text" class="form-control" id="txt_con2" placeholder="Repita la Contraseña"><br>
+              <input type="password" class="form-control" id="txt_con2" placeholder="Repita la Contraseña"><br>
             </div>
           </div>
         </div>
@@ -224,7 +224,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Repetir Contraseña</label>
-              <input type="text" class="form-control" id="txt_con2_edit" placeholder="Repita la Contraseña"><br>
+              <input type="password" class="form-control" id="txt_con2_edit" placeholder="Repita la Contraseña"><br>
             </div>
           </div>
         </div>
