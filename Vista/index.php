@@ -46,35 +46,22 @@ if(!isset($_SESSION['S_ID'])){
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
     </ul>
-
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       
-    <a href="../controlador/usuario/controlador_cerrar_sesion.php"><button class="cerrar_sesion"><i class="fas fa-sign-out-alt"></i></button></a>
    
     <!-- Notifications Dropdown Menu --> 
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
           <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link"  data-slide="true" href="../controlador/usuario/controlador_cerrar_sesion.php">
+          <i class="fas fa-sign-out-alt"></i>
         </a>
       </li>
     </ul>
@@ -87,7 +74,7 @@ if(!isset($_SESSION['S_ID'])){
     <a href="index3.html" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">VisualSat</span>
+      <span class="brand-text font-weight-light">VisualSat - SUT</span>
     </a>
 
     <!-- Sidebar -->
@@ -109,23 +96,24 @@ if(!isset($_SESSION['S_ID'])){
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
             <a  class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-cog"></i>
               <p>
               Configuracion
                 <i class="right fas fa-angle-left"></i>
+                
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a onclick="cargar_contenido('contenido_principal','usuario/vista_usuario_listar.php')" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Usuario</p>
+                  <i class="fas fa-user"></i>
+                  <p>Usuarios</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a onclick="cargar_contenido('contenido_principal','vehiculo/vista_vehiculo_listar.php')" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>vehiculo</p>
+                  <i class="fas fa-taxi"></i>
+                  <p>vehiculos</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -188,10 +176,10 @@ if(!isset($_SESSION['S_ID'])){
     </section>
 
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
+    <strong><a href="http://adminlte.io">Visualsat.com</a></strong>
+   Todos los derechos reservados.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.0-rc.5
+      <b>Version</b> 1.0
     </div>
   </footer>
 
