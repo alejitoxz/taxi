@@ -139,4 +139,33 @@
         
         $this->conexion->conectar();
     }
+
+    function editar_vehiculo($id,$placa,$marca,$modelo,$entResp,$idPropietario,$nInterno,$vMovilizacion,$vSoat){
+        $conn = $this->conexion->conectar();
+
+        $sql  = "UPDATE vehiculo SET
+                placa= '$usuario' 
+                marca= '$tipoRol',
+                modelo = '$entResp',
+                entResp = '$entResp',
+                idPropietario = '$idPropietario',
+                nInterno = '$nInterno',
+                vMovilizacion = '$vMovilizacion',
+                vSoat = '$vSoat'
+                WHERE id=$id
+                ";
+                 
+        $resp = sqlsrv_query($conn, $sql);
+        
+        if( $resp === false) {
+            return 0;
+        }else{
+            return 1;
+        }
+        
+        $this->conexion->conectar();
+    }
+
+
+
 }

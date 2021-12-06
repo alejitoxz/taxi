@@ -60,7 +60,7 @@
         <div class="modal-body">
           <!-- FORMULARIO REGISTRO DE vehiculo, CAMPOS -->
         <form class="form">
-
+        
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
@@ -112,7 +112,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Dueño</label>
-              <select class="js-example-basic-single"  name="state" id="sel_pro" style="width:100%; heigth: 40px;">   
+              <select class="js-example-basic-single"  name="state" id="sel_pro_vehiculo" style="width:100%; heigth: 40px;">   
               </select><br><br>
             </div>
           </div>
@@ -140,24 +140,24 @@
         <div class="modal-body">
           <!-- FORMULARIO REGISTRO DE vehiculo, CAMPOS -->
         <form class="form">
-
+        <input type="hidden" id="idVehiculo">
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Placa</label>
-              <input type="text" class="form-control" id="txt_pla" placeholder="Ingrese Placa"><br>
+              <input type="text" class="form-control" id="txt_pla_edit" placeholder="Ingrese Placa"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Marca</label>
-              <input type="text" class="form-control" id="txt_mar" placeholder="Ingrese la Marca"><br>
+              <input type="text" class="form-control" id="txt_mar_edit" placeholder="Ingrese la Marca"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Modelo</label>
-              <input type="text" class="form-control" id="txt_mod" placeholder="Ingrese el Modelo"><br>
+              <input type="text" class="form-control" id="txt_mod_edit" placeholder="Ingrese el Modelo"><br>
             </div>
           </div>
         </div>
@@ -165,19 +165,19 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Numero Interno</label>
-              <input type="text" class="form-control" id="txt_int" placeholder="Ingrese el Numero Interno"><br>
+              <input type="text" class="form-control" id="txt_int_edit" placeholder="Ingrese el Numero Interno"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Vencimiento Movilizacion</label>
-              <input type="date" class="form-control" id="txt_mov" ><br>
+              <input type="date" class="form-control" id="txt_mov_edit" ><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Vencimiento Soat</label>
-              <input type="date" class="form-control" id="txt_soa" ><br>
+              <input type="date" class="form-control" id="txt_soa_edit" ><br>
             </div>
           </div>
         </div>
@@ -185,14 +185,14 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Entidad responsable</label>
-              <select class="js-example-basic-single"  name="state" id="sel_entResp_vehiculo" style="width:100%; heigth: 40px;">               
+              <select class="js-example-basic-single"  name="state" id="sel_entResp_vehiculo_edit" style="width:100%; heigth: 40px;">               
               </select><br><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Dueño</label>
-              <select class="js-example-basic-single"  name="state" id="sel_pro" style="width:100%; heigth: 40px;">   
+              <select class="js-example-basic-single"  name="state" id="sel_pro_vehiculo_edit" style="width:100%; heigth: 40px;">   
               </select><br><br>
             </div>
           </div>

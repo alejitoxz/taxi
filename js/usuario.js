@@ -113,18 +113,25 @@ function listar_usuario(){
 }
 // FUNCION PARA EDITAR REGISTRO
 $('#tabla_usuario').on('click','.editar',function(){
-    var id = table.row(this).data().id;
-    var nombres = table.row(this).data().nombre;
-    var apellidos = table.row(this).data().apellido;
-    var telefono = table.row(this).data().telefono;
-    var cedula = table.row(this).data().cedula;
-    var email = table.row(this).data().email;
-    var direccion = table.row(this).data().direccion;
-    var usuario = table.row(this).data().usuario;
-    var clave = table.row(this).data().clave;
-    var idRol = table.row(this).data().idRol;
-    var idEntResp = table.row(this).data().idEntResp;
-    var idPersona = table.row(this).data().idPersona;
+
+    if(table.row(this).child.isShown()){
+        var datosUsuario = table.row(this).data();
+    }else{
+        var datosUsuario = table.row($(this).parents('tr')).data();
+    }
+
+    var id = datosUsuario.id;
+    var nombres = datosUsuario.nombre;
+    var apellidos = datosUsuario.apellido;
+    var telefono = datosUsuario.telefono;
+    var cedula = datosUsuario.cedula;
+    var email = datosUsuario.email;
+    var direccion = datosUsuario.direccion;
+    var usuario = datosUsuario.usuario;
+    var clave = datosUsuario.clave;
+    var idRol = datosUsuario.idRol;
+    var idEntResp = datosUsuario.idEntResp;
+    var idPersona = datosUsuario.idPersona;
     //levantar modal
     AbrirModalEditar();
     //ingresas datos modal
@@ -140,7 +147,7 @@ $('#tabla_usuario').on('click','.editar',function(){
     $("#txt_con2_edit").val('');
     $("#sel_rol_edit").val(idRol).trigger('change');
     $("#sel_ent_edit").val(idEntResp).trigger('change');
-    $("#idPersona").val(idPersona).trigger('change');
+    $("#idPersona").val(idPersona);
 
 })
 function modificar_usuario(){
