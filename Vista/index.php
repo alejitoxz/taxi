@@ -129,7 +129,7 @@ if(!isset($_SESSION['S_ID'])){
                 </a>
               </li>
               <li class="nav-item">
-              <a onclick="cargar_contenido('contenido_principal','compañia/vista_compañia_listar.php')" class="nav-link">
+              <a onclick="cargar_contenido('contenido_principal','company/vista_company_listar.php')" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Compañia</p>
                 </a>
