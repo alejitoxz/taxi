@@ -16,7 +16,7 @@
             <div class="form-group">
                 <div class="col-lg-10">
                     <div class="col-lg-2">
-                    <button type="button" class="btn btn-default"  onclick="AbrirModalRegistro()" style="background: rgb(87, 146, 255);width: 120px;color:#fff;"><i class="fas fa-registered"><b>&nbsp;Registrar</b></i></button>
+                    <button type="button" class="btn btn-primary"  onclick="AbrirModalRegistro()"><i class="fas fa-user-plus"> </i> Registrar</button>
                     </div> 
                 </div>
             </div>

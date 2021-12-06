@@ -16,7 +16,7 @@
             <div class="form-group">
                 <div class="col-lg-10">
                     <div class="col-lg-2">
-                    <button type="button" class="btn btn-default"  onclick="AbrirModalRegistroCompany()" style="background: rgb(87, 146, 255);width: 120px;color:#fff;"><i class="fas fa-registered"><b>&nbsp;Registrar</b></i></button>
+                    <button type="button" class="btn btn-primary"  onclick="AbrirModalRegistroCompany()"><i class="fas fa-plus"> </i> Registrar</button>
                     </div> 
                 </div>
             </div>
@@ -26,10 +26,10 @@
                           <th>#</th>
                           <th>Compañia</th>
                           <th>NIT</th>
-                          <th>Editar</th>
+                          <th align="right">Editar</th>
                         </tr>
                     </thead>
-                    <tbody id="Listadocompañias">
+                    <tbody id="Listadocompanias">
                     </tbody>
             </table>
             </div>
