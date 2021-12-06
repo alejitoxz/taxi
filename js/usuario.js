@@ -214,8 +214,11 @@ function modificar_usuario(){
 
 // FUNCION PARA ELIMINAR (ANULAR) REGISTRO
 $('#tabla_usuario').on('click','.eliminar',function(){
-    var id = table.row(this).data().id;
-    
+    if(table.row(this).child.isShown()){
+        var idUsuario = table.row(this).data().id;
+    }else{
+        var idUsuario = table.row($(this).parents('tr')).data().id;
+    }
     Swal.fire({
         title: '¿Seguro desea eliminar el registro?',
         text: "Una vez hecho esto, se eliminara del sistema",
@@ -228,7 +231,7 @@ $('#tabla_usuario').on('click','.eliminar',function(){
       }).then((result) => {
           console.log(result);
         if (result.value) {
-        modificar_estatus(id,0);
+        modificar_estatus(idUsuario,0);
           Swal.fire(
             'Eliminado',
             '¡Tu registro ha sido eliminado!',
@@ -249,7 +252,6 @@ function modificar_estatus(id,estatus){
     }).done(function(resp){
         if(resp>0){
             if(resp==1){
-                Swal.fire("Mensaje De Confirmacion",'Registro realizado', "success")
                     listar_usuario();
                 
             }else{

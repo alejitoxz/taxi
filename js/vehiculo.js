@@ -1,6 +1,6 @@
-var tableV;
+var table_vehiculo;
 function listar_vehiculo(){
-    tableV = $('#tabla_vehiculo').DataTable( {
+    table_vehiculo = $('#tabla_vehiculo').DataTable( {
         "ordering":false,
         "paging": false,
         "searching": { "regex": true },
@@ -13,7 +13,19 @@ function listar_vehiculo(){
             "url": "../controlador/vehiculo/controlador_listar_vehiculo.php",
             "type": "POST"
         },
+        "columnDefs": [
+            {
+                "targets": [ 0 ],
+                "visible": false
+            },
+            {
+                "targets": [ 1 ],
+                "visible": false
+            }
+        ],
         "columns": [
+            { "data": "idEntResp" },
+            { "data": "idPropietario" },
             { "data": "id" },
             { "data": "placa" },
             { "data": "marca" },
@@ -24,10 +36,10 @@ function listar_vehiculo(){
             { "data": "nInterno" },
             { "data": "vMovilizacion" },
             { "data": "vSoat" },
-            {"defaultContent":"<button style='font-size:13px;' type='button' class='eliminar btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editar btn btn-info'><i class='fa fa-edit'></i></button>"}
+            {"defaultContent":
+            "<button style='font-size:13px;' type='button' class='eliminarv btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editarv btn btn-info'><i class='fa fa-edit'></i></button>"}
         ],
         "language":idioma_espanol,
-        
        select: true
     } );
     
@@ -83,20 +95,19 @@ function registrar_vehiculo(){
     var placa = $("#txt_pla").val();
     var marca = $("#txt_mar").val();
     var modelo = $("#txt_mod").val();
+    var entResp = $("#sel_entResp_vehiculo").val();
+    var idPropietario = $("#sel_pro").val();
     var nInterno = $("#txt_int").val();
     var vMovilizacion = $("#txt_mov").val();
     var vSoat = $("#txt_soa").val();
-    var entResp = $("#sel_entResp_vehiculo").val();
-    var idPropietario = $("#sel_pro").val();
+
 
     if( placa == '' ||
         marca == '' ||
         modelo == '' ||
         nInterno == '' ||
         vMovilizacion == '' ||
-        vSoat == '' ||
-        entResp == '' ||
-        idPropietario == ''
+        vSoat == ''
     ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }if(
@@ -112,11 +123,12 @@ function registrar_vehiculo(){
             placa:placa,
             marca:marca,
             modelo:modelo,
+            entResp:entResp,
+            idPropietario:idPropietario,
             nInterno:nInterno,
             vMovilizacion:vMovilizacion,
             vSoat:vSoat,
-            entResp:entResp,
-            idPropietario:idPropietario,
+            
         }
     }).done(function(resp){
         console.log(resp);
@@ -135,6 +147,54 @@ function registrar_vehiculo(){
         }
     })
 
+}
+// FUNCION PARA ELIMINAR (ANULAR) REGISTRO
+$('#tabla_vehiculo').on('click','.eliminarv',function(){
+    if(table_vehiculo.row(this).child.isShown()){
+        var idVehiculo = table_vehiculo.row(this).data().id;
+    }else{
+        var idVehiculo = table_vehiculo.row($(this).parents('tr')).data().id;
+    }
+    Swal.fire({
+        title: '¿Seguro desea eliminar el registro?',
+        text: "Una vez hecho esto, se eliminara del sistema",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+          console.log(result);
+        if (result.value) {
+        modificar_estatusV(idVehiculo,0);
+          Swal.fire(
+            'Eliminado',
+            '¡Tu registro ha sido eliminado!',
+            'success'
+          )
+        }
+      })
+});
+
+function modificar_estatusV(id,estatus){
+    $.ajax({
+        "url": "../controlador/vehiculo/controlador_modificar_vehiculo_estatus.php",
+        type: "POST",
+        data:{
+        id:id,
+        estatus:estatus
+        }
+    }).done(function(resp){
+        if(resp>0){
+            if(resp==1){
+                    listar_vehiculo();
+                
+            }else{
+                Swal.fire("Mensaje De Advertencia",'No se pudo borrar el archivo', "warning")
+            }
+        }
+    })
 }
 
 
@@ -169,69 +229,55 @@ function AbrirModalEditarV(){
 }
 
 // FUNCION PARA EDITAR REGISTRO
-$('#tabla_vehiculo').on('click','.editar',function(){
-    var id = table.row(this).data().id;
-    var placa = table.row(this).data().placa;
-    var marca = table.row(this).data().marca;
-    var modelo = table.row(this).data().modelo;
-    var idCompañia = table.row(this).data().idCompañia;
-    var idPropietario = table.row(this).data().idPropietario;
-    var nInterno = table.row(this).data().nInterno;
-    var vMovilizacion = table.row(this).data().vMovilizacion;
-    var vSoat = table.row(this).data().vSoat;
+$('#tabla_vehiculo').on('click','.editarv',function(){
+    
+    var placa = $("#txt_pla").val();
+    var marca = $("#txt_mar").val();
+    var modelo = $("#txt_mod").val();
+    var idEntResp = $("#sel_entResp_vehiculo").val();
+    var idPropietario = $("#sel_pro").val();
+    var nInterno = $("#txt_int").val();
+    var vMovilizacion = $("#txt_mov").val();
+    var vSoat = $("#txt_soa").val();
+
     //levantar modal
     AbrirModalEditarV();
     //ingresas datos modal
     $("#id").val(id);
-    $("#txt_nom_edit").val(nombres);
-    $("#txt_ape_edit").val(apellidos);
-    $("#txt_ced_edit").val(cedula);
-    $("#txt_tel_edit").val(telefono);
-    $("#txt_ema_edit").val(email);
-    $("#txt_dir_edit").val(direccion);
-    $("#txt_usu_edit").val(usuario);
-    $("#txt_con_edit").val('');
-    $("#txt_con2_edit").val('');
-    $("#sel_rol_edit").val(idRol).trigger('change');
-    $("#sel_ent_edit").val(idEntResp).trigger('change');
-    $("#idPersona").val(idPersona).trigger('change');
+    $("#txt_pla").val(placa);
+    $("#txt_mar").val(marca);
+    $("#txt_mod").val(modelo);
+    $("#sel_entResp_vehiculo").val(idEntResp).trigger('change');
+    $("#sel_pro").val(idPropietario).trigger('change');
+    $("#txt_int").val(nInterno);
+    $("#txt_mov").val(vMovilizacion);
+    $("#txt_soa").val(vSoat);
 
 })
-function modificar_usuario(){
+function modificar_vehiculo(){
     var id = $("#id").val();
-    var nombre = $("#txt_nom_edit").val();
-    var apellido = $("#txt_ape_edit").val();
-    var cedula = $("#txt_ced_edit").val();
-    var telefono = $("#txt_tel_edit").val();
-    var email = $("#txt_ema_edit").val();
-    var direccion = $("#txt_dir_edit").val();
-    var usuario = $("#txt_usu_edit").val();
-    var clave = $("#txt_con_edit").val();
-    var clave2 = $("#txt_con2_edit").val();
-    var tipoRol = $("#sel_rol_edit").val();
-    var entResp = $("#sel_ent_edit").val();
-    var idPersona = $("#idPersona").val();
+    var placa = $("#txt_pla").val();
+    var marca = $("#txt_mar").val();
+    var modelo = $("#txt_mod").val();
+    var entResp = $("#sel_entResp_vehiculo").val();
+    var idPropietario = $("#sel_pro").val();
+    var nInterno = $("#txt_int").val();
+    var vMovilizacion = $("#txt_mov").val();
+    var vSoat = $("#txt_soa").val();
 
-    if( id == ''||
-        nombre == '' ||
-        apellido == '' ||
-        cedula == '' ||
-        telefono == '' ||
-        email == '' ||
-        direccion == '' ||
-        usuario == ''
-        ){
+    if( placa == '' ||
+        marca == '' ||
+        modelo == '' ||
+        nInterno == '' ||
+        vMovilizacion == '' ||
+        vSoat == ''
+    ){
+            return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
+        }if(
+            idPropietario == 0 ||
+            entResp == 0){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }
-    if(
-        tipoRol == 0 ||
-        entResp == 0){
-        return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
-    }
-    
-    if(clave != clave2){
-        return Swal.fire("Mensaje De Advertencia", "Las contraseñas no coinciden", "warning");
-    }
 
     $.ajax({
         "url": "../controlador/usuario/controlador_usuario_modificar.php",
@@ -239,21 +285,20 @@ function modificar_usuario(){
         data:{
         idPersona:idPersona,
         id:id,
-        nombre:nombre,
-        apellido:apellido,
-        cedula:cedula,
-        telefono:telefono,
-        email:email,
-        direccion:direccion,
-        usuario:usuario,
-        clave:clave,
-        tipoRol:tipoRol,
-        entResp:entResp
+        placa:placa,
+        marca:marca,
+        modelo:modelo,
+        entResp:entResp,
+        idPropietario:idPropietario,
+        nInterno:nInterno,
+        vMovilizacion:vMovilizacion,
+        vSoat:vSoat,
+            
         }
     }).done(function(resp){
         console.log(resp);
         if(resp > 0){
-            $("#modal_editar").modal('hide');
+            $("#modal_editarV").modal('hide');
             Swal.fire("Mensaje De Confirmacion",'Datos Actualizados', "success")
                 .then((value)=>{
                 table.ajax.reload();

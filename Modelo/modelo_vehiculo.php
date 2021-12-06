@@ -20,12 +20,15 @@
             p.apellido,
             v.nInterno,
             CONVERT(varchar,v.vMovilizacion) as vMovilizacion,
-            CONVERT(varchar,v.vSoat) as vSoat
+            CONVERT(varchar,v.vSoat) as vSoat,
+            co.id as idEntResp,
+            pro.id as idPropietario
             FROM
             vehiculo AS v
             INNER JOIN company AS co ON (v.idCompañia = co.id)
             INNER JOIN propietario AS pro ON (v.idPropietario = pro.id)
             INNER JOIN persona AS p ON (pro.idPersona = p.id)
+            WHERE estatus = 1;
             ";
 
             $resp = sqlsrv_query($conn, $sql);
@@ -104,8 +107,8 @@
     
     function registrar_vehiculo($placa,$marca,$modelo,$entResp,$idPropietario,$nInterno,$vMovilizacion,$vSoat){
         $conn = $this->conexion->conectar();
-        $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompañia,idPropietario,nInterno,vMovilizacion,vSoat)
-                 VALUES('$placa','$marca','$modelo','$nInterno','$vMovilizacion','$vSoat','$entResp','$idPropietario')
+        $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompañia,idPropietario,nInterno,vMovilizacion,vSoat,estatus)
+                 VALUES('$placa','$marca','$modelo','$entResp','$idPropietario','$nInterno','$vMovilizacion','$vSoat',1)
                  ";
                
         $resp = sqlsrv_query($conn, $sql);
@@ -120,4 +123,20 @@
     }
 
 
+    function modificar_vehiculo($id,$estatus){
+        $conn = $this->conexion->conectar();
+        $sql  = "UPDATE vehiculo set estatus = $estatus
+                WHERE id='$id'
+                ";
+               
+        $resp = sqlsrv_query($conn, $sql);
+        
+        if( $resp === false) {
+            return 0;
+        }else{
+            return 1;
+        }
+        
+        $this->conexion->conectar();
+    }
 }
