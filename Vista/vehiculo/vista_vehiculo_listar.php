@@ -16,7 +16,7 @@
             <div class="form-group">
                 <div class="col-lg-10">
                     <div class="col-lg-2">
-                    <button type="button" class="btn btn-default"  onclick="AbrirModalRegistroVehiculo()" style="background: rgb(87, 146, 255);width: 120px;color:#fff;"><i class="fas fa-registered"><b>&nbsp;Registrar</b></i></button>
+                    <button type="button" class="btn btn-primary"  onclick="AbrirModalRegistroVehiculo()" ><i class="fas fa-plus"></i> Registrar</button>
                     </div> 
                 </div>
             </div>
@@ -35,7 +35,7 @@
                           <th>Numero Interno</th>
                           <th>Vencimiento Movilizacion</th>
                           <th>Vencimiento Soat</th>
-                          <th>Acciones</th>
+                          <th align="right" >Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="ListadoVehiculos">
@@ -120,8 +120,8 @@
         </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"><b>&nbsp;Close</b></i></button>
-          <button type="button" class="btn btn-primary" onclick="registrar_vehiculo()"><i class="fa fa-check"><b>&nbsp;Guardar</b></i></button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> </i> Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="registrar_vehiculo()"><i class="fa fa-check"> </i> Guardar</button>
         </div>
       </div>
     </div>
@@ -200,8 +200,8 @@
         </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"><b>&nbsp;Close</b></i></button>
-          <button type="button" class="btn btn-primary" onclick="registrar_vehiculo()"><i class="fa fa-check"><b>&nbsp;Guardar</b></i></button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"><b> </i> Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="registrar_vehiculo()"><i class="fa fa-check"> </i> Modificar</button>
         </div>
       </div>
     </div>

@@ -28,9 +28,8 @@
             INNER JOIN company AS co ON (v.idCompañia = co.id)
             INNER JOIN propietario AS pro ON (v.idPropietario = pro.id)
             INNER JOIN persona AS p ON (pro.idPersona = p.id)
-            WHERE estatus = 1;
+            WHERE v.estatus = 1;
             ";
-
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
