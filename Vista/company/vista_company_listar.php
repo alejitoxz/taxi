@@ -57,7 +57,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Compañia</label>
-              <input type="text" class="form-control" id="txt_ent" placeholder="Ingrese los Nombre"><br>
+              <input type="text" class="form-control" id="txt_com" placeholder="Ingrese los Nombre"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -70,14 +70,14 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"><b>&nbsp;Close</b></i></button>
-          <button type="button" class="btn btn-primary" onclick="registrar_usuario()"><i class="fa fa-check"><b>&nbsp;Guardar</b></i></button>
+          <button type="button" class="btn btn-primary" onclick="registrar_company()"><i class="fa fa-check"><b>&nbsp;Guardar</b></i></button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- MODAL PARA EDITAR REGISTRO -->
-  <div class="modal fade" id="modal_editarC" role="dialog">
+  <div class="modal fade" id="modal_editar_C" role="dialog">
 
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -91,8 +91,7 @@
 
         <div class="row">
           <div class="col-md-4">
-          <input type="hidden" id="id" >
-          <input type="hidden" id="idPersona" >
+          <input type="hidden" id="idCompany" >
             <div class="form-group">
               <label for="">Compañia</label>
               <input type="text" class="form-control" id="txt_com_edit" placeholder="Ingrese los Nombre"><br>
@@ -119,7 +118,7 @@
 <script>
   $(document).ready(function(){
     listar_company();
-    $("#modal_registroC").on('shown.bs.modal',function(){
+    $("#modal_registro_company").on('shown.bs.modal',function(){
 
     });
   });

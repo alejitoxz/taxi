@@ -40,6 +40,59 @@
            
         }
 
-
+        function registrar_company($entResp,$nit){
+            $conn = $this->conexion->conectar();
+            $sql  = "INSERT INTO company(
+                    entResp,nit,estatus)
+                     VALUES ('$entResp','$nit',1)
+                     ";
+                   
+            $resp = sqlsrv_query($conn, $sql);
+            
+            if( $resp === false) {
+                return 0;
+            }else{
+                return 1;
+            }
+            
+            $this->conexion->conectar();
+        }
+        
+        function modificar_company($id,$estatus){
+            $conn = $this->conexion->conectar();
+            $sql  = "UPDATE company set estatus = $estatus
+                    WHERE id='$id'
+                    ";
+                   
+            $resp = sqlsrv_query($conn, $sql);
+            
+            if( $resp === false) {
+                return 0;
+            }else{
+                return 1;
+            }
+            
+            $this->conexion->conectar();
+        }
+        
+        function editar_company($id,$entResp,$nit){
+            $conn = $this->conexion->conectar();
+    
+            $sql  = "UPDATE company SET
+                    entResp = '$entResp',
+                    nit = '$nit'
+                    WHERE idCompany=$id
+                    ";
+                     
+            $resp = sqlsrv_query($conn, $sql);
+            
+            if( $resp === false) {
+                return 0;
+            }else{
+                return 1;
+            }
+            
+            $this->conexion->conectar();
+        }
 
 }
