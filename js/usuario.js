@@ -1,9 +1,11 @@
 function VerificarUsuario(){
+
     var usu = $("#txt_usu").val();
     var con = $("#txt_con").val();
 
-    if(usu.length==0 || con.length==0){
-        return Swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
+    if(usu.length == '' || con.length == ''){
+        Swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
+        return;
     }
     $.ajax({
         url:'../controlador/usuario/controlador_verificar_usuario.php',
@@ -14,12 +16,12 @@ function VerificarUsuario(){
         }
     }).done(function(req){
 		var resultado=eval("("+req+")");
-        var Id      = resultado[0]['id'];
-        var Usuario = resultado[0]['usuario'];
-        var Rol     = resultado[0]['idRol'];
-        //console.log("Entra usuario",resultado[0]['rol'])
-        if(resultado){
-            Swal.fire("Mensaje De Confirmacion",'bienvenido al sistema', "success");
+
+        console.log("Entra usuario",resultado)
+        if(resultado.length>0){
+            var Id      = resultado[0]['id'];
+            var Usuario = resultado[0]['usuario'];
+            var Rol     = resultado[0]['idRol'];
             $.ajax({
                 url:'../controlador/usuario/controlador_crear_sesion.php',
                 type:'post',
@@ -29,34 +31,11 @@ function VerificarUsuario(){
                     rol : Rol
                 }
             }).done(function(req){
-                let timerInterval
-                Swal.fire({
-                title: 'Bienvenido a VisualSat',
-                html: 'Cargando <b></b> milliseconds.',
-                timer: 500,
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                    b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-                }).then((result) => {
-                /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    location.reload();
-                }
-                })
+                location.reload();
             });
         }else{
             Swal.fire("Mensaje De Error",'Usuaio y/o contrase\u00f1a incorrecta', "error");
         }
-        
-
     })
 }
 var table;

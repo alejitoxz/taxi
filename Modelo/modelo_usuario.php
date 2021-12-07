@@ -23,8 +23,12 @@
 				$i++;
                 
 			}
-            if(password_verify($contra,$data[0]['clave'])){
-                return $data;
+            if($data){
+                if(password_verify($contra,$data[0]['clave'])){
+                    return $data;
+                }else{
+                    return 0;
+                }
             }else{
                 return 0;
             }

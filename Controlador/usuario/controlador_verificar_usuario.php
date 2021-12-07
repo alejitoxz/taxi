@@ -6,8 +6,9 @@
     $contra = htmlspecialchars($_POST['pass'],ENT_QUOTES,'UTF-8');
     $consulta = $MU->VerificarUsuario($usuario,$contra);
     $data = json_encode($consulta);
-    if(count($consulta)>0){
+    if($consulta>0){
         echo $data;
     }else{
         echo 0;
+        
     }
