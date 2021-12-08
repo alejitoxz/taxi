@@ -122,6 +122,18 @@ if(!isset($_SESSION['S_ID'])){
                   <p>Compañia</p>
                 </a>
               </li>
+              <li class="nav-item">
+              <a onclick="cargar_contenido('contenido_principal','propietario/vista_propietario_listar.php')" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <p>Propietario</p>
+                </a>
+              </li>
+              <li class="nav-item">
+              <a onclick="cargar_contenido('contenido_principal','conductor/vista_conductor_listar.php')" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <p>Conductor</p>
+                </a>
+              </li>
             </ul>
           </li>
 

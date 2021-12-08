@@ -28,13 +28,13 @@
                           <th style="display:none"></th>
                           <th>#</th>
                           <th>Nombres</th>
-                          <th>apellidos</th>
+                          <th>Apellidos</th>
                           <th>Cedula</th>
                           <th>Telefono</th>
                           <th>Email</th>
                           <th>direccion</th>
                           <th>Usuario</th>
-                          <th>contraseña</th>
+                          <th>Contraseña</th>
                           <th>Rol</th>
                           <th>Compañia</th>
                           <th>Editar</th>
@@ -67,20 +67,21 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
+              <label for="">Cedula</label>
+              <input type="text" class="form-control" id="txt_ced" placeholder="Ingrese la cedula" onchange="buscarPersona(this.value)"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
               <label for="">Nombres</label>
-              <input type="text" class="form-control" id="txt_nom" placeholder="Ingrese los Nombre"><br>
+              <input type="hidden" id="idPersonaR">
+              <input type="text" class="form-control" id="txt_nom" placeholder="Ingrese los nombres"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Apellidos</label>
-              <input type="text" class="form-control" id="txt_ape" placeholder="Ingrese los Apellidos"><br>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="">Cedula</label>
-              <input type="text" class="form-control" id="txt_ced" placeholder="Ingrese la cedula"><br>
+              <input type="text" class="form-control" id="txt_ape" placeholder="Ingrese los apellidos"><br>
             </div>
           </div>
         </div>
@@ -88,14 +89,14 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">telefono</label>
-              <input type="text" class="form-control" id="txt_tel" placeholder="Ingrese el Telefono"><br>
+              <label for="">Telefono</label>
+              <input type="text" class="form-control" id="txt_tel" placeholder="Ingrese el telefono"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Email</label>
-              <input type="text" class="form-control" id="txt_ema" placeholder="Ingrese el Email"><br>
+              <input type="text" class="form-control" id="txt_ema" placeholder="Ingrese el email"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -109,19 +110,19 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Usuario</label>
-              <input type="text" class="form-control" id="txt_usu" placeholder="Ingrese el Usuario"><br>
+              <input type="text" class="form-control" id="txt_usu" placeholder="Ingrese el usuario"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Contraseña</label>
-              <input type="password" autocomplete="new-password" class="form-control" id="txt_con" placeholder="Ingrese la Contraseña"><br>
+              <input type="password" autocomplete="new-password" class="form-control" id="txt_con" placeholder="Ingrese la contraseña"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Repetir Contraseña</label>
-              <input type="password" class="form-control" id="txt_con2" placeholder="Repita la Contraseña"><br>
+              <label for="">Repetir contraseña</label>
+              <input type="password" class="form-control" id="txt_con2" placeholder="Repita la contraseña"><br>
             </div>
           </div>
         </div>
@@ -171,13 +172,13 @@
           <input type="hidden" id="idPersona" >
             <div class="form-group">
               <label for="">Nombres</label>
-              <input type="text" class="form-control" id="txt_nom_edit" placeholder="Ingrese los Nombre"><br>
+              <input type="text" class="form-control" id="txt_nom_edit" placeholder="Ingrese los Nombres"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Apellidos</label>
-              <input type="text" class="form-control" id="txt_ape_edit" placeholder="Ingrese los Apellidos"><br>
+              <input type="text" class="form-control" id="txt_ape_edit" placeholder="Ingrese los apellidos"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -191,14 +192,14 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">telefono</label>
-              <input type="text" class="form-control" id="txt_tel_edit" placeholder="Ingrese el Telefono"><br>
+              <label for="">Telefono</label>
+              <input type="text" class="form-control" id="txt_tel_edit" placeholder="Ingrese el telefono"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Email</label>
-              <input type="text" class="form-control" id="txt_ema_edit" placeholder="Ingrese el Email"><br>
+              <input type="text" class="form-control" id="txt_ema_edit" placeholder="Ingrese el email"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -212,19 +213,19 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Usuario</label>
-              <input type="text" class="form-control" id="txt_usu_edit" placeholder="Ingrese el Usuario"><br>
+              <input type="text" class="form-control" id="txt_usu_edit" placeholder="Ingrese el usuario"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Contraseña</label>
-              <input type="password" autocomplete="new-password" class="form-control" id="txt_con_edit" placeholder="Ingrese la Contraseña"><br>
+              <input type="password" autocomplete="new-password" class="form-control" id="txt_con_edit" placeholder="Ingrese la contraseña"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Repetir Contraseña</label>
-              <input type="password" class="form-control" id="txt_con2_edit" placeholder="Repita la Contraseña"><br>
+              <label for="">Repetir contraseña</label>
+              <input type="password" class="form-control" id="txt_con2_edit" placeholder="Repita la contraseña"><br>
             </div>
           </div>
         </div>

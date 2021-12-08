@@ -16,6 +16,7 @@ function VerificarUsuario(){
         }
     }).done(function(req){
 		var resultado=eval("("+req+")");
+        
 
         console.log("Entra usuario",resultado)
         if(resultado.length>0){
@@ -38,11 +39,39 @@ function VerificarUsuario(){
         }
     })
 }
+
+function buscarPersona(valor){
+    $.ajax({
+        url:'../controlador/usuario/controlador_buscar_persona.php',
+        type:'POST',
+        data:{
+            valor:valor
+        }
+    }).done(function(resp){
+    var data = JSON.parse(resp);
+    if(data){
+        $("#idPersonaR").val(data.data[0]['id']);
+        $("#txt_nom").val(data.data[0]['nombre']);
+        $("#txt_ape").val(data.data[0]['apellido']);
+        $("#txt_tel").val(data.data[0]['telefono']);
+        $("#txt_ema").val(data.data[0]['email']);
+        $("#txt_dir").val(data.data[0]['direccion']);
+    }else{
+        $("#idPersonaR").val("");
+        $("#txt_nom").val("");
+        $("#txt_ape").val("");
+        $("#txt_tel").val("");
+        $("#txt_ema").val("");
+        $("#txt_dir").val("");
+    }
+    })
+}
+
 var table;
 function listar_usuario(){
     table = $('#tabla_usuario').DataTable( {
-        "ordering":false,
-        "paging": false,
+        "ordering":true,
+        "paging": true,
         "searching": { "regex": true },
         "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
         "pageLength": 10,
@@ -306,6 +335,8 @@ function listar_ent(){
 
 
 function registrar_usuario(){
+
+    var id = $("#idPersonaR").val();
     var nombre = $("#txt_nom").val();
     var apellido = $("#txt_ape").val();
     var cedula = $("#txt_ced").val();
@@ -346,6 +377,7 @@ function registrar_usuario(){
         "url": "../controlador/usuario/controlador_usuario_registro.php",
         "type": "POST",
         data:{
+        id:id,
         nombre:nombre,
         apellido:apellido,
         cedula:cedula,

@@ -109,7 +109,6 @@
         $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompañia,idPropietario,nInterno,vMovilizacion,vSoat,estatus)
                  VALUES('$placa','$marca','$modelo','$entResp','$idPropietario','$nInterno','$vMovilizacion','$vSoat',1)
                  ";
-               
         $resp = sqlsrv_query($conn, $sql);
         
         if( $resp === false) {

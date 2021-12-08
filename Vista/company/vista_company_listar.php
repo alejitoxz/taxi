@@ -26,7 +26,7 @@
                           <th>#</th>
                           <th>Compañia</th>
                           <th>NIT</th>
-                          <th align="right">Editar</th>
+                          <th>Editar</th>
                         </tr>
                     </thead>
                     <tbody id="Listadocompanias">
@@ -46,7 +46,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header modal-primary">
-        <h4 class="modal-title"><b>Registro de company</b></h4>
+        <h4 class="modal-title"><b>Registro de compañia</b></h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
@@ -57,13 +57,13 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Compañia</label>
-              <input type="text" class="form-control" id="txt_com" placeholder="Ingrese los Nombre"><br>
+              <input type="text" class="form-control" id="txt_com" placeholder="Ingrese el nombre de la compañia"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">NIT</label>
-              <input type="text" class="form-control" id="txt_nit" placeholder="Ingrese los Apellidos"><br>
+              <input type="text" class="form-control" id="txt_nit" placeholder="Ingrese el nit"><br>
             </div>
           </div>
         </div>
@@ -94,13 +94,13 @@
           <input type="hidden" id="idCompany" >
             <div class="form-group">
               <label for="">Compañia</label>
-              <input type="text" class="form-control" id="txt_com_edit" placeholder="Ingrese los Nombre"><br>
+              <input type="text" class="form-control" id="txt_com_edit" placeholder="Ingrese el nombre de la empresa"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">NIT</label>
-              <input type="text" class="form-control" id="txt_nit_edit" placeholder="Ingrese los Apellidos"><br>
+              <input type="text" class="form-control" id="txt_nit_edit" placeholder="Ingrese el nit"><br>
             </div>
           </div>
         </div>

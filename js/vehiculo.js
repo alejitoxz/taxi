@@ -1,6 +1,6 @@
-var table_vehiculo;
+var table;
 function listar_vehiculo(){
-    table_vehiculo = $('#tabla_vehiculo').DataTable( {
+    table = $('#tabla_vehiculo').DataTable( {
         "ordering":false,
         "paging": false,
         "searching": { "regex": true },
@@ -85,7 +85,7 @@ function listar_pro(){
                 cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['dueno']+"</option>";
             }
             
-            $("#sel_pro").html(cadena);
+            $("#sel_pro_vehiculo").html(cadena);
         }else{
             cadena+="<option value='0'>No se encontraron registros</option>"; 
         }
@@ -96,7 +96,7 @@ function registrar_vehiculo(){
     var marca = $("#txt_mar").val();
     var modelo = $("#txt_mod").val();
     var entResp = $("#sel_entResp_vehiculo").val();
-    var idPropietario = $("#sel_pro").val();
+    var idPropietario = $("#sel_pro_vehiculo").val();
     var nInterno = $("#txt_int").val();
     var vMovilizacion = $("#txt_mov").val();
     var vSoat = $("#txt_soa").val();
@@ -134,7 +134,7 @@ function registrar_vehiculo(){
         console.log(resp);
         if(resp > 0){
             if(resp==1){
-            $("#modal_registro").modal('hide');
+            $("#modal_registro_vehiculo").modal('hide');
             Swal.fire("Mensaje De Confirmacion",'Registro realizado', "success").then((value)=>{
                 table.ajax.reload();
                 limpiarRegistro();
@@ -150,10 +150,10 @@ function registrar_vehiculo(){
 }
 // FUNCION PARA ELIMINAR (ANULAR) REGISTRO
 $('#tabla_vehiculo').on('click','.eliminarv',function(){
-    if(table_vehiculo.row(this).child.isShown()){
-        var idVehiculo = table_vehiculo.row(this).data().id;
+    if(table.row(this).child.isShown()){
+        var idVehiculo = table.row(this).data().id;
     }else{
-        var idVehiculo = table_vehiculo.row($(this).parents('tr')).data().id;
+        var idVehiculo = table.row($(this).parents('tr')).data().id;
     }
     Swal.fire({
         title: '¿Seguro desea eliminar el registro?',
@@ -231,10 +231,10 @@ function AbrirModalEditarV(){
 // FUNCION PARA EDITAR REGISTRO
 $('#tabla_vehiculo').on('click','.editarv',function(){
 
-    if(table_vehiculo.row(this).child.isShown()){
-        var datosVehiculo = table_vehiculo.row(this).data().id;
+    if(table.row(this).child.isShown()){
+        var datosVehiculo = table.row(this).data().id;
     }else{
-        var datosVehiculo = table_vehiculo.row($(this).parents('tr')).data().id;
+        var datosVehiculo = table.row($(this).parents('tr')).data().id;
     }
     
     var id = datosVehiculo.id;
@@ -316,4 +316,17 @@ function modificar_vehiculo(){
         }
     })
 
+}
+
+
+
+function limpiarRegistro(){
+    $("#txt_pla").val("");
+    $("#txt_mar").val("");
+    $("#txt_mod").val("");
+    $("#txt_int").val("");
+    $("#txt_mov").val("");
+    $("#txt_soa").val("");
+    $("#sel_entResp_vehiculo").val("");
+    $("#sel_pro_vehiculo").val("");
 }
