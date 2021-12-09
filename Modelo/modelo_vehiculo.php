@@ -11,6 +11,7 @@ session_start();
 
         function listar_vehiculo(){
             $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
             $sql  = "SELECT
             v.id,
             v.placa,
@@ -29,7 +30,7 @@ session_start();
             INNER JOIN company AS co ON (v.idCompañia = co.id)
             INNER JOIN propietario AS pro ON (v.idPropietario = pro.id)
             INNER JOIN persona AS p ON (pro.idPersona = p.id)
-            WHERE v.estatus = 1;
+            WHERE v.estatus = 1 and v.idCompany = $idCompany;
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -78,12 +79,14 @@ session_start();
 
     function listar_pro(){
         $conn = $this->conexion->conectar();
+        $idCompany = $_SESSION['COMPANY'];
         $sql  = "SELECT 
         pro.id,
         (p.nombre + ' ' +p.apellido) as dueno
         from 
         propietario as pro
         INNER JOIN persona AS p ON (pro.idPersona = p.id)
+        where pro.idCompany = $idCompany and pro.estatus = 1
         ";
         $resp = sqlsrv_query($conn, $sql);
         if( $resp === false) {
@@ -105,10 +108,11 @@ session_start();
         $this->conexion->conectar();
     }
     
-    function registrar_vehiculo($placa,$marca,$modelo,$entResp,$idPropietario,$nInterno,$vMovilizacion,$vSoat){
+    function registrar_vehiculo($placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat){
         $conn = $this->conexion->conectar();
-        $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompañia,idPropietario,nInterno,vMovilizacion,vSoat,estatus)
-                 VALUES('$placa','$marca','$modelo','$entResp','$idPropietario','$nInterno','$vMovilizacion','$vSoat',1)
+        $idCompany = $_SESSION['COMPANY'];
+        $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompany,idPropietario,nInterno,vMovilizacion,vSoat,estatus)
+                 VALUES('$placa','$marca','$modelo',$idCompany,'$idPropietario','$nInterno','$vMovilizacion','$vSoat',1)
                  ";
         $resp = sqlsrv_query($conn, $sql);
         
@@ -139,14 +143,13 @@ session_start();
         $this->conexion->conectar();
     }
 
-    function editar_vehiculo($id,$placa,$marca,$modelo,$entResp,$idPropietario,$nInterno,$vMovilizacion,$vSoat){
+    function editar_vehiculo($id,$placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat){
         $conn = $this->conexion->conectar();
 
         $sql  = "UPDATE vehiculo SET
                 placa= '$usuario' 
                 marca= '$tipoRol',
-                modelo = '$entResp',
-                entResp = '$entResp',
+                modelo = '$modelo',
                 idPropietario = '$idPropietario',
                 nInterno = '$nInterno',
                 vMovilizacion = '$vMovilizacion',
