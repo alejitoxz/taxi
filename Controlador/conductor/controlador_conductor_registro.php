@@ -12,9 +12,8 @@
     $eps = htmlspecialchars($_POST['eps'],ENT_QUOTES,'UTF-8');
     $arl = htmlspecialchars($_POST['arl'],ENT_QUOTES,'UTF-8');
     $rh = htmlspecialchars($_POST['rh'],ENT_QUOTES,'UTF-8');
-    $fondoPension = htmlspecialchars($_POST['fondoPenseion'],ENT_QUOTES,'UTF-8');
+    $fondoPension = htmlspecialchars($_POST['fondoPension'],ENT_QUOTES,'UTF-8');
     $vLicencia = htmlspecialchars($_POST['vLicencia'],ENT_QUOTES,'UTF-8');
     $placa = htmlspecialchars($_POST['placa'],ENT_QUOTES,'UTF-8');
-    $idPersona = htmlspecialchars($_POST['idPersona'],ENT_QUOTES,'UTF-8');
-    $consulta = $MU->registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$idPersona);
+    $consulta = $MU->registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa);
     echo $consulta;
