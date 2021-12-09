@@ -115,18 +115,18 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     var entResp = datosConductor.entResp;
     var nit = datosConductor.nit;
 
-    var url = "../controlador/tarjeton/controlador_exportar.php?nombres="+nombres+"placa="+placa
-    +"nInterno="+nInterno
-    +"nMovilizacion="+nMovilizacion
-    +"vLicencia="+vLicencia
-    +"vMovilizacion="+vMovilizacion
-    +"vSoat="+vSoat
-    +"eps="+eps
-    +"rh="+rh
-    +"arl="+arl
-    +"fondoPension="+fondoPension
-    +"entResp="+entResp
-    +"nit="+nit;
+    var url = "../controlador/tarjeton/controlador_exportar.php?nombres="+nombres+"&placa="+placa
+    +"&nInterno="+nInterno
+    +"&nMovilizacion="+nMovilizacion
+    +"&vLicencia="+vLicencia
+    +"&vMovilizacion="+vMovilizacion
+    +"&vSoat="+vSoat
+    +"&eps="+eps
+    +"&rh="+rh
+    +"&arl="+arl
+    +"&fondoPension="+fondoPension
+    +"&entResp="+entResp
+    +"&nit="+nit;
     window.open(url,'_blank');
 })
 
