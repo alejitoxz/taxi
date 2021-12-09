@@ -25,12 +25,18 @@ function VerificarUsuario(){
                 var Rol     = resultado[0]['submodulos'][0]['idRol'];
                 var Company     = resultado[0]['submodulos'][0]['idCompany'];
                 var Ente     = resultado[0]['submodulos'][0]['EntResp'];
-            }else{
+            }else if(resultado[1]['submodulos'].length > 0){
                 var Id      = resultado[1]['submodulos'][0]['id'];
                 var Usuario = resultado[1]['submodulos'][0]['usuario'];
                 var Rol     = resultado[1]['submodulos'][0]['idRol'];
                 var Company     = resultado[1]['submodulos'][0]['idCompany'];
                 var Ente     = resultado[1]['submodulos'][0]['EntResp'];
+            }else{
+                var Id      = resultado[2]['submodulos'][0]['id'];
+                var Usuario = resultado[2]['submodulos'][0]['usuario'];
+                var Rol     = resultado[2]['submodulos'][0]['idRol'];
+                var Company     = resultado[2]['submodulos'][0]['idCompany'];
+                var Ente     = resultado[2]['submodulos'][0]['EntResp'];
             }
             
             let Datos = [];

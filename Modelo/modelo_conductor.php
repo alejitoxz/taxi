@@ -24,11 +24,18 @@ session_start();
                     con.rh,
                     con.fondoPension,
                     CONVERT ( VARCHAR, con.vLicencia ) AS vLicencia,
-                    v.placa
+                    CONVERT ( VARCHAR, v.vSoat ) AS vSoat,
+                    CONVERT ( VARCHAR, v.vMovilizacion ) AS vMovilizacion,
+                    v.nMovilizacion,
+                    v.placa,
+                    v.nInterno,
+                    c.entResp,
+                    c.nit
                     FROM
                     conductor AS con
                     INNER JOIN vehiculo AS v ON ( con.idVehiculo = v.id )
                     INNER JOIN persona AS p ON ( con.idPersona = p.id ) 
+                    INNER JOIN company AS c ON ( c.id = con.idCompany ) 
                     WHERE con.estatus = 1 and con.idCompany = $idCompany 
             ";
             $resp = sqlsrv_query($conn, $sql);
@@ -54,7 +61,11 @@ session_start();
 
         function listar_placa(){
             $conn = $this->conexion->conectar();
-            $sql  = "SELECT id, placa from vehiculo";
+            $idCompany = $_SESSION['COMPANY'];
+            $sql  = "SELECT v.id, v.placa 
+            from vehiculo as v
+            INNER JOIN company AS c ON ( c.id = v.idCompany ) 
+            where v.estatus = 1 and c.id = $idCompany";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;

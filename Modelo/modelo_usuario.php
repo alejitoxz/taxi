@@ -125,7 +125,7 @@ session_start();
                     INNER JOIN company AS co ON (u.idCompany = co.id)
                     INNER JOIN rol AS r ON (u.idRol = r.id)
                     INNER JOIN persona AS p ON (u.idPersona = p.id)
-                    WHERE u.estatus = 1 and u.idCompany = $idCompany
+                    WHERE u.estatus = 1 and u.idCompany = $idCompany and r.Id not in (1)
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -180,7 +180,7 @@ session_start();
 
         function listar_rol(){
             $conn = $this->conexion->conectar();
-            $sql  = "SELECT id, tipoRol from rol";
+            $sql  = "SELECT id, tipoRol from rol where Id not in (1)";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -227,8 +227,11 @@ session_start();
         function contador_usuario(){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
-            $sql  = "select COUNT(id) as contadorUsuario from usuario
-            where estatus = 1 AND idCompany = $idCompany";
+            $sql  = "select COUNT(u.id) as contadorUsuario 
+            from usuario as u
+            INNER JOIN rol as r ON (r.id = u.idRol)
+            where u.estatus = 1 AND u.idCompany = $idCompany 
+            and r.Id not in (1)";
            
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
