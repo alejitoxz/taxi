@@ -65,7 +65,7 @@
           <div class="col-md-4">
                 <div class="form-group">
                     <label for="">Cedula</label>
-                    <input type="text" class="form-control" id="txt_ced" placeholder="Ingrese cedula"><br>
+                    <input type="text" class="form-control" id="txt_ced" placeholder="Ingrese cedula" onchange="buscarPersona(this.value)" ><br>
                 </div>
             </div>
           <div class="col-md-4">
@@ -135,7 +135,6 @@
               <input type="date" class="form-control" id="txt_lic" ><br>
             </div>
           </div>
-        </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Placa del vehiculo</label>
@@ -238,6 +237,7 @@
   $(document).ready(function(){
     listar_conductor();
     $('.js-example-basic-single').select2();
+    listar_placa();
     $("#modal_registro_conductor").on('shown.bs.modal',function(){
     });
   });
