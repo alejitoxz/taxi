@@ -27,13 +27,45 @@ function listar_conductor(){
             { "data": "vLicencia" },
             { "data": "placa" },
             {"defaultContent":
-            "<button style='font-size:13px;' type='button' class='eliminar btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editar btn btn-info'><i class='fa fa-edit'></i></button>"}
+            "<button style='font-size:13px;' type='button' class='eliminar btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editar btn btn-info'><i class='fa fa-edit'></i></button><button style='font-size:13px;' type='button' class='tarjeton btn btn-success'><i class='fa fa-file-pdf'></i></button>"}
         ],
         "language":idioma_espanol,
        select: true
     } );
     
 }
+
+// FUNCION PARA EDITAR REGISTRO
+$('#tabla_conductor').on('click','.tarjeton',function(){
+    window.open(url);
+    if(table.row(this).child.isShown()){
+        var datosVehiculo = table.row(this).data();
+    }else{
+        var datosVehiculo = table.row($(this).parents('tr')).data();
+    }
+    
+    var id = datosVehiculo.id;
+    var placa = datosVehiculo.placa;
+    var marca = datosVehiculo.marca;
+    var modelo = datosVehiculo.modelo;
+    var idPropietario = datosVehiculo.idPropietario;
+    var nInterno = datosVehiculo.nInterno;
+    var vMovilizacion = datosVehiculo.vMovilizacion;
+    var vSoat = datosVehiculo.vSoat;
+    //levantar modal
+    AbrirModalEditarV();
+    //ingresas datos modal
+    $("#idVehiculo").val(id);
+    $("#txt_pla_edit").val(placa);
+    $("#txt_mar_edit").val(marca);
+    $("#txt_mod_edit").val(modelo);
+    $("#sel_pro_vehiculo_edit").val(idPropietario).trigger('change');
+    $("#txt_int_edit").val(nInterno);
+    $("#txt_mov_edit").val(vMovilizacion);
+    $("#txt_soa_edit").val(vSoat);
+
+})
+
 function listar_placa(){
     $.ajax({
         "url": "../controlador/conductor/controlador_placa_listar.php",
