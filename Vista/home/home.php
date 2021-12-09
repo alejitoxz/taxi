@@ -22,7 +22,7 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
-                        <h3 class="vehiculosRegistrados">0</h3>
+                        <h3 id="contadorVehiculo">0</h3>
 
                         <p>Vehículos</p>
                         </div>
@@ -39,7 +39,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                     <div class="inner">
-                    <h3 class="PropietariosRegistrados">0</h3>
+                    <h3 id="contadorPropietario">0</h3>
                         <p>Propietarios</p>
                     </div>
                     <div class="icon">
@@ -56,14 +56,14 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                    <h3 class="ConductoresRegistrados">0</h3>
+                    <h3 id="contadorConductor">0</h3>
 
                     <p>Conductores</p>
                     </div>
                     <div class="icon">
                     <i class="fas fa-id-card"></i>
                     </div>
-                    <a onclick="cargar_contenido('contenido_principal','conductor/vista_conductor_listar.php.php')" class="small-box-footer">Conductores Registrados 
+                    <a onclick="cargar_contenido('contenido_principal','conductor/vista_conductor_listar.php')" class="small-box-footer">Conductores Registrados 
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -74,6 +74,12 @@
     </div>
 </div>
 <script src="../js/usuario.js"></script>
+<script src="../js/vehiculo.js"></script>
+<script src="../js/propietario.js"></script>
+<script src="../js/conductor.js"></script>
 <script>
     contarUsuario();
+    contarVehiculo();
+    contarPropietario();
+    contarConductor();
 </script>

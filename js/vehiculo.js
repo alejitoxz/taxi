@@ -318,7 +318,22 @@ function modificar_vehiculo(){
 
 }
 
-
+function contarVehiculo(){
+    $("#contadorVehiculo").html(0);
+    $.ajax({
+        url:'../controlador/vehiculo/controlador_contador_vehiculo.php',
+        type:'post',
+    }).done(function(req){
+		var resultado=eval("("+req+")");
+        if(resultado.length>0){
+            $("#contadorVehiculo").html(resultado[0]['contadorVehiculo']);
+         }else{
+            $("#contadorVehiculo").html(0);
+         }
+            
+            
+    })
+}
 
 function limpiarRegistro(){
     $("#txt_pla").val("");

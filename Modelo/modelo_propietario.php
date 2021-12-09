@@ -1,4 +1,5 @@
 <?php
+session_start();
     class modelo_propietario{
         private $conexion;
         public $data;
@@ -146,13 +147,39 @@
                     direccion = '$direccion'
                     WHERE id= $idPersona
                     ";
-                     echo $sql; exit;
+                    // echo $sql; exit;
             $resp = sqlsrv_query($conn, $sql);
             
             if( $resp === false) {
                 return 0;
             }else{
                 return 1;
+            }
+            
+            $this->conexion->conectar();
+        }
+
+        function contador_propietario(){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+            $sql  = "select COUNT(id) as contadorPropietario from propietario
+            where estatus = 1 AND idCompany = $idCompany";
+           //echo $sql;
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+            $i = 0;
+            
+            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+            {
+                $data[$i] = $row;
+                $i++;
+            }
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
             }
             
             $this->conexion->conectar();

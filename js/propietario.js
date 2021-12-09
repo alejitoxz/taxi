@@ -245,5 +245,22 @@ function modificar_propietario(){
             Swal.fire("Mensaje De Error",'No se pudo completar la edicion', "error");
         }
     })
+}
 
+function contarPropietario(){
+    $("#contadorPropietario").html(0);
+    $.ajax({
+        url:'../controlador/propietario/controlador_contador_propietario.php',
+        type:'post',
+    }).done(function(req){
+		var resultado=eval("("+req+")");
+
+        if(resultado.length>0){
+            $("#contadorPropietario").html(resultado[0]['contadorPropietario']);
+         }else{
+            $("#contadorPropietario").html(0);
+         }
+            
+            
+    })
 }

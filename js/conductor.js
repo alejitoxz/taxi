@@ -156,6 +156,25 @@ function registrar_conductor(){
     })
 
 }
+
+function contarConductor(){
+    $("#contadorConductor").html(0);
+    $.ajax({
+        url:'../controlador/conductor/controlador_contador_conductor.php',
+        type:'post',
+    }).done(function(req){
+		var resultado=eval("("+req+")");
+
+        if(resultado.length>0){
+            $("#contadorConductor").html(resultado[0]['contadorConductor']);
+         }else{
+            $("#contadorConductor").html(0);
+         }
+            
+            
+    })
+}
+
 function limpiarRegistro(){
     $("#txt_nom").val("");
     $("#txt_ape").val("");
