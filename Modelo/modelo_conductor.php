@@ -25,7 +25,6 @@ session_start();
                     con.fondoPension,
                     CONVERT ( VARCHAR, con.vLicencia ) AS vLicencia,
                     v.placa
-                    
                     FROM
                     conductor AS con
                     INNER JOIN vehiculo AS v ON ( con.idVehiculo = v.id )

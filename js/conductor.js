@@ -39,19 +39,19 @@ function listar_conductor(){
 $('#tabla_conductor').on('click','.tarjeton',function(){
     window.open(url);
     if(table.row(this).child.isShown()){
-        var datosVehiculo = table.row(this).data();
+        var datosConductor = table.row(this).data();
     }else{
-        var datosVehiculo = table.row($(this).parents('tr')).data();
+        var datosConductor = table.row($(this).parents('tr')).data();
     }
     
-    var id = datosVehiculo.id;
-    var placa = datosVehiculo.placa;
-    var marca = datosVehiculo.marca;
-    var modelo = datosVehiculo.modelo;
-    var idPropietario = datosVehiculo.idPropietario;
-    var nInterno = datosVehiculo.nInterno;
-    var vMovilizacion = datosVehiculo.vMovilizacion;
-    var vSoat = datosVehiculo.vSoat;
+    var id = datosConductor.id;
+    var placa = datosConductor.placa;
+    var marca = datosConductor.marca;
+    var modelo = datosConductor.modelo;
+    var idPropietario = datosConductor.idPropietario;
+    var nInterno = datosConductor.nInterno;
+    var vMovilizacion = datosConductor.vMovilizacion;
+    var vSoat = datosConductor.vSoat;
     //levantar modal
     AbrirModalEditarV();
     //ingresas datos modal
