@@ -34,10 +34,56 @@ function listar_conductor(){
     } );
     
 }
-
+function listar_placa(){
+    $.ajax({
+        "url": "../controlador/conductor/controlador_placa_listar.php",
+        "type": "POST"
+    }).done(function(resp){
+        
+        var data = JSON.parse(resp);
+        
+        var cadena="";
+        if(data.length>0){
+            cadena+="<option value='0'>Seleccionar</option>"; 
+            for(var i=0; i < data.length; i++){
+                cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['placa']+"</option>";
+            }
+            $("#sel_placa_vehiculo").html(cadena);
+            $("#sel_placa_vehiculo_edit").html(cadena);
+        }else{
+            cadena+="<option value =''>No se encontraron registros</option>"; 
+        }
+    })
+}
 function AbrirModalRegistroConductor(){
     $("#modal_registro_conductor").modal({backdrop:'static',keyboard:false})
     $("#modal_registro_conductor").modal('show');
+}
+function buscarPersona(valor){
+    $.ajax({
+        url:'../controlador/conductor/controlador_buscar_persona.php',
+        type:'POST',
+        data:{
+            valor:valor
+        }
+    }).done(function(resp){
+    var data = JSON.parse(resp);
+    if(data){
+        $("#idPersonaC").val(data.data[0]['id']);
+        $("#txt_nom").val(data.data[0]['nombre']);
+        $("#txt_ape").val(data.data[0]['apellido']);
+        $("#txt_tel").val(data.data[0]['telefono']);
+        $("#txt_ema").val(data.data[0]['email']);
+        $("#txt_dir").val(data.data[0]['direccion']);
+    }else{
+        $("#idPersonaC").val("");
+        $("#txt_nom").val("");
+        $("#txt_ape").val("");
+        $("#txt_tel").val("");
+        $("#txt_ema").val("");
+        $("#txt_dir").val("");
+    }
+    })
 }
 function registrar_conductor(){
 
@@ -76,7 +122,7 @@ function registrar_conductor(){
     }
 
     $.ajax({
-        "url": "../controlador/usuario/controlador_usuario_registro.php",
+        "url": "../controlador/conductor/controlador_conductor_registro.php",
         "type": "POST",
         data:{
         id:id,

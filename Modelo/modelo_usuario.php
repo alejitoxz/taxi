@@ -184,6 +184,7 @@
                      ROLLBACK TRAN
                      END CATCH";
                    
+                     echo $sql; exit;
             $resp = sqlsrv_query($conn, $sql);
            
             if( $resp === false) {
