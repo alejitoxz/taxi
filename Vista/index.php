@@ -271,7 +271,7 @@ if(isset($Datos[$i]['submodulos'])){
 					"sSortDescending": ": Activar para ordenar la columna de manera descendente"
 			}
 	 }
-
+   cargar_contenido('contenido_principal','home/home.php');
   function cargar_contenido(contenedor,contenido){
     $("#"+contenedor).load(contenido);
   }
