@@ -3,6 +3,7 @@
 
     $MT = new modelo_tarjeton();
     $nombres = htmlspecialchars($_GET['nombres'],ENT_QUOTES,'UTF-8');
+    $placa = htmlspecialchars($_GET['placa'],ENT_QUOTES,'UTF-8');
     $nInterno = htmlspecialchars($_GET['nInterno'],ENT_QUOTES,'UTF-8');
     $nMovilizacion = htmlspecialchars($_GET['nMovilizacion'],ENT_QUOTES,'UTF-8');
     $vLicencia = htmlspecialchars($_GET['vLicencia'],ENT_QUOTES,'UTF-8');
@@ -14,4 +15,4 @@
     $fondoPension = htmlspecialchars($_GET['fondoPension'],ENT_QUOTES,'UTF-8');
     $entResp = htmlspecialchars($_GET['entResp'],ENT_QUOTES,'UTF-8');
     $nit = htmlspecialchars($_GET['nit'],ENT_QUOTES,'UTF-8');
-    $consulta = $MT->exportar($nombres,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit);
+    $consulta = $MT->exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit);
