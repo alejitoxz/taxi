@@ -12,6 +12,5 @@
     $usuario = htmlspecialchars($_POST['usuario'],ENT_QUOTES,'UTF-8');
     $clave = password_hash($_POST['clave'],PASSWORD_DEFAULT,['cost'=>10]);
     $tipoRol = htmlspecialchars($_POST['tipoRol'],ENT_QUOTES,'UTF-8');
-    $entResp = htmlspecialchars($_POST['entResp'],ENT_QUOTES,'UTF-8');
-    $consulta = $MU->registrar_usuario($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$usuario,$clave,$tipoRol,$entResp);
+    $consulta = $MU->registrar_usuario($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$usuario,$clave,$tipoRol);
     echo $consulta;

@@ -3,6 +3,33 @@ session_start();
 if(!isset($_SESSION['S_ID'])){
     header('location: ../login/index.php');
 }
+// DATOS DE SESION USUARIO ROLES
+$Datos = $_SESSION['Datos'];
+
+
+
+/*for ($i=0; $i < count($Datos); $i++) { 
+  $Modulos = $Datos[$i]['modulos'];
+  echo $Modulos;
+  
+  if(isset($Datos[$i]['submodulos'])){
+    for ($k=0; $k < count($Datos[$i]['submodulos']); $k++) { 
+      //for ($x=0; $x < count($Datos[$i]['submodulos'][$x]); $x++) { 
+       // var_dump($Datos[$i]['submodulos'][$x]['descripcion']);
+        $SubDescripcion = $Datos[$i]['submodulos'][$k]['descripcion'];
+        $SubUrl = $Datos[$i]['submodulos'][$k]['url'];
+        $SubIcon = $Datos[$i]['submodulos'][$k]['icon'];
+        
+        echo $SubUrl." - ";
+      //}
+    } 
+  }
+  
+}
+
+exit;*/
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,7 +63,7 @@ if(!isset($_SESSION['S_ID'])){
   <link rel="stylesheet" href="../plantilla/DataTables/datatables.min.css">
   <link rel="stylesheet" href="../plantilla/select2/select2.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="sidebar-mini layout-fixed sidebar-collapse">
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -85,44 +112,66 @@ if(!isset($_SESSION['S_ID'])){
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo $_SESSION['USUARIO']; ?></a>
+          <a href="#" class="d-block"><?php echo $_SESSION['USUARIO']  ?></a>
         </div>
       </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a  class="nav-link active">
-              <i class="nav-icon fas fa-cog"></i>
+
+
+          
+          
+<?php
+  for ($i=0; $i < count($Datos); $i++) { 
+    $Modulos = $Datos[$i]['modulos'];
+    if($Modulos == "Inicio"){
+      $IconoMenu = "nav-icon fas fa-chart-pie"; 
+      $Desploy = ""; 
+      $base = "cargar_contenido('contenido_principal','home/home.php')"; 
+    }else if($Modulos == "Configuracion"){
+      $IconoMenu = "nav-icon fas fa-cog"; 
+      $Desploy = "right fas fa-angle-left";
+      $base = ""; 
+    }
+    else if($Modulos == "Bases de datos"){
+      $IconoMenu = "nav-icon fas fa-edit"; 
+      $Desploy = "right fas fa-angle-left";
+      $base = ""; 
+    }
+    
+    
+?>
+<!-- MODULOS -->
+            <li class="nav-item has-treeview">
+              <a  class="nav-link nav-active" onclick="<?php echo $base; ?>">
+              <i class="<?php echo $IconoMenu; ?>"></i>
               <p>
-              Configuracion
-                <i class="right fas fa-angle-left"></i>
-                
+              <?php echo $Modulos; ?>
+              <i class="<?php echo $Desploy; ?>"></i>
               </p>
             </a>
+<?php
+if(isset($Datos[$i]['submodulos'])){
+  for ($k=0; $k < count($Datos[$i]['submodulos']); $k++) { 
+
+      $SubDescripcion = $Datos[$i]['submodulos'][$k]['descripcion'];
+      $SubUrl = $Datos[$i]['submodulos'][$k]['url'];
+      $SubIcon = $Datos[$i]['submodulos'][$k]['icon'];
+
+  
+
+?>
+<!-- SUB MODULOS -->
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a onclick="cargar_contenido('contenido_principal','usuario/vista_usuario_listar.php')" class="nav-link">
-                  <i class="fas fa-user"></i>
-                  <p>Usuarios</p>
+              <li class="nav-item ">
+                <a onclick="cargar_contenido('contenido_principal','<?php echo $SubUrl; ?>')" class="nav-link nav-active">
+                  <i class="<?php echo $SubIcon; ?>"></i>
+                  <p><?php echo $SubDescripcion; ?></p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a onclick="cargar_contenido('contenido_principal','vehiculo/vista_vehiculo_listar.php')" class="nav-link">
-                  <i class="fas fa-taxi"></i>
-                  <p>vehiculos</p>
-                </a>
-              </li>
-              <li class="nav-item">
-              <a onclick="cargar_contenido('contenido_principal','company/vista_company_listar.php')" class="nav-link">
-                  <i class="fas fa-building"></i>
-                  <p>Compañia</p>
-                </a>
-              </li>
-              <li class="nav-item">
+              <!--<li class="nav-item">
               <a onclick="cargar_contenido('contenido_principal','propietario/vista_propietario_listar.php')" class="nav-link">
                   <i class="fas fa-building"></i>
                   <p>Propietario</p>
@@ -133,13 +182,20 @@ if(!isset($_SESSION['S_ID'])){
                   <i class="fas fa-building"></i>
                   <p>Conductor</p>
                 </a>
-              </li>
+              </li>-->
             </ul>
+<?php
+      
+    }
+  }
+}
+?>
+<!-- FIN MODULOS -->
           </li>
-
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
+
     </div>
     <!-- /.sidebar -->
   </aside>
@@ -152,38 +208,17 @@ if(!isset($_SESSION['S_ID'])){
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Bienvenidos a VisualSat</h1>
+            <h1 class="m-0 text-dark">Bienvenidos</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
-
+    
+<!--dash -->
     <section class="content">
       <div clas="row" id="contenido_principal">
-      
-      <div class="col-md-12">
-            <div class="card card-success">
-              <div class="card-header">
-                <h3 class="card-title">Bienvenido a VisualSat</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="/pages/widgets.html" data-source-selector="#card-refresh-content"><i class="fas fa-sync-alt"></i></button>
-                  <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                </div>
-                <!-- /.card-tools -->
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-              
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-      </div>
+       
+        </div>
       </div>
     </section>
 
@@ -241,6 +276,13 @@ if(!isset($_SESSION['S_ID'])){
     $("#"+contenedor).load(contenido);
   }
   $.widget.bridge('uibutton', $.ui.button)
+
+  $('.nav-active').on('click', function (e) {
+  e.preventDefault()
+  $('.nav-active').removeClass("active");
+  $(this).addClass("active");
+})
+
 </script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

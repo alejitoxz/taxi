@@ -135,14 +135,7 @@
               </select><br><br>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="">Entidad responsable</label>
-              <select class="js-example-basic-single"  name="state" id="sel_ent" style="width:100%; heigth: 40px;">
-                
-              </select><br><br>
-            </div>
-          </div>
+
         </div>
         </div>
         <div class="modal-footer">
@@ -234,14 +227,6 @@
             <div class="form-group">
               <label for="">Rol</label>
               <select class="js-example-basic-single"  name="state" id="sel_rol_edit" style="width:100%; heigth: 40px;">
-                
-              </select><br><br>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="">Entidad responsable</label>
-              <select class="js-example-basic-single"  name="state" id="sel_ent_edit" style="width:100%; heigth: 40px;">
                 
               </select><br><br>
             </div>

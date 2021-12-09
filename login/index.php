@@ -2,6 +2,7 @@
 session_start();
 if(isset($_SESSION['S_ID'])){
     header('location: ../vista/index.php');
+    
 }
 ?>
 
@@ -32,26 +33,6 @@ if(isset($_SESSION['S_ID'])){
 
     <title>Login</title>
 </head>
-
-   <!-- <div class="login-box">
-        <img src="img/avatar.jpg" alt="logo" class="avatar">
-        <h1>Login</h1>
-
-        <label for="usuario">Usuario</label>
-        <input type="text" placeholder="Usuario" id="txt_usu">
-
-        <label for="--password---">Contraseña</label>
-        <input type="password" placeholder="Contraseña" autocomplete="new-password" id="txt_con">
-        <button class="btn btn-primary" type="submit" onclick="VerificarUsuario()">Iniciar Sesión</button>
-        <a href="#">Has olvidado tu contraseña</a>
-
-
-    </div>
-	<div class="footer">
-		<h1>By: <a href="https://www.visualsat.com/" style="color: #ffffffbe!important;">Visualsat.com</a></h1>
-
-	</div>
--->
 <body class="hold-transition login-page fondoTaxi" >
 <div class="login-box">
   <div class="login-logo">

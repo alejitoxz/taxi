@@ -18,18 +18,32 @@ function VerificarUsuario(){
 		var resultado=eval("("+req+")");
         
 
-        console.log("Entra usuario",resultado)
         if(resultado.length>0){
-            var Id      = resultado[0]['id'];
-            var Usuario = resultado[0]['usuario'];
-            var Rol     = resultado[0]['idRol'];
+            if(resultado[0]['submodulos'].length > 0){
+                var Id      = resultado[0]['submodulos'][0]['id'];
+                var Usuario = resultado[0]['submodulos'][0]['usuario'];
+                var Rol     = resultado[0]['submodulos'][0]['idRol'];
+                var Company     = resultado[0]['submodulos'][0]['idCompany'];
+            }else{
+                var Id      = resultado[1]['submodulos'][0]['id'];
+                var Usuario = resultado[1]['submodulos'][0]['usuario'];
+                var Rol     = resultado[1]['submodulos'][0]['idRol'];
+                var Company     = resultado[1]['submodulos'][0]['idCompany'];
+            }
+            
+            let Datos = [];
+            Datos = resultado;
+//console.log("Prueba",resultado);return;
+            
             $.ajax({
                 url:'../controlador/usuario/controlador_crear_sesion.php',
                 type:'post',
                 data:{
                     id : Id,
                     usuario : Usuario,
-                    rol : Rol
+                    rol : Rol,
+                    company : Company,
+                    Datos : Datos
                 }
             }).done(function(req){
                 location.reload();
@@ -142,7 +156,6 @@ $('#tabla_usuario').on('click','.editar',function(){
     var usuario = datosUsuario.usuario;
     var clave = datosUsuario.clave;
     var idRol = datosUsuario.idRol;
-    var idEntResp = datosUsuario.idEntResp;
     var idPersona = datosUsuario.idPersona;
     //levantar modal
     AbrirModalEditar();
@@ -158,7 +171,6 @@ $('#tabla_usuario').on('click','.editar',function(){
     $("#txt_con_edit").val('');
     $("#txt_con2_edit").val('');
     $("#sel_rol_edit").val(idRol).trigger('change');
-    $("#sel_ent_edit").val(idEntResp).trigger('change');
     $("#idPersona").val(idPersona);
 
 })
@@ -174,7 +186,6 @@ function modificar_usuario(){
     var clave = $("#txt_con_edit").val();
     var clave2 = $("#txt_con2_edit").val();
     var tipoRol = $("#sel_rol_edit").val();
-    var entResp = $("#sel_ent_edit").val();
     var idPersona = $("#idPersona").val();
 
     if( id == ''||
@@ -189,8 +200,7 @@ function modificar_usuario(){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }
     if(
-        tipoRol == 0 ||
-        entResp == 0){
+        tipoRol == 0){
         return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
     }
     
@@ -212,8 +222,7 @@ function modificar_usuario(){
         direccion:direccion,
         usuario:usuario,
         clave:clave,
-        tipoRol:tipoRol,
-        entResp:entResp
+        tipoRol:tipoRol
         }
     }).done(function(resp){
         console.log(resp);
@@ -347,7 +356,6 @@ function registrar_usuario(){
     var clave = $("#txt_con").val();
     var clave2 = $("#txt_con2").val();
     var tipoRol = $("#sel_rol").val();
-    var entResp = $("#sel_ent").val();
 
     if( nombre == '' ||
         apellido == '' ||
@@ -364,8 +372,7 @@ function registrar_usuario(){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }
     if(
-        tipoRol == 0 ||
-        entResp == 0){
+        tipoRol == 0){
         return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
     }
     
@@ -386,8 +393,7 @@ function registrar_usuario(){
         direccion:direccion,
         usuario:usuario,
         clave:clave,
-        tipoRol:tipoRol,
-        entResp:entResp
+        tipoRol:tipoRol
         }
     }).done(function(resp){
         console.log(resp);
@@ -407,6 +413,25 @@ function registrar_usuario(){
     })
 
 }
+
+function contarUsuario(){
+    $("#contadorUsuario").html(0);
+    $.ajax({
+        url:'../controlador/usuario/controlador_contador_usuario.php',
+        type:'post',
+    }).done(function(req){
+		var resultado=eval("("+req+")");
+
+        if(resultado.length>0){
+            $("#contadorUsuario").html(resultado[0]['contadorUsuario']);
+         }else{
+            $("#contadorUsuario").html(0);
+         }
+            
+            
+    })
+}
+
 function limpiarRegistro(){
     $("#txt_nom").val("");
     $("#txt_ape").val("");
