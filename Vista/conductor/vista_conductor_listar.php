@@ -23,6 +23,17 @@
             <table id="tabla_conductor" class="display responsive nowrap" style="width:100%">
                     <thead>
                         <tr>
+                          <th style="display:none"></th>
+                          <th style="display:none"></th>
+                          <th style="display:none"></th>
+                          <th style="display:none"></th>
+                          <th style="display:none"></th>
+                          <th style="display:none"></th>
+                          <th style="display:none"></th>
+                          <th style="display:none"></th>
+                          <th style="display:none"></th>
+                          <th style="display:none"></th>
+                          <th style="display:none"></th>
                           <th>#</th>
                           <th>Nombre</th>
                           <th>Cedula</th>

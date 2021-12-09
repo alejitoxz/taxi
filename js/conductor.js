@@ -13,7 +13,64 @@ function listar_conductor(){
             "url": "../controlador/conductor/controlador_conductor_listar.php",
             "type": "POST"
         },
+        "columnDefs": [
+            {
+                "targets": [ 0 ],
+                "visible": false
+            },
+            {
+                "targets": [ 1 ],
+                "visible": false
+            },
+            {
+                "targets": [ 2 ],
+                "visible": false
+            },
+            {
+                "targets": [ 3 ],
+                "visible": false
+            },
+            {
+                "targets": [ 4 ],
+                "visible": false
+            },
+            {
+                "targets": [ 5 ],
+                "visible": false
+            },
+            {
+                "targets": [ 6 ],
+                "visible": false
+            },
+            {
+                "targets": [ 7 ],
+                "visible": false
+            },
+            {
+                "targets": [ 8 ],
+                "visible": false
+            },
+            {
+                "targets": [ 9 ],
+                "visible": false
+            },
+            {
+                "targets": [ 10 ],
+                "visible": false
+            }
+        ],
         "columns": [
+            { "data": "nInterno" },
+            { "data": "nMovilizacion" },
+            { "data": "vMovilizacion" },
+            { "data": "vSoat" },
+            { "data": "vLicencia" },
+            { "data": "eps" },
+            { "data": "nit" },
+            { "data": "arl" },
+            { "data": "rh" },
+            { "data": "entResp" },
+            { "data": "fondoPension" },
             { "data": "id" },
             { "data": "dueno" },
             { "data": "cedula" },
