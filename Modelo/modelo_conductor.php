@@ -1,4 +1,5 @@
 <?php
+session_start();
     class modelo_conductor{
         private $conexion;
         public $data;
@@ -10,6 +11,7 @@
 
         function listar_conductor(){
             $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
             $sql  = "SELECT
                     con.id,
                     (p.nombre + ' ' + p.apellido) AS dueno, 
@@ -17,10 +19,10 @@
                     p.telefono,
                     p.email,
                     p.direccion,
-                    p.eps,
-                    p.arl,
-                    p.rh,
-                    p.fondoPension,
+                    con.eps,
+                    con.arl,
+                    con.rh,
+                    con.fondoPension,
                     CONVERT ( VARCHAR, con.vLicencia ) AS vLicencia,
                     v.placa
                     
@@ -28,8 +30,7 @@
                     conductor AS con
                     INNER JOIN vehiculo AS v ON ( con.idVehiculo = v.id )
                     INNER JOIN persona AS p ON ( con.idPersona = p.id ) 
-                    WHERE
-                    con.estatus = 1
+                    WHERE con.estatus = 1 and con.idCompany = $idCompany 
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -104,7 +105,7 @@
         }
 
         function registrar_usuario($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa){
-            
+            $idCompany = $_SESSION['COMPANY'];
             $cadena = "";
             if($id){
                 $cadena = "
