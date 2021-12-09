@@ -93,7 +93,7 @@ function listar_usuario(){
         "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
         "pageLength": 10,
         "destroy":true,
-        "async": false ,
+        "async": true ,
         "processing": true,
         "ajax": {
             "url": "../controlador/usuario/controlador_usuario_listar.php",
@@ -323,27 +323,6 @@ function listar_rol(){
     })
 }
 
-function listar_ent(){
-    $.ajax({
-        "url": "../controlador/usuario/controlador_ent_listar.php",
-        "type": "POST"
-    }).done(function(resp){
-        
-        var data = JSON.parse(resp);
-        
-        var cadena="";
-        if(data.length>0){
-            cadena+="<option value='0'>Seleccionar</option>"; 
-            for(var i=0; i < data.length; i++){
-                cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['entResp']+"</option>";
-            }
-            $("#sel_ent").html(cadena);
-            $("#sel_ent_edit").html(cadena);
-        }else{
-            cadena+="<option value='0'>No se encontraron registros</option>"; 
-        }
-    })
-}
 
 
 function registrar_usuario(){
@@ -445,7 +424,6 @@ function limpiarRegistro(){
     $("#txt_usu").val("");
     $("#txt_con").val("");
     $("#txt_rol").val("");
-    $("#txt_ent").val("");
 }
 
 

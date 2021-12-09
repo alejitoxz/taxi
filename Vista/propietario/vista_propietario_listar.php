@@ -23,6 +23,7 @@
             <table id="tabla_propietario" class="display responsive nowrap" style="width:100%">
                     <thead>
                         <tr>
+                          <th style="display:none"></th>
                           <th>#</th>
                           <th>nombre</th>
                           <th>apellido</th>
@@ -67,7 +68,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Nombres</label>
-              <input type="hidden" id="idPersonaP">
+              <input type="hidden" id="idPersona">
               <input type="text" class="form-control" id="txt_nomp" placeholder="Ingrese los nombres"><br>
             </div>
           </div>
@@ -124,7 +125,6 @@
         <div class="row">
           <div class="col-md-4">
           <input type="hidden" id="id" >
-          <input type="hidden" id="idPersona" >
             <div class="form-group">
               <label for="">Nombres</label>
               <input type="text" class="form-control" id="txt_nomp_edit" placeholder="Ingrese los Nombres"><br>

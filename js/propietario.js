@@ -1,19 +1,26 @@
-var table_propietario;
+var table;
 function listar_propietario(){
-    table_propietario = $('#tabla_propietario').DataTable( {
-        "ordering":false,
-        "paging": false,
+    table = $('#tabla_propietario').DataTable( {
+        "ordering":true,
+        "paging": true,
         "searching": { "regex": true },
         "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
         "pageLength": 10,
         "destroy":true,
-        "async": false ,
+        "async": true ,
         "processing": true,
         "ajax": {
             "url": "../controlador/propietario/controlador_propietario_listar.php",
             "type": "POST"
         },
+        "columnDefs": [
+            {
+                "targets": [ 0 ],
+                "visible": false
+            }
+        ],
         "columns": [
+            { "data": "idPersona" },
             { "data": "id" },
             { "data": "nombre" },
             { "data": "apellido" },
@@ -45,14 +52,14 @@ function buscarPersonaP(valor){
     }).done(function(resp){
     var data = JSON.parse(resp);
     if(data){
-        $("#idPersonaP").val(data.data[0]['id']);
+        $("#idPersona").val(data.data[0]['id']);
         $("#txt_nomp").val(data.data[0]['nombre']);
         $("#txt_apep").val(data.data[0]['apellido']);
         $("#txt_telp").val(data.data[0]['telefono']);
         $("#txt_emap").val(data.data[0]['email']);
         $("#txt_dirp").val(data.data[0]['direccion']);
     }else{
-        $("#idPersonaP").val("");
+        $("#idPersona").val("");
         $("#txt_nomp").val("");
         $("#txt_apep").val("");
         $("#txt_telp").val("");
@@ -100,10 +107,11 @@ function registrar_propietario(){
         console.log(resp);
         if(resp > 0){
             if(resp==1){
+                limpiarRegistro();
             $("#modal_registro_P").modal('hide');
             Swal.fire("Mensaje De Confirmacion",'Registro realizado', "success").then((value)=>{
-                table_propietario.ajax.reload();
-                limpiarRegistro();
+                table.ajax.reload();
+                
             });
         }else{
             Swal.fire("Mensaje De Advertencia",'El usuario ya se encuentra en uso', "warning");
@@ -114,13 +122,22 @@ function registrar_propietario(){
     })
 
 }
-
+function limpiarRegistro(){
+    $("#idPersonaP").val("");
+    $("#txt_cedp").val("");
+    $("#txt_nomp").val("");
+    $("#txt_apep").val("");
+    $("#txt_telp").val("");
+    $("#txt_emap").val("");
+    $("#txt_dirp").val("");
+    console.log("prueba");
+}
 // FUNCION PARA ELIMINAR (ANULAR) REGISTRO
 $('#tabla_propietario').on('click','.eliminarp',function(){
-    if(table_propietario.row(this).child.isShown()){
-        var idPropietario = table_propietario.row(this).data().id;
+    if(table.row(this).child.isShown()){
+        var idPropietario = table.row(this).data().id;
     }else{
-        var idPropietario = table_propietario.row($(this).parents('tr')).data().id;
+        var idPropietario = table.row($(this).parents('tr')).data().id;
     }
     Swal.fire({
         title: '¿Seguro desea eliminar el registro?',
@@ -172,10 +189,10 @@ function AbrirModalEditarP(){
 // FUNCION PARA EDITAR REGISTRO
 $('#tabla_propietario').on('click','.editarp',function(){
 
-    if(table_propietario.row(this).child.isShown()){
-        var datosPropietario = table_propietario.row(this).data();
+    if(table.row(this).child.isShown()){
+        var datosPropietario = table.row(this).data();
     }else{
-        var datosPropietario = table_propietario.row($(this).parents('tr')).data();
+        var datosPropietario = table.row($(this).parents('tr')).data();
     }
 
     var id = datosPropietario.id;
@@ -185,7 +202,7 @@ $('#tabla_propietario').on('click','.editarp',function(){
     var cedula = datosPropietario.cedula;
     var email = datosPropietario.email;
     var direccion = datosPropietario.direccion;
-
+    var idPersona = datosPropietario.idPersona;
     //levantar modal
     AbrirModalEditarP();
     //ingresas datos modal
@@ -238,7 +255,7 @@ function modificar_propietario(){
             $("#modal_editar_P").modal('hide');
             Swal.fire("Mensaje De Confirmacion",'Datos Actualizados', "success")
                 .then((value)=>{
-                table_propietario.ajax.reload();
+                table.ajax.reload();
             });
         
         }else{

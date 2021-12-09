@@ -24,7 +24,6 @@
                     <thead>
                         <tr>
                           <th style="display:none"></th>
-                          <th style="display:none"></th>
                           <th>#</th>
                           <th>Placa</th>
                           <th>Marca</th>
@@ -140,7 +139,8 @@
         <div class="modal-body">
           <!-- FORMULARIO REGISTRO DE vehiculo, CAMPOS -->
         <form class="form">
-        <input type="hidden" id="idVehiculo">
+        <input type="hidden" id="id">
+        <input type="hidden" id="idPropietario">
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
@@ -200,7 +200,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"><b> </i> Cancelar</button>
-          <button type="button" class="btn btn-primary" onclick="registrar_vehiculo()"><i class="fa fa-check"> </i> Modificar</button>
+          <button type="button" class="btn btn-primary" onclick="modificar_vehiculo()"><i class="fa fa-check"> </i> Modificar</button>
         </div>
       </div>
     </div>
@@ -213,7 +213,6 @@
     listar_vehiculo();
     $('.js-example-basic-single').select2();
     listar_pro();
-    listar_ent_vehiculo();
     $("#modal_registro_vehiculo").on('shown.bs.modal',function(){
     });
   });

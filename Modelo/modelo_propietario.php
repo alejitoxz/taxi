@@ -18,7 +18,8 @@ session_start();
             p.cedula,
             p.telefono,
             p.email,
-            p.direccion
+            p.direccion,
+            p.id as idPersona
             FROM
             propietario AS pro
             INNER JOIN persona AS p ON ( pro.idPersona = p.id ) 
@@ -145,9 +146,8 @@ session_start();
                     telefono = '$telefono',
                     email = '$email',
                     direccion = '$direccion'
-                    WHERE id= $idPersona
+                    WHERE id = $idPersona
                     ";
-                    // echo $sql; exit;
             $resp = sqlsrv_query($conn, $sql);
             
             if( $resp === false) {
@@ -164,7 +164,6 @@ session_start();
             $idCompany = $_SESSION['COMPANY'];
             $sql  = "select COUNT(id) as contadorPropietario from propietario
             where estatus = 1 AND idCompany = $idCompany";
-           //echo $sql;
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;

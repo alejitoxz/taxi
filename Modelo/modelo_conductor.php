@@ -108,8 +108,8 @@ session_start();
             $cadena = "";
             if($id){
                 $cadena = "
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,,eps,arl,rh,fondoPension,$idCompany) 
-                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',)";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany) 
+                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany)";
             }else{
                 
                 $cadena = "DECLARE @idPersona int
@@ -164,6 +164,23 @@ session_start();
                 return $data;
             }else{
                 return 0;
+            }
+            
+            $this->conexion->conectar();
+        }
+
+        function modificar_conductor($id,$estatus){
+            $conn = $this->conexion->conectar();
+            $sql  = "UPDATE conductor set estatus= $estatus
+                    WHERE id='$id'
+                    ";
+                   
+            $resp = sqlsrv_query($conn, $sql);
+            
+            if( $resp === false) {
+                return 0;
+            }else{
+                return 1;
             }
             
             $this->conexion->conectar();

@@ -1,13 +1,13 @@
 var table_company;
 function listar_company(){
     table_company = $('#tabla_company').DataTable( {
-        "ordering":false,
-        "paging": false,
+        "ordering":true,
+        "paging": true,
         "searching": { "regex": true },
         "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
         "pageLength": 10,
         "destroy":true,
-        "async": false ,
+        "async": true ,
         "processing": true,
         "ajax": {
             "url": "../controlador/company/controlador_company_listar.php",

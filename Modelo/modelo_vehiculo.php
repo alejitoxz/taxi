@@ -54,29 +54,6 @@ session_start();
            
         }
 
-        
-    function listar_ent_vehiculo(){
-        $conn = $this->conexion->conectar();
-        $sql  = "SELECT id, entResp from company";
-        $resp = sqlsrv_query($conn, $sql);
-        if( $resp === false) {
-            return 0;
-        }
-        $i = 0;
-        $data = [];
-        while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
-        {
-            $data[$i] = $row;
-            $i++;
-        }
-        if($data>0){
-            return $data;
-        }else{
-            return 0;
-        }
-        
-        $this->conexion->conectar();
-    }
 
     function listar_pro(){
         $conn = $this->conexion->conectar();
@@ -144,17 +121,18 @@ session_start();
         $this->conexion->conectar();
     }
 
-    function editar_vehiculo($id,$placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat){
+    function editar_vehiculo($id,$placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat,$nMovilizacion){
         $conn = $this->conexion->conectar();
 
         $sql  = "UPDATE vehiculo SET
-                placa= '$usuario' 
-                marca= '$tipoRol',
+                placa= '$placa', 
+                marca= '$marca',
                 modelo = '$modelo',
                 idPropietario = '$idPropietario',
                 nInterno = '$nInterno',
                 vMovilizacion = '$vMovilizacion',
-                vSoat = '$vSoat'
+                vSoat = '$vSoat',
+                nMovilizacion = '$nMovilizacion'
                 WHERE id=$id
                 ";
                  

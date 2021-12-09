@@ -208,13 +208,6 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Entidad responsable</label>
-              <select class="js-example-basic-single"  name="state" id="sel_entResp_vehiculo_edit" style="width:100%; heigth: 40px;">               
-              </select><br><br>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
               <label for="">Dueño</label>
               <select class="js-example-basic-single"  name="state" id="sel_pro_vehiculo_edit" style="width:100%; heigth: 40px;">   
               </select><br><br>
@@ -225,7 +218,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"><b> </i> Cancelar</button>
-          <button type="button" class="btn btn-primary" onclick="registrar_vehiculo()"><i class="fa fa-check"> </i> Modificar</button>
+          <button type="button" class="btn btn-primary" onclick="modificar_vehiculo()"><i class="fa fa-check"> </i> Modificar</button>
         </div>
       </div>
     </div>

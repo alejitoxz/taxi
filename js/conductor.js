@@ -220,5 +220,53 @@ function limpiarRegistro(){
     $("#txt_rh").val("");
     $("#txt_pen").val("");
     $("#txt_lic").val("");
-    $("#sel_placa_vehiculo").val("");
+    $("#sel_placa_vehiculo").val(0);
+}
+// FUNCION PARA ELIMINAR (ANULAR) REGISTRO
+$('#tabla_conductor').on('click','.eliminar',function(){
+    if(table.row(this).child.isShown()){
+        var idConductor = table.row(this).data().id;
+    }else{
+        var idConductor = table.row($(this).parents('tr')).data().id;
+    }
+    Swal.fire({
+        title: '¿Seguro desea eliminar el registro?',
+        text: "Una vez hecho esto, se eliminara del sistema",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+          console.log(result);
+        if (result.value) {
+        modificar_estatus(idConductor,0);
+          Swal.fire(
+            'Eliminado',
+            '¡Tu registro ha sido eliminado!',
+            'success'
+          )
+        }
+      })
+    
+})
+function modificar_estatus(id,estatus){
+    $.ajax({
+        "url": "../controlador/conductor/controlador_modificar_conductor_estatus.php",
+        type: "POST",
+        data:{
+        id:id,
+        estatus:estatus
+        }
+    }).done(function(resp){
+        if(resp>0){
+            if(resp==1){
+                    listar_conductor();
+                
+            }else{
+                Swal.fire("Mensaje De Advertencia",'No se pudo borrar el archivo', "warning")
+            }
+        }
+    })
 }

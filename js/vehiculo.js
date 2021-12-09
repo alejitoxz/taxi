@@ -1,13 +1,13 @@
 var table;
 function listar_vehiculo(){
     table = $('#tabla_vehiculo').DataTable( {
-        "ordering":false,
-        "paging": false,
+        "ordering":true,
+        "paging": true,
         "searching": { "regex": true },
         "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
         "pageLength": 10,
         "destroy":true,
-        "async": false ,
+        "async": true ,
         "processing": true,
         "ajax": {
             "url": "../controlador/vehiculo/controlador_listar_vehiculo.php",
@@ -17,14 +17,9 @@ function listar_vehiculo(){
             {
                 "targets": [ 0 ],
                 "visible": false
-            },
-            {
-                "targets": [ 1 ],
-                "visible": false
             }
         ],
         "columns": [
-            { "data": "idEntResp" },
             { "data": "idPropietario" },
             { "data": "id" },
             { "data": "placa" },
@@ -67,35 +62,13 @@ function listar_pro(){
             }
             
             $("#sel_pro_vehiculo").html(cadena);
-        }else{
-            cadena+="<option value='0'>No se encontraron registros</option>"; 
-        }
-    })
-}
-
-function listar_pro_edit(){
-    
-    $.ajax({
-        "url": "../controlador/vehiculo/controlador_listar_propietario.php",
-        "type": "POST"
-    }).done(function(resp){
-        
-        var data = JSON.parse(resp);
-        $("#sel_pro_vehiculo_edit").empty();
-        var cadena="";
-        
-        if(data.length>0){
-            cadena+="<option value='0'>Seleccionar</option>"; 
-            for(var i=0; i < data.length; i++){
-                cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['dueno']+"</option>";
-            }
-            
             $("#sel_pro_vehiculo_edit").html(cadena);
         }else{
             cadena+="<option value='0'>No se encontraron registros</option>"; 
         }
     })
 }
+
 function registrar_vehiculo(){
     var placa = $("#txt_pla").val();
     var marca = $("#txt_mar").val();
@@ -210,7 +183,6 @@ function AbrirModalEditarV(){
 
 // FUNCION PARA EDITAR REGISTRO
 $('#tabla_vehiculo').on('click','.editarv',function(){
-    listar_pro_edit();
     if(table.row(this).child.isShown()){
         var datosVehiculo = table.row(this).data();
     }else{
@@ -225,10 +197,11 @@ $('#tabla_vehiculo').on('click','.editarv',function(){
     var nInterno = datosVehiculo.nInterno;
     var vMovilizacion = datosVehiculo.vMovilizacion;
     var vSoat = datosVehiculo.vSoat;
+    var nMovilizacion = datosVehiculo.nMovilizacion;
     //levantar modal
     AbrirModalEditarV();
     //ingresas datos modal
-    $("#idVehiculo").val(id);
+    $("#id").val(id);
     $("#txt_pla_edit").val(placa);
     $("#txt_mar_edit").val(marca);
     $("#txt_mod_edit").val(modelo);
@@ -236,24 +209,27 @@ $('#tabla_vehiculo').on('click','.editarv',function(){
     $("#txt_int_edit").val(nInterno);
     $("#txt_mov_edit").val(vMovilizacion);
     $("#txt_soa_edit").val(vSoat);
+    $("#txt_nmov_edit").val(nMovilizacion);
 
 })
 function modificar_vehiculo(){
-    var id = $("#idVehiculo").val();
+    var id = $("#id").val();
     var placa = $("#txt_pla_edit").val();
     var marca = $("#txt_mar_edit").val();
     var modelo = $("#txt_mod_edit").val();
-    var idPropietario = $("#sel_pro_edit").val();
+    var idPropietario = $("#sel_pro_vehiculo_edit").val();
     var nInterno = $("#txt_int_edit").val();
     var vMovilizacion = $("#txt_mov_edit").val();
     var vSoat = $("#txt_soa_edit").val();
+    var nMovilizacion = $("#txt_nmov_edit").val();
 
     if( placa == '' ||
         marca == '' ||
         modelo == '' ||
         nInterno == '' ||
         vMovilizacion == '' ||
-        vSoat == ''
+        vSoat == ''||
+        vMovilizacion == '' 
     ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }if(
@@ -265,7 +241,6 @@ function modificar_vehiculo(){
         "url": "../controlador/vehiculo/controlador_vehiculo_modificar.php",
         "type": "POST",
         data:{
-        idEntResp:idEntResp,
         id:id,
         placa:placa,
         marca:marca,
@@ -274,7 +249,7 @@ function modificar_vehiculo(){
         nInterno:nInterno,
         vMovilizacion:vMovilizacion,
         vSoat:vSoat,
-            
+        nMovilizacion:nMovilizacion,    
         }
     }).done(function(resp){
         console.log(resp);
@@ -316,6 +291,7 @@ function limpiarRegistro(){
     $("#txt_int").val("");
     $("#txt_mov").val("");
     $("#txt_soa").val("");
-    $("#sel_entResp_vehiculo").val("");
-    $("#sel_pro_vehiculo").val("");
+    $("#sel_pro_vehiculo").val("0");
+    $("#txt_nmov").val("");
+    
 }
