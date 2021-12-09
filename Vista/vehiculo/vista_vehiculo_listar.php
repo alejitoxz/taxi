@@ -35,6 +35,7 @@
                           <th>Numero Interno</th>
                           <th>Vencimiento Movilizacion</th>
                           <th>Vencimiento Soat</th>
+                          <th>N. Movilizacion</th>
                           <th align="right" >Acciones</th>
                         </tr>
                     </thead>
@@ -110,7 +111,12 @@
               </select><br><br>
             </div>
           </div>
-          
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Numero Movilizacion</label>
+              <input type="text" class="form-control" id="txt_nmov" placeholder="Ingrese el numero interno"><br>
+            </div>
+          </div>
         </div>
         </div>
         <div class="modal-footer">
@@ -184,7 +190,12 @@
               </select><br><br>
             </div>
           </div>
-          
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Numero Movilizacion</label>
+              <input type="text" class="form-control" id="txt_nmov_edit" placeholder="Ingrese el numero de movilizacion"><br>
+            </div>
+          </div>
         </div>
         </div>
         <div class="modal-footer">

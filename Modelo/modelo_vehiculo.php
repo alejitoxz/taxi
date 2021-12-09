@@ -23,6 +23,7 @@ session_start();
             v.nInterno,
             CONVERT(varchar,v.vMovilizacion) as vMovilizacion,
             CONVERT(varchar,v.vSoat) as vSoat,
+            v.nMovilizacion,
             co.id as idEntResp,
             pro.id as idPropietario
             FROM
@@ -108,11 +109,11 @@ session_start();
         $this->conexion->conectar();
     }
     
-    function registrar_vehiculo($placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat){
+    function registrar_vehiculo($placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat,$nMovilizacion){
         $conn = $this->conexion->conectar();
         $idCompany = $_SESSION['COMPANY'];
-        $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompany,idPropietario,nInterno,vMovilizacion,vSoat,estatus)
-                 VALUES('$placa','$marca','$modelo',$idCompany,'$idPropietario','$nInterno','$vMovilizacion','$vSoat',1)
+        $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompany,idPropietario,nInterno,vMovilizacion,vSoat,estatus,nMovilizacion)
+                 VALUES('$placa','$marca','$modelo',$idCompany,'$idPropietario','$nInterno','$vMovilizacion','$vSoat',1,'$nMovilizacion')
                  ";
         $resp = sqlsrv_query($conn, $sql);
         

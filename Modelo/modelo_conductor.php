@@ -108,8 +108,8 @@ session_start();
             $cadena = "";
             if($id){
                 $cadena = "
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,,eps,arl,rh,fondoPension) 
-                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension')";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,,eps,arl,rh,fondoPension,$idCompany) 
+                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',)";
             }else{
                 
                 $cadena = "DECLARE @idPersona int

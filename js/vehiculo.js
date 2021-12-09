@@ -36,6 +36,7 @@ function listar_vehiculo(){
             { "data": "nInterno" },
             { "data": "vMovilizacion" },
             { "data": "vSoat" },
+            { "data": "nMovilizacion" },
             {"defaultContent":
             "<button style='font-size:13px;' type='button' class='eliminarv btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editarv btn btn-info'><i class='fa fa-edit'></i></button>"}
         ],
@@ -47,26 +48,6 @@ function listar_vehiculo(){
 function AbrirModalRegistroVehiculo(){
     $("#modal_registro_vehiculo").modal({backdrop:'static',keyboard:false})
     $("#modal_registro_vehiculo").modal('show');
-}
-function listar_ent_vehiculo(){
-    $.ajax({
-        "url": "../controlador/vehiculo/controlador_ent_listar.php",
-        "type": "POST"
-    }).done(function(resp){
-        
-        var data = JSON.parse(resp);
-        
-        var cadena="";
-        if(data.length>0){
-            cadena+="<option value='0'>Seleccionar</option>"; 
-            for(var i=0; i < data.length; i++){
-                cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['entResp']+"</option>";
-            }
-            $("#sel_entResp_vehiculo").html(cadena);
-        }else{
-            cadena+="<option value='0'>No se encontraron registros</option>"; 
-        }
-    })
 }
 function listar_pro(){
     
@@ -123,6 +104,7 @@ function registrar_vehiculo(){
     var nInterno = $("#txt_int").val();
     var vMovilizacion = $("#txt_mov").val();
     var vSoat = $("#txt_soa").val();
+    var nMovilizacion = $("#txt_nmov").val();
 
 
     if( placa == '' ||
@@ -130,7 +112,8 @@ function registrar_vehiculo(){
         modelo == '' ||
         nInterno == '' ||
         vMovilizacion == '' ||
-        vSoat == ''
+        vSoat == ''||
+        nMovilizacion == ''
     ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }if(
@@ -149,6 +132,7 @@ function registrar_vehiculo(){
             nInterno:nInterno,
             vMovilizacion:vMovilizacion,
             vSoat:vSoat,
+            nMovilizacion:nMovilizacion,
             
         }
     }).done(function(resp){
