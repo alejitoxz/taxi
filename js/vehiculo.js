@@ -91,11 +91,34 @@ function listar_pro(){
         }
     })
 }
+
+function listar_pro_edit(){
+    
+    $.ajax({
+        "url": "../controlador/vehiculo/controlador_listar_propietario.php",
+        "type": "POST"
+    }).done(function(resp){
+        
+        var data = JSON.parse(resp);
+        $("#sel_pro_vehiculo_edit").empty();
+        var cadena="";
+        
+        if(data.length>0){
+            cadena+="<option value='0'>Seleccionar</option>"; 
+            for(var i=0; i < data.length; i++){
+                cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['dueno']+"</option>";
+            }
+            
+            $("#sel_pro_vehiculo_edit").html(cadena);
+        }else{
+            cadena+="<option value='0'>No se encontraron registros</option>"; 
+        }
+    })
+}
 function registrar_vehiculo(){
     var placa = $("#txt_pla").val();
     var marca = $("#txt_mar").val();
     var modelo = $("#txt_mod").val();
-    var entResp = $("#sel_entResp_vehiculo").val();
     var idPropietario = $("#sel_pro_vehiculo").val();
     var nInterno = $("#txt_int").val();
     var vMovilizacion = $("#txt_mov").val();
@@ -111,8 +134,7 @@ function registrar_vehiculo(){
     ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }if(
-            idPropietario == 0 ||
-            entResp == 0){
+            idPropietario == 0 ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }
 
@@ -123,7 +145,6 @@ function registrar_vehiculo(){
             placa:placa,
             marca:marca,
             modelo:modelo,
-            entResp:entResp,
             idPropietario:idPropietario,
             nInterno:nInterno,
             vMovilizacion:vMovilizacion,
@@ -197,56 +218,29 @@ function modificar_estatusV(id,estatus){
     })
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function AbrirModalEditarV(){
     $("#modal_editar_V").modal({backdrop:'static',keyboard:false})
     $("#modal_editar_V").modal('show');
+    
 }
 
 // FUNCION PARA EDITAR REGISTRO
 $('#tabla_vehiculo').on('click','.editarv',function(){
-
+    listar_pro_edit();
     if(table.row(this).child.isShown()){
-        var datosVehiculo = table.row(this).data().id;
+        var datosVehiculo = table.row(this).data();
     }else{
-        var datosVehiculo = table.row($(this).parents('tr')).data().id;
+        var datosVehiculo = table.row($(this).parents('tr')).data();
     }
     
     var id = datosVehiculo.id;
     var placa = datosVehiculo.placa;
     var marca = datosVehiculo.marca;
     var modelo = datosVehiculo.modelo;
-    var idEntResp = datosVehiculo.idEntResp;
-    var idPropietario = datosVehiculo;
-    var nInterno = datosVehiculo;
-    var vMovilizacion = datosVehiculo;
-    var vSoat = datosVehiculo;
-
+    var idPropietario = datosVehiculo.idPropietario;
+    var nInterno = datosVehiculo.nInterno;
+    var vMovilizacion = datosVehiculo.vMovilizacion;
+    var vSoat = datosVehiculo.vSoat;
     //levantar modal
     AbrirModalEditarV();
     //ingresas datos modal
@@ -254,8 +248,7 @@ $('#tabla_vehiculo').on('click','.editarv',function(){
     $("#txt_pla_edit").val(placa);
     $("#txt_mar_edit").val(marca);
     $("#txt_mod_edit").val(modelo);
-    $("#sel_entResp_vehiculo").val(idEntResp).trigger('change');
-    $("#sel_pro_edit").val(idPropietario).trigger('change');
+    $("#sel_pro_vehiculo_edit").val(idPropietario).trigger('change');
     $("#txt_int_edit").val(nInterno);
     $("#txt_mov_edit").val(vMovilizacion);
     $("#txt_soa_edit").val(vSoat);
@@ -266,7 +259,6 @@ function modificar_vehiculo(){
     var placa = $("#txt_pla_edit").val();
     var marca = $("#txt_mar_edit").val();
     var modelo = $("#txt_mod_edit").val();
-    var entResp = $("#sel_entResp_vehiculo").val();
     var idPropietario = $("#sel_pro_edit").val();
     var nInterno = $("#txt_int_edit").val();
     var vMovilizacion = $("#txt_mov_edit").val();
@@ -281,8 +273,7 @@ function modificar_vehiculo(){
     ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }if(
-            idPropietario == 0 ||
-            entResp == 0){
+            idPropietario == 0 ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }
 
@@ -295,7 +286,6 @@ function modificar_vehiculo(){
         placa:placa,
         marca:marca,
         modelo:modelo,
-        entResp:entResp,
         idPropietario:idPropietario,
         nInterno:nInterno,
         vMovilizacion:vMovilizacion,

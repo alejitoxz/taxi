@@ -102,13 +102,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="">Entidad responsable</label>
-              <select class="js-example-basic-single"  name="state" id="sel_entResp_vehiculo" style="width:100%; heigth: 40px;">               
-              </select><br><br>
-            </div>
-          </div>
+          
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Dueño</label>
@@ -182,16 +176,10 @@
           </div>
         </div>
         <div class="row">
+          
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Entidad responsable</label>
-              <select class="js-example-basic-single"  name="state" id="sel_entResp_vehiculo_edit" style="width:100%; heigth: 40px;">               
-              </select><br><br>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="">Dueño</label>
+              <label for="">Propietario</label>
               <select class="js-example-basic-single"  name="state" id="sel_pro_vehiculo_edit" style="width:100%; heigth: 40px;">   
               </select><br><br>
             </div>

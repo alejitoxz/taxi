@@ -27,7 +27,7 @@ session_start();
             pro.id as idPropietario
             FROM
             vehiculo AS v
-            INNER JOIN company AS co ON (v.idCompañia = co.id)
+            INNER JOIN company AS co ON (v.idCompany = co.id)
             INNER JOIN propietario AS pro ON (v.idPropietario = pro.id)
             INNER JOIN persona AS p ON (pro.idPersona = p.id)
             WHERE v.estatus = 1 and v.idCompany = $idCompany;
