@@ -3,8 +3,11 @@ session_start();
 if(!isset($_SESSION['S_ID'])){
     header('location: ../login/index.php');
 }
-// DATOS DE SESION USUARIO ROLES
+
 $Datos = $_SESSION['Datos'];
+
+// DATOS DE SESION USUARIO ROLES
+$Ente = $_SESSION['ENTE'];
 
 
 
@@ -36,7 +39,7 @@ exit;*/
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Visualsat | SUT</title>
+  <title>Visualsat | SUTC</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -98,10 +101,10 @@ exit;*/
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">VisualSat - SUT</span>
+    <a href="#" class="brand-link">
+      <!--<img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8"> -->
+      <span class="brand-text font-weight-light"><?php echo $Ente;  ?></span>
     </a>
 
     <!-- Sidebar -->
@@ -112,7 +115,7 @@ exit;*/
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo $_SESSION['USUARIO']  ?></a>
+          <a href="#" class="d-block"><?php echo $_SESSION['USUARIO'];  ?></a>
         </div>
       </div>
 
@@ -223,7 +226,7 @@ if(isset($Datos[$i]['submodulos'])){
     </section>
 
   <footer class="main-footer">
-    <strong><a href="http://adminlte.io">Visualsat.com</a></strong>
+    <strong><a href="https://www.visualsat.com">Visualsat</a></strong>
    Todos los derechos reservados.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0

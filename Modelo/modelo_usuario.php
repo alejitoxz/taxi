@@ -12,6 +12,7 @@ session_start();
             $conn = $this->conexion->conectar();
             $sql1  = "SELECT
                     u.*,
+                    c.EntResp,
                     m.descripcion,
                     m.url,
                     m.nivel,
@@ -20,10 +21,11 @@ session_start();
                     m.id as idMenu
                     FROM
                     usuario as u
+                    INNER JOIN company as c ON (c.id = u.idCompany)
                     INNER JOIN rol as r ON (r.id = u.idRol) 
                     LEFT JOIN rol_modulos as rm ON (rm.idRol = r.id)
                     LEFT JOIN modulos as m ON (m.id = rm.idModulos)  
-                    WHERE usuario = '$usuario' AND estatus = 1 
+                    WHERE u.usuario = '$usuario' AND u.estatus = 1 
                     and m.nivel = 2 
                     ORDER BY m.orden";
             $resp1 = sqlsrv_query($conn, $sql1);
