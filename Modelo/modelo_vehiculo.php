@@ -12,6 +12,10 @@ session_start();
         function listar_vehiculo(){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+
+            
+
             $sql  = "SELECT
             v.id,
             v.placa,
@@ -89,6 +93,7 @@ session_start();
         INNER JOIN persona AS p ON (pro.idPersona = p.id)
         where pro.idCompany = $idCompany and pro.estatus = 1
         ";
+        //echo $sql;
         $resp = sqlsrv_query($conn, $sql);
         if( $resp === false) {
             return 0;

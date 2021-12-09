@@ -94,33 +94,40 @@ function listar_conductor(){
 
 // FUNCION PARA EDITAR REGISTRO
 $('#tabla_conductor').on('click','.tarjeton',function(){
-    window.open(url);
+    
     if(table.row(this).child.isShown()){
         var datosConductor = table.row(this).data();
     }else{
         var datosConductor = table.row($(this).parents('tr')).data();
     }
     
-    var id = datosConductor.id;
+    var nombres = datosConductor.dueno;
     var placa = datosConductor.placa;
-    var marca = datosConductor.marca;
-    var modelo = datosConductor.modelo;
-    var idPropietario = datosConductor.idPropietario;
     var nInterno = datosConductor.nInterno;
+    var nMovilizacion = datosConductor.nMovilizacion;
+    var vLicencia = datosConductor.vLicencia;
     var vMovilizacion = datosConductor.vMovilizacion;
     var vSoat = datosConductor.vSoat;
-    //levantar modal
-    AbrirModalEditarV();
-    //ingresas datos modal
-    $("#idVehiculo").val(id);
-    $("#txt_pla_edit").val(placa);
-    $("#txt_mar_edit").val(marca);
-    $("#txt_mod_edit").val(modelo);
-    $("#sel_pro_vehiculo_edit").val(idPropietario).trigger('change');
-    $("#txt_int_edit").val(nInterno);
-    $("#txt_mov_edit").val(vMovilizacion);
-    $("#txt_soa_edit").val(vSoat);
+    var eps = datosConductor.eps;
+    var rh = datosConductor.rh;
+    var arl = datosConductor.arl;
+    var fondoPension = datosConductor.fondoPension;
+    var entResp = datosConductor.entResp;
+    var nit = datosConductor.nit;
 
+    var url = "../controlador/tarjeton/controlador_exportar.php?nombres="+nombres+"placa="+placa
+    +"nInterno="+nInterno
+    +"nMovilizacion="+nMovilizacion
+    +"vLicencia="+vLicencia
+    +"vMovilizacion="+vMovilizacion
+    +"vSoat="+vSoat
+    +"eps="+eps
+    +"rh="+rh
+    +"arl="+arl
+    +"fondoPension="+fondoPension
+    +"entResp="+entResp
+    +"nit="+nit;
+    window.open(url,'_blank');
 })
 
 function listar_placa(){

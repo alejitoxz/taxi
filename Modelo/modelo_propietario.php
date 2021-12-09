@@ -11,6 +11,7 @@ session_start();
 
         function listar_propietario(){
             $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
             $sql  = "SELECT
             pro.id,
             p.nombre,
@@ -22,10 +23,11 @@ session_start();
             FROM
             propietario AS pro
             INNER JOIN persona AS p ON ( pro.idPersona = p.id ) 
+            INNER JOIN company AS c ON ( c.id = pro.idCompany ) 
             WHERE
-            estatus = 1;
+            pro.estatus = 1
+            and c.id = $idCompany;
             ";
-
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -79,20 +81,20 @@ session_start();
 
         //revisar el tema del alert, no funciona bien
         function registrar_propietario($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion){
-            
+            $idCompany = $_SESSION['COMPANY'];
             $cadena = "";
             if($id){
                 $cadena = "
-                INSERT INTO propietario(idPersona,estatus) 
-                VALUES($id,1)";
+                INSERT INTO propietario(idPersona,estatus,idCompany) 
+                VALUES($id,1,$idCompany)";
             }else{
                 
                 $cadena = "DECLARE @idPersona int
                 INSERT INTO persona(nombre,apellido,cedula,telefono,email,direccion)
                 VALUES('$nombre','$apellido','$cedula','$telefono','$email','$direccion')
                 SET @idPersona = SCOPE_IDENTITY()
-                INSERT INTO propietario(idPersona,estatus) 
-                VALUES(@idPersona,1)";
+                INSERT INTO propietario(idPersona,estatus,idCompany) 
+                VALUES(@idPersona,1,$idCompany)";
             }
             $conn = $this->conexion->conectar();
             $sql  = "BEGIN TRY

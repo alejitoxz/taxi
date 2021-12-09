@@ -61,7 +61,11 @@ session_start();
 
         function listar_placa(){
             $conn = $this->conexion->conectar();
-            $sql  = "SELECT id, placa from vehiculo";
+            $idCompany = $_SESSION['COMPANY'];
+            $sql  = "SELECT v.id, v.placa 
+            from vehiculo as v
+            INNER JOIN company AS c ON ( c.id = v.idCompany ) 
+            where v.estatus = 1 and c.id = $idCompany";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
