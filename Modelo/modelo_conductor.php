@@ -104,22 +104,23 @@ session_start();
             $this->conexion->conectar();
         }
 
-        function registrar_usuario($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa){
+        function registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa){
             $idCompany = $_SESSION['COMPANY'];
             $cadena = "";
             if($id){
                 $cadena = "
-                INSERT INTO conductor(idPersona,usuario,clave,idRol,idCompany,estatus) 
-                VALUES($id,'$usuario','$clave',$tipoRol,$entResp,1)";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,,eps,arl,rh,fondoPension) 
+                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension')";
             }else{
                 
                 $cadena = "DECLARE @idPersona int
-                INSERT INTO persona(nombre,apellido,cedula,telefono,email,direccion,eps,arl,rh,fondoPension)
-                VALUES('$nombre','$apellido','$cedula','$telefono','$email','$direccion','$eps','$arl','$rh','$fondoPension')
+                INSERT INTO persona(nombre,apellido,cedula,telefono,email,direccion)
+                VALUES('$nombre','$apellido','$cedula','$telefono','$email','$direccion')
                 SET @idPersona = SCOPE_IDENTITY()
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus) 
-                VALUES(@idPersona,'$vLicencia','$placa',1)";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany) 
+                VALUES(@idPersona,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany)";
             }
+            
             $conn = $this->conexion->conectar();
             $sql  = "BEGIN TRY
                      BEGIN TRAN
@@ -131,9 +132,9 @@ session_start();
                      BEGIN CATCH
                      ROLLBACK TRAN
                      END CATCH";
-                   
+
             $resp = sqlsrv_query($conn, $sql);
-           
+
             if( $resp === false) {
                 return 0;
             }else{

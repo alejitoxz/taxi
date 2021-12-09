@@ -166,9 +166,10 @@ function registrar_conductor(){
         direccion:direccion,
         eps:eps,
         arl:arl,
+        rh:rh,
         fondoPension:fondoPension,
         vLicencia:vLicencia,
-        placa:placa,
+        placa:placa
         }
     }).done(function(resp){
         console.log(resp);
