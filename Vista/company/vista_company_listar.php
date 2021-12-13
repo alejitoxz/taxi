@@ -91,7 +91,7 @@
 
         <div class="row">
           <div class="col-md-4">
-          <input type="hidden" id="idCompany" >
+          <input type="hidden" id="id" >
             <div class="form-group">
               <label for="">Compañia</label>
               <input type="text" class="form-control" id="txt_com_edit" placeholder="Ingrese el nombre de la empresa"><br>

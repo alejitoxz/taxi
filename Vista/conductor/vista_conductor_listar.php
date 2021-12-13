@@ -161,11 +161,11 @@
       </div>
     </div>
   </div>
-
+</form>
 
 
   <!-- MODAL PARA EDITAR REGISTRO -->
-  <div class="modal fade" id="modal_editar_V" role="dialog">
+  <div class="modal fade" id="modal_editar_Con" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header modal-primary">
@@ -175,61 +175,91 @@
         <div class="modal-body">
           <!-- FORMULARIO REGISTRO DE vehiculo, CAMPOS -->
         <form class="form">
-        <input type="hidden" id="idVehiculo">
         <div class="row">
           <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">Cedula</label>
+                    <input type="text" class="form-control" id="txt_ced_edit" placeholder="Ingrese cedula" onchange="buscarPersona(this.value)" ><br>
+                </div>
+            </div>
+          <div class="col-md-4">
             <div class="form-group">
-              <label for="">Placa</label>
-              <input type="text" class="form-control" id="txt_pla_edit" placeholder="Ingrese placa"><br>
+              <label for="">Nombres</label>
+              <input type="hidden" id="idVehiculo">
+              <input type="text" class="form-control" id="txt_nom_edit" placeholder="Ingrese nombres"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Marca</label>
-              <input type="text" class="form-control" id="txt_mar_edit" placeholder="Ingrese la marca"><br>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="">Modelo</label>
-              <input type="text" class="form-control" id="txt_mod_edit" placeholder="Ingrese el modelo"><br>
+              <label for="">Apellidos</label>
+              <input type="text" class="form-control" id="txt_ape_edit" placeholder="Ingrese apellidos"><br>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Numero interno</label>
-              <input type="text" class="form-control" id="txt_int_edit" placeholder="Ingrese el numero interno"><br>
+              <label for="">Telefono</label>
+              <input type="text" class="form-control" id="txt_tel_edit" placeholder="Ingrese telefono"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Vencimiento movilizacion</label>
-              <input type="date" class="form-control" id="txt_mov_edit" ><br>
+              <label for="">Direccion</label>
+              <input type="text" class="form-control" id="txt_dir_edit" placeholder="Ingrese direccion"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Vencimiento soat</label>
-              <input type="date" class="form-control" id="txt_soa_edit" ><br>
+              <label for="">Email</label>
+              <input type="text" class="form-control" id="txt_ema_edit" placeholder="Ingrese email"><br>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Dueño</label>
-              <select class="js-example-basic-single"  name="state" id="sel_pro_vehiculo_edit" style="width:100%; heigth: 40px;">   
+              <label for="">Eps</label>
+              <input type="text" class="form-control" id="txt_eps_edit" placeholder="Ingrese la eps"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">ARL</label>
+              <input type="text" class="form-control" id="txt_arl_edit" placeholder="Ingrese la arl"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">GS.RH</label>
+              <input type="text" class="form-control" id="txt_rh_edit" placeholder="Ingrese el RH"><br>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Fondo Pension</label>
+              <input type="text" class="form-control" id="txt_pen_edit" placeholder="Ingrese el fondo Pension"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Vencimiento de licencia</label>
+              <input type="date" class="form-control" id="txt_lic_edit" ><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Placa del vehiculo</label>
+              <select class="js-example-basic-single"  name="state" id="sel_placa_vehiculo_edit" style="width:100%; heigth: 40px;">               
               </select><br><br>
             </div>
           </div>
-          
-        </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"><b> </i> Cancelar</button>
-          <button type="button" class="btn btn-primary" onclick="modificar_vehiculo()"><i class="fa fa-check"> </i> Modificar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> </i> Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="modificar_conductor()"><i class="fa fa-check"> </i> Guardar</button>
         </div>
       </div>
     </div>

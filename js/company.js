@@ -124,27 +124,26 @@ function AbrirModalEditarC(){
 
 // FUNCION PARA EDITAR REGISTRO
 $('#tabla_company').on('click','.editarc',function(){
-
+    
     if(table_company.row(this).child.isShown()){
-        var datoscompany = table_company.row(this).data().id;
+        var datosCompany = table_company.row(this).data();
     }else{
-        var datoscompany = table_company.row($(this).parents('tr')).data().id;
+        var datosCompany = table_company.row($(this).parents('tr')).data();
     }
     
-    var id = datoscompany.id;
-    var entResp = datoscompany.entResp;
-    var nit = datoscompany.nit;
-
+    var id = datosCompany.id;
+    var entResp = datosCompany.entResp;
+    var nit = datosCompany.nit;
     //levantar modal
     AbrirModalEditarC();
     //ingresas datos modal
-    $("#idCompany").val(id);
+    $("#id").val(id);
     $("#txt_com_edit").val(entResp);
     $("#txt_nit_edit").val(nit);
-
+   
 })
 function modificar_company(){
-    var id = $("#idCompany").val();
+    var id = $("#id").val();
     var entResp = $("#txt_com_edit").val();
     var nit = $("#txt_nit_edit").val();
 

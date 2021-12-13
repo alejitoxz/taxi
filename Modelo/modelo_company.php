@@ -81,7 +81,7 @@
             $sql  = "UPDATE company SET
                     entResp = '$entResp',
                     nit = '$nit'
-                    WHERE idCompany=$id
+                    WHERE id=$id
                     ";
                      
             $resp = sqlsrv_query($conn, $sql);

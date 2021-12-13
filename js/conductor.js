@@ -91,6 +91,110 @@ function listar_conductor(){
     } );
     
 }
+function AbrirModalEditarCon(){
+    $("#modal_editar_Con").modal({backdrop:'static',keyboard:false})
+    $("#modal_editar_Con").modal('show');
+}
+
+// FUNCION PARA EDITAR REGISTRO
+$('#tabla_conductor').on('click','.editar',function(){
+    
+    if(table.row(this).child.isShown()){
+        var datosConductor = table.row(this).data();
+    }else{
+        var datosConductor = table.row($(this).parents('tr')).data();
+    }
+    //levantar modal
+    AbrirModalEditarCon();
+    var id = datosConductor.id;
+    var nombre = datosConductor.nombre;
+    var apellido = datosConductor.apellido;
+    var cedula = datosConductor.cedula;
+    var telefono = datosConductor.telefono;
+    var direccion = datosConductor.direccion;
+    var email = datosConductor.email;
+    var eps = datosConductor.eps;
+    var arl = datosConductor.arl;
+    var rh = datosConductor.rh;
+    var fondoPension = datosConductor.fondoPension;
+    var vLicencia = datosConductor.vLicencia;
+    var idVehiculo = datosConductor.idVehiculo;
+    
+    //ingresas datos modal
+    $("#id").val(id);
+    $("#txt_nom_edit").val(nombre);
+    $("#txt_ape_edit").val(apellido);
+    $("#txt_ced_edit").val(cedula);
+    $("#txt_tel_edit").val(telefono);
+    $("#txt_dir_edit").val(direccion);
+    $("#txt_ema_edit").val(email);
+    $("#txt_eps_edit").val(eps);
+    $("#txt_arl_edit").val(arl);
+    $("#txt_rh_edit").val(rh);
+    $("#txt_pen_edit").val(fondoPension);
+    $("#txt_lic_edit").val(vLicencia);
+    $("#sel_placa_vehiculo_edit").val(idVehiculo).trigger('change');
+  
+})
+function modificar_conductor(){
+    var id = $("#id").val()
+    var nombre = $("#txt_nom_edit").val();
+    var apellido = $("#txt_ape_edit").val();
+    var cedula = $("#txt_ced_edit").val();
+    var telefono = $("#txt_tel_edit").val();
+    var direccion = $("#txt_dir_edit").val();
+    var email =  $("#txt_ema_edit").val();
+    var eps = $("#txt_eps_edit").val();
+    var arl = $("#txt_arl_edit").val();
+    var rh = $("#txt_rh_edit").val();
+    var fondoPension = $("#txt_pen_edit").val();
+    var vLicencia = $("#txt_lic_edit").val();
+    var idVehiculo =  $("#sel_placa_vehiculo_edit").val();
+
+    if( nombre == '' ||
+        apellido == '' ||
+        cedula == '' ||
+        telefono == '' ||
+        direccion == '' ||
+        email == '' ||
+        eps == '' ||
+        arl == '' ||
+        rh == '' ||
+        fondoPension == ''||
+        vLicencia == ''
+    ){
+            return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
+        }if(
+            idVehiculo == 0){
+            return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
+        }
+
+    $.ajax({
+        "url": "../controlador/conductor/controlador_conductor_modificar.php",
+        "type": "POST",
+        data:{
+        id:id,
+        entResp:entResp,
+        nit:nit,
+        }
+    }).done(function(resp){
+        console.log(resp);
+        if(resp > 0){
+            $("#modal_editar_Con").modal('hide');
+            Swal.fire("Mensaje De Confirmacion",'Datos Actualizados', "success")
+                .then((value)=>{
+                table_company.ajax.reload();
+            });
+        
+        }else{
+            Swal.fire("Mensaje De Error",'No se pudo completar la edicion', "error");
+        }
+    })
+
+}
+
+
+
 
 // FUNCION PARA EDITAR REGISTRO
 $('#tabla_conductor').on('click','.tarjeton',function(){
@@ -334,3 +438,6 @@ function modificar_estatus(id,estatus){
         }
     })
 }
+
+
+
