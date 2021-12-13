@@ -154,6 +154,7 @@
             </div>
           </div>
         </div>
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> </i> Cancelar</button>
           <button type="button" class="btn btn-primary" onclick="registrar_conductor()"><i class="fa fa-check"> </i> Guardar</button>
@@ -165,7 +166,7 @@
 
 
   <!-- MODAL PARA EDITAR REGISTRO -->
-  <div class="modal fade" id="modal_editar_Con" role="dialog">
+  <div class="modal fade" id="modal_editar_conductor" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header modal-primary">
@@ -256,6 +257,7 @@
               </select><br><br>
             </div>
           </div>
+        </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> </i> Cancelar</button>
