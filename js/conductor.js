@@ -106,8 +106,8 @@ function listar_conductor(){
     
 }
 function AbrirModalEditarCon(){
-    $("#modal_editar_Con").modal({backdrop:'static',keyboard:false})
-    $("#modal_editar_Con").modal('show');
+    $("#modal_editar_conductor").modal({backdrop:'static',keyboard:false})
+    $("#modal_editar_conductor").modal('show');
 }
 
 // FUNCION PARA EDITAR REGISTRO
