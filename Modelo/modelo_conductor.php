@@ -14,6 +14,9 @@ session_start();
             $idCompany = $_SESSION['COMPANY'];
             $sql  = "SELECT
                     con.id,
+                    p.id as idPersonaC,
+                    p.nombre,
+                    p.apellido,
                     (p.nombre + ' ' + p.apellido) AS dueno, 
                     p.cedula,
                     p.telefono,
@@ -29,6 +32,7 @@ session_start();
                     v.nMovilizacion,
                     v.placa,
                     v.nInterno,
+                    v.id as idVehiculo,
                     c.entResp,
                     c.nit
                     FROM
@@ -197,5 +201,50 @@ session_start();
             $this->conexion->conectar();
         }
     
+        function modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+
+            $sql  = "BEGIN TRY
+                    BEGIN TRAN
+                    UPDATE persona SET
+                    nombre = '$nombre', 
+                    apellido = '$apellido',
+                    cedula = $cedula,
+                    telefono = '$telefono',
+                    email = '$email',
+                    direccion = '$direccion'
+                    WHERE id= $idPersonaC
+
+                    UPDATE conductor SET
+                    vLicencia='$vLicencia',
+                    idVehiculo='$idVehiculo',
+                    eps= '$eps',
+                    arl= '$arl',
+                    rh = '$rh',
+                    fondoPension = '$fondoPension',
+                    idCompany = $idCompany
+                    WHERE id=$id
+
+                    
+                    COMMIT TRAN
+                    END TRY
+                    BEGIN CATCH
+                    ROLLBACK TRAN
+                    END CATCH
+                    ";
+                    // echo $sql; exit;
+            $resp = sqlsrv_query($conn, $sql);
+            
+            if( $resp === false) {
+                return 0;
+            }else{
+                return 1;
+            }
+            
+            $this->conexion->conectar();
+        }
+
+
 
 }

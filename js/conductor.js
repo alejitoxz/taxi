@@ -57,6 +57,17 @@ function listar_conductor(){
             {
                 "targets": [ 10 ],
                 "visible": false
+            },{
+                "targets": [ 11 ],
+                "visible": false
+            } ,
+            {
+                "targets": [ 12 ],
+                "visible": false
+            },
+            {
+                "targets": [ 13 ],
+                "visible": false
             }
         ],
         "columns": [
@@ -71,6 +82,9 @@ function listar_conductor(){
             { "data": "rh" },
             { "data": "entResp" },
             { "data": "fondoPension" },
+            { "data": "nombre" },
+            { "data": "apellido" },
+            { "data": "idVehiculo" },
             { "data": "id" },
             { "data": "dueno" },
             { "data": "cedula" },
@@ -107,8 +121,10 @@ $('#tabla_conductor').on('click','.editar',function(){
     //levantar modal
     AbrirModalEditarCon();
     var id = datosConductor.id;
+    var idPersonaC = datosConductor.idPersonaC;
     var nombre = datosConductor.nombre;
     var apellido = datosConductor.apellido;
+    var idVehiculo = datosConductor.idVehiculo;
     var cedula = datosConductor.cedula;
     var telefono = datosConductor.telefono;
     var direccion = datosConductor.direccion;
@@ -118,12 +134,12 @@ $('#tabla_conductor').on('click','.editar',function(){
     var rh = datosConductor.rh;
     var fondoPension = datosConductor.fondoPension;
     var vLicencia = datosConductor.vLicencia;
-    var idVehiculo = datosConductor.idVehiculo;
-    
     //ingresas datos modal
     $("#id").val(id);
+    $("#idPersonaC").val(idPersonaC);
     $("#txt_nom_edit").val(nombre);
     $("#txt_ape_edit").val(apellido);
+    $("#sel_placa_vehiculo_edit").val(idVehiculo).trigger('change');
     $("#txt_ced_edit").val(cedula);
     $("#txt_tel_edit").val(telefono);
     $("#txt_dir_edit").val(direccion);
@@ -133,13 +149,15 @@ $('#tabla_conductor').on('click','.editar',function(){
     $("#txt_rh_edit").val(rh);
     $("#txt_pen_edit").val(fondoPension);
     $("#txt_lic_edit").val(vLicencia);
-    $("#sel_placa_vehiculo_edit").val(idVehiculo).trigger('change');
-  
+    
 })
-function modificar_conductor(){
+function modificar_datos_conductor(){
+ 
     var id = $("#id").val()
+    var idPersonaC =  $("#idPersonaC").val();
     var nombre = $("#txt_nom_edit").val();
     var apellido = $("#txt_ape_edit").val();
+    var idVehiculo =  $("#sel_placa_vehiculo_edit").val();
     var cedula = $("#txt_ced_edit").val();
     var telefono = $("#txt_tel_edit").val();
     var direccion = $("#txt_dir_edit").val();
@@ -149,9 +167,11 @@ function modificar_conductor(){
     var rh = $("#txt_rh_edit").val();
     var fondoPension = $("#txt_pen_edit").val();
     var vLicencia = $("#txt_lic_edit").val();
-    var idVehiculo =  $("#sel_placa_vehiculo_edit").val();
+    console.log("persona",idPersonaC)
+    
 
-    if( nombre == '' ||
+    if( 
+        nombre == '' ||
         apellido == '' ||
         cedula == '' ||
         telefono == '' ||
@@ -174,8 +194,19 @@ function modificar_conductor(){
         "type": "POST",
         data:{
         id:id,
-        entResp:entResp,
-        nit:nit,
+        idPersonaC:idPersonaC,
+        nombre:nombre,
+        apellido:apellido,
+        cedula:cedula,
+        telefono:telefono,
+        direccion:direccion,
+        email:email,
+        idVehiculo:idVehiculo,
+        eps:eps,
+        arl:arl,
+        rh:rh,
+        fondoPension:fondoPension,
+        vLicencia:vLicencia
         }
     }).done(function(resp){
         console.log(resp);
@@ -183,7 +214,7 @@ function modificar_conductor(){
             $("#modal_editar_Con").modal('hide');
             Swal.fire("Mensaje De Confirmacion",'Datos Actualizados', "success")
                 .then((value)=>{
-                table_company.ajax.reload();
+                table.ajax.reload();
             });
         
         }else{

@@ -34,6 +34,9 @@
                           <th style="display:none"></th>
                           <th style="display:none"></th>
                           <th style="display:none"></th>
+                          <th style="display:none"></th>
+                          <th style="display:none"></th>
+                          <th style="display:none"></th>
                           <th>#</th>
                           <th>Nombre</th>
                           <th>Cedula</th>
@@ -83,6 +86,7 @@
             <div class="form-group">
               <label for="">Nombres</label>
               <input type="hidden" id="idPersonaC">
+              <input type="hidden" id="id">
               <input type="text" class="form-control" id="txt_nom" placeholder="Ingrese nombres"><br>
             </div>
           </div>
@@ -139,6 +143,7 @@
               <label for="">Fondo Pension</label>
               <input type="text" class="form-control" id="txt_pen" placeholder="Ingrese el fondo Pension"><br>
             </div>
+          </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
@@ -259,12 +264,13 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> </i> Cancelar</button>
-          <button type="button" class="btn btn-primary" onclick="modificar_conductor()"><i class="fa fa-check"> </i> Guardar</button>
+          <button type="button" class="btn btn-primary" onclick="modificar_datos_conductor()"><i class="fa fa-check"> </i> Guardar</button>
         </div>
       </div>
+      
     </div>
   </div>
-   
+
   </form>
 <script type="text/javascript" src="../js/conductor.js"></script>
 <script>
