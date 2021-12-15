@@ -18,14 +18,11 @@ function listar_home(){
             { "data": "propietario"},
             { "data": "placa" },
             { "data": "conductor" },
-            { "data": "cedula" },           
-            { "data": "telefono" },
             { "data": "email" },
-            { "data": "vLicencia" },
-            { "data": "vSoat" },
-            { "data": "vMovilizacion" },
+            { "data": "Vencimiento" },
+            { "data": "Fecha" },
             {"defaultContent":
-            "<button style='font-size:13px;' type='button' class='eliminarp btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editarp btn btn-info'><i class='fa fa-edit'></i></button>"}
+            "</button><button style='font-size:13px;' type='button' class='editarp btn btn-info'><i class='fa fa-edit'></i></button>"}
         ],
         "language":idioma_espanol,
        select: true

@@ -76,39 +76,29 @@
 
 <div class="col-md-12">
     <div class="card card-primary">
-            <div class="card-header">
-            <h1 class="card-title"><b>Proximos vencimientos</b></h1>
-
-            <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="/pages/widgets.html" data-source-selector="#card-refresh-content"><i class="fas fa-sync-alt"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-            </div>
-                <!-- /.card-tools -->
-            </div>
-            <table id="tabla_alerta" class="display responsive nowrap" style="width:100%">
-                    <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Propietario</th>
-                          <th>Placa</th>
-                          <th>Conductor</th>
-                          <th>Cedula</th>
-                          <th>Telefono</th>
-                          <th>Email</th>
-                          <th>Vencimiento licencia</th>
-                          <th>Vencimiento Soat</th>
-                          <th>Vencimiento Movilidad</th>
-                          <th>Editar</th>
-                        </tr>
-                    </thead>
-                    <tbody id="Listadohome">
-                    </tbody>
-            </table>
-            </div>
-              <!-- /.card-body -->
+        <div class="card-header">
+        <h1 class="card-title"><b>Proximos vencimientos</b></h1>
         </div>
+        <div class="card-body">
+        <table id="tabla_alerta" class="display responsive nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Propietario</th>
+                    <th>Placa</th>
+                    <th>Conductor</th>
+                    <th>Email</th>
+                    <th>Vencimiento</th>
+                    <th>Fecha</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody id="Listadohome">
+            </tbody>
+        </table>
+        </div>
+            <!-- /.card-body -->
+    </div>
             <!-- /.card -->
     </div>
 </div>
