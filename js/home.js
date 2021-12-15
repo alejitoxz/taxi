@@ -15,6 +15,7 @@ function listar_home(){
         },
         "columns": [
             { "data": "id" },
+            { "data": "propietario"},
             { "data": "placa" },
             { "data": "conductor" },
             { "data": "cedula" },           

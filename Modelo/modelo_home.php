@@ -14,14 +14,15 @@ session_start();
             $idCompany = $_SESSION['COMPANY'];
             $sql  = "SELECT
             con.id,
+            (prop.nombre + ' ' + prop.apellido) AS propietario,
+            v.placa,
             (p.nombre + ' ' + p.apellido) AS conductor,
-						(prop.nombre + ' ' + prop.apellido) AS propietario,
             p.cedula,
             p.telefono,
             p.email,
-            con.vLicencia,
-            v.vSoat,
-            v.vMovilizacion
+            CONVERT(varchar,con.vLicencia) as vLicencia,   
+            CONVERT(varchar,v.vSoat) as vSoat,
+            CONVERT(varchar,v.vMovilizacion) as vMovilizacion 
             FROM
             conductor AS con
             INNER JOIN persona AS p ON ( con.idPersona = p.id ) 

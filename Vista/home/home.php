@@ -91,8 +91,9 @@
                     <thead>
                         <tr>
                           <th>#</th>
-                          <th>placa</th>
-                          <th>conductor</th>
+                          <th>Propietario</th>
+                          <th>Placa</th>
+                          <th>Conductor</th>
                           <th>Cedula</th>
                           <th>Telefono</th>
                           <th>Email</th>
