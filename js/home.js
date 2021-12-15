@@ -22,7 +22,7 @@ function listar_home(){
             { "data": "Vencimiento" },
             { "data": "Fecha" },
             {"defaultContent":
-            "</button><button style='font-size:13px;' type='button' class='editarp btn btn-info'><i class='fa fa-edit'></i></button>"}
+            "</button><button style='font-size:13px;' type='button' class='enviarCorreo btn btn-success'><i class='fa fa-envelope'></i></button>"}
         ],
         "language":idioma_espanol,
        select: true

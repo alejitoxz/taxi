@@ -90,7 +90,7 @@
                     <th>Email</th>
                     <th>Vencimiento</th>
                     <th>Fecha</th>
-                    <th>Editar</th>
+                    <th>Enviar</th>
                 </tr>
             </thead>
             <tbody id="Listadohome">
