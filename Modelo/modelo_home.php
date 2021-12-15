@@ -15,22 +15,25 @@ session_start();
             $sql  = "SELECT
             con.id,
             (p.nombre + ' ' + p.apellido) AS conductor,
+						(prop.nombre + ' ' + prop.apellido) AS propietario,
             p.cedula,
             p.telefono,
             p.email,
-            v.vLicencia,
+            con.vLicencia,
             v.vSoat,
-            v.vMovilizacion,
+            v.vMovilizacion
             FROM
             conductor AS con
-            INNER JOIN persona AS p ON ( pro.idPersona = p.id ) 
-            INNER JOIN vehiculo AS v ON ( pro.idPersona = v.id ) 
-            INNER JOIN company AS c ON ( c.id = pro.idCompany ) 
+            INNER JOIN persona AS p ON ( con.idPersona = p.id ) 
+            INNER JOIN vehiculo AS v ON ( con.idVehiculo = v.id ) 
+            INNER JOIN company AS c ON ( c.id = con.idCompany ) 
+            INNER JOIN propietario AS pro ON ( pro.id = v.idPropietario) 
+            INNER JOIN persona AS prop ON ( pro.idPersona = prop.id ) 
             WHERE
             pro.estatus = 1
-            and c.id = $idCompany;
+            and c.id = $idCompany
             ";
-            echo $sql;exit;
+            //echo $sql;exit;
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
