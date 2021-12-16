@@ -144,7 +144,6 @@
               <input type="text" class="form-control" id="txt_pen" placeholder="Ingrese el fondo Pension"><br>
             </div>
           </div>
-          </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Vencimiento de licencia</label>
