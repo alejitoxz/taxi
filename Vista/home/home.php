@@ -80,9 +80,25 @@
         <h1 class="card-title"><b>Proximos vencimientos</b></h1>
         </div>
         <div class="card-body">
+            <!-- /.card-header -->
+            <div class="card-body">
+            <div class="form-group">
+                <div class="col-lg-10">
+                    <div class="col-lg-2">
+                    <button type="button" class="btn btn-primary"  onclick="reporte()" ><i class='fa fa-file-pdf'></i>Exportar</button>
+                    </div> 
+                </div>
+            </div>
         <table id="tabla_alerta" class="display responsive nowrap" style="width:100%">
             <thead>
                 <tr>
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
                     <th>#</th>
                     <th>Propietario</th>
                     <th>Placa</th>
