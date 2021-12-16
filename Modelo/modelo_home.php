@@ -12,17 +12,9 @@ session_start();
         function listar_home(){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
-            $sql  = "SELECT
-            con.id,
-            (prop.nombre + ' ' + prop.apellido) AS propietario,
-            v.placa,
-            (p.nombre + ' ' + p.apellido) AS conductor,
-            p.cedula,
-            p.telefono,
-            p.email,
-            CONVERT(varchar,con.vLicencia) as vLicencia,   
-            CONVERT(varchar,v.vSoat) as vSoat,
-            CONVERT(varchar,v.vMovilizacion) as vMovilizacion 
+            $sql  = "DECLARE @Fecha DATE = DATEADD( DAY, 15, CONVERT ( DATE, GETDATE( ), 1 ) ), @fechaActual DATE = GETDATE( ) 
+            SELECT
+            * 
             FROM
                 (
                 SELECT
@@ -120,12 +112,28 @@ session_start();
                 return 0;
             }
             $i = 0;
+            $Fecha = [];
             $data = [];
             while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
             {
-                $data['data'][] = $row;
+                $data['data'][$i] = $row;
+                $Vencimiento = $data['data'][$i]['Vencimiento'];
+                $Soat = $data['data'][$i]['vSoat'];
+                $Movilizacion = $data['data'][$i]['vMovilizacion'];
+                $Licencia = $data['data'][$i]['vLicencia'];
+
+                if($Vencimiento == 'Licencia'){
+                    $data['data'][$i]['Fecha'] = $Licencia;
+                }else if($Vencimiento == 'Movilizacion'){
+                    $data['data'][$i]['Fecha'] = $Movilizacion;
+                }elseif ($Vencimiento == 'Soat') {
+                    $data['data'][$i]['Fecha'] = $Soat;
+                }
                 $i++;
             }
+
+            
+            
             if($data>0){
                 return $data;
             }else{
