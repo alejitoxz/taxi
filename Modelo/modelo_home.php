@@ -24,18 +24,6 @@ session_start();
             CONVERT(varchar,v.vSoat) as vSoat,
             CONVERT(varchar,v.vMovilizacion) as vMovilizacion 
             FROM
-<<<<<<< HEAD
-            conductor AS con
-            INNER JOIN persona AS p ON ( con.idPersona = p.id ) 
-            INNER JOIN vehiculo AS v ON ( con.idVehiculo = v.id ) 
-            INNER JOIN company AS c ON ( c.id = con.idCompany ) 
-            INNER JOIN propietario AS pro ON ( pro.id = v.idPropietario) 
-            INNER JOIN persona AS prop ON ( pro.idPersona = prop.id ) 
-            WHERE
-            pro.estatus = 1
-            and c.id = $idCompany
-            and vLiencia
-=======
                 (
                 SELECT
                     con.id,
@@ -126,9 +114,7 @@ session_start();
                             ) tablas 
                     WHERE 
                 Vencimiento IS NOT NULL
->>>>>>> bf92713d9140f211d8c16e906c22d2624a7b056e
             ";
-            //echo $sql;exit;
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
