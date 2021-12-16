@@ -26,6 +26,6 @@ function listar_home(){
         ],
         "language":idioma_espanol,
        select: true
-    } );
+    } ); 
     
 }

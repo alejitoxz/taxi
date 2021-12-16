@@ -104,7 +104,7 @@ session_start();
                                 pro.estatus = 1 
                                 AND c.id = $idCompany 
                             ) tablas 
-                    WHERE
+                    WHERE 
                 Vencimiento IS NOT NULL
             ";
             $resp = sqlsrv_query($conn, $sql);
