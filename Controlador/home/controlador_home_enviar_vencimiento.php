@@ -9,7 +9,7 @@
     $Placa = htmlspecialchars($_POST['Placa'],ENT_QUOTES,'UTF-8');
     $Vencimiento = htmlspecialchars($_POST['Vencimiento'],ENT_QUOTES,'UTF-8');
     $Fecha = htmlspecialchars($_POST['Fecha'],ENT_QUOTES,'UTF-8');
-    $Email = htmlspecialchars($_POST['eEmail'],ENT_QUOTES,'UTF-8');
+    $Email = htmlspecialchars($_POST['Email'],ENT_QUOTES,'UTF-8');
 
     $consulta = $MU->enviarVencimiento($Propietario,$Conductor,$Placa,$Vencimiento,$Fecha,$Email); 
     if($consulta){
