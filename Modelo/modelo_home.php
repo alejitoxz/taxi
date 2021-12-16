@@ -1,4 +1,7 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use  PHPMailer\PHPMailer\Exception;
 session_start();
     class modelo_home{
         private $conexion;
@@ -7,8 +10,12 @@ session_start();
         function __construct(){
             require_once 'modelo_conexion.php';
             $this->conexion = new conexion();
+            
+            require  'PHPMailer/Exception.php';
+            require  'PHPMailer/PHPMailer.php';
+            require  'PHPMailer/SMTP.php';
+            $this->mail = new PHPMailer();
         }
-        
         function listar_home(){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
@@ -144,11 +151,40 @@ session_start();
            
         }
 
+        function enviarVencimiento($Propietario,$Conductor,$Placa,$Vencimiento,$Fecha,$Email){
+            
+            //echo $Email;
+            try {
+            $cuerpoMail = utf8_decode("
+            <b><h4><center>ALCALDÍA DE IBAGUÉ</center></h4><b>
+            <center><img width='150' height='150' src='https://www.visualsatco.com/visualsat.sutc/Vista/imagenes/logo-alcaldia.png'>
+            <img width='130' height='150' src='https://www.visualsatco.com/visualsat.sutc/Vista/imagenes/musical.png'></center>
+            <b><h4><center>Hola $Conductor, te saluda el SUTC, SISTEMA UNICO DE TARJETONES DE COLOMBIA</center></h4><b>
+            <b><h4><center>Le indicamos que su vehículo de placa $Placa, esta próximo a su vencimiento :</center></h4><b>
+            <b><h4><center>$Vencimiento  $Fecha</center></h4><b>
+            <h4><center>Por favor, debe estar al día</center></h4>
+            
+                ");	 
+            $this->mail->IsSMTP();
+            $this->mail->SMTPAuth = true;
+            $this->mail->SMTPSecure = "ssl";
+            $this->mail->Host = "smtp.gmail.com";
+            $this->mail->Port = 465;
+            $this->mail->Username = "pruebahost19@gmail.com";
+            $this->mail->Password = "123456789-a";									
+            $this->mail->setFrom( 'pruebahost19@gmail.com'  );
+            $this->mail->addAddress ( $Email );									
+            $this->mail->Subject='SUTC';
+            $this->mail->From ="pruebahost19@gmail.com";
+            $this->mail->FromName = "SUTC"; 
+            $this->mail->MsgHTML($cuerpoMail);
+            $this->mail->IsHTML(true);
+            $this->mail->Send();
+            echo 1 ;
+            }catch( Exception  $e ) {
+            echo 0 ;
+            }
 
+        }
 
-
-
-
-
-
-    }
+}

@@ -2,7 +2,7 @@
     require '../../modelo/modelo_home.php';
 
     $MU = new modelo_home();
-    $consulta = $MU->listar_home(); 
+    $consulta = $MU->listar_home();
     if($consulta){
         echo json_encode($consulta);
     }else {
