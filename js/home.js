@@ -129,7 +129,7 @@ function reporte(){
     var vMovilizacion = datosConductor.vMovilizacion;
     var vSoat = datosConductor.vSoat;
 
-    var url = "../controlador/REPORTE/controlador_exportar_reporte.php?nombres="+nombres+"&placa="+placa
+    var url = "../controlador/reporte/controlador_exportar_reporte.php?nombres="+nombres+"&placa="+placa
     +"&placa="+placa
     +"&vLicencia="+vLicencia
     +"&vMovilizacion="+vMovilizacion
