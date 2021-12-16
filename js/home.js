@@ -66,166 +66,58 @@ function listar_home(){
     
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// FUNCION PARA EDITAR REGISTRO
+$('#tabla_alerta').on('click','.enviarCorreo',function(){
+
+    if(table.row(this).child.isShown()){
+        var datos = table.row(this).data();
+    }else{
+        var datos = table.row($(this).parents('tr')).data();
+    }
+
+    var propietario = datos.propietario;
+    var conductor = datos.conductor;
+    var placa = datos.placa;
+    var email = datos.email;
+    var Vencimiento = datos.Vencimiento;
+    var Fecha = datos.Fecha;
+
+    Swal.fire({
+        title: '¿Seguro desea enviar un email?',
+        text: "Una vez hecho esto, se enviará un email con los datos de vencimiento del registro",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                "url": "../Controlador/home/controlador_home_enviar_vencimiento.php",
+                "type": "POST",
+                data:{
+                Propietario : propietario,
+                Conductor    : conductor,
+                Vencimiento : Vencimiento,
+                Placa       : placa,
+                Email       : email,
+                Fecha       : Fecha
+                }
+            }).done(function(resp){
+                if(resp > 0){
+                    Swal.fire("¡Email enviado con exito!",'Pronto recibira el email', "success")
+                }else{
+                    Swal.fire("Error",'No se pudo enviar el email, revise su conexion', "error");
+                }
+            })
+        }
+      })
+
+})
 
 // FUNCION PARA EXPORTAR REPORTE
-    function reporte(){
+function reporte(){
     
     var datosConductor = table.row().data();
         
@@ -237,7 +129,7 @@ function listar_home(){
     var vMovilizacion = datosConductor.vMovilizacion;
     var vSoat = datosConductor.vSoat;
 
-    var url = "../controlador/REPORTE/controlador_exportar_reporte.php?nombres="+nombres+"&placa="+placa
+    var url = "../controlador/reporte/controlador_exportar_reporte.php?nombres="+nombres+"&placa="+placa
     +"&placa="+placa
     +"&vLicencia="+vLicencia
     +"&vMovilizacion="+vMovilizacion
