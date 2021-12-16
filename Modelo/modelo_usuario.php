@@ -180,7 +180,7 @@ session_start();
 
         function listar_rol(){
             $conn = $this->conexion->conectar();
-            $sql  = "SELECT id, tipoRol from rol where Id not in (1)";
+            $sql  = "SELECT id, tipoRol from rol where Id not in (1,6)";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;

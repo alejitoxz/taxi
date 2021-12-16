@@ -211,7 +211,7 @@ function modificar_datos_conductor(){
     }).done(function(resp){
         console.log(resp);
         if(resp > 0){
-            $("#modal_editar_Con").modal('hide');
+            $("#modal_editar_conductor").modal('hide');
             Swal.fire("Mensaje De Confirmacion",'Datos Actualizados', "success")
                 .then((value)=>{
                 table.ajax.reload();
@@ -223,9 +223,6 @@ function modificar_datos_conductor(){
     })
 
 }
-
-
-
 
 // FUNCION PARA EDITAR REGISTRO
 $('#tabla_conductor').on('click','.tarjeton',function(){
