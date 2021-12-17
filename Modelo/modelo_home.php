@@ -187,4 +187,64 @@ session_start();
 
         }
 
+        function VencimientoPDF($datos){
+            $conn = $this->conexion->conectar();
+            $date = date('Y-m-d');
+            require('../../vista/plugins/fpdf/fpdf.php');
+            $pdf = new FPDF();
+            $pdf->AddPage();
+            
+            //cabecera
+            $pdf->SetFont('Arial','B',12);
+            $pdf->Image('../../vista/imagenes/logo-alcaldia.png' , 18 ,6, 0 , 30,'png');
+            $pdf->SetFont('Arial','B',15);
+            $pdf->Cell(200,10,'ALCALDIA DE IBAGUE',0,1,'C');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->Cell(200,6,'SECRETARIA DE TRANSITO Y TRANSPORTE DE LA MOVILIDAD',0,1,'C');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetTextColor(2,8,4);
+            $pdf->Cell(200,6,'Tarjeta de Control Numero',0,1,'C');
+            $pdf->Image('../../vista/imagenes/musical.png' , 170 ,6, 0 , 30,'png');
+            $pdf->ln(10);
+
+            //info
+            $pdf->SetFont('Arial','B',10);
+            $pdf->Cell(8);
+            $pdf->Cell(15,8,'Fecha: ',0,0,'L');
+            $pdf->Cell(30,8,$date,0,1,'L');
+            $pdf->SetFont('Arial','B',12);
+            $pdf->Cell(0,8,'Historial de vencimiento a los proximos 15 dias ',0,0,'C');
+            $pdf->ln(15);
+
+            $pdf->SetFont('Arial','B',10);
+            $pdf->Cell(8);
+            $pdf->SetFillColor(200,200,200);
+            $pdf->Cell(53,8,'Propietario',1,0,'C',true);
+            $pdf->Cell(53,8,'Conductor',1,0,'C',true);
+            $pdf->Cell(23,8,'Placa',1,0,'C',true);
+            $pdf->Cell(23,8,'Vencimiento',1,0,'C',true);
+            $pdf->Cell(23,8,'Fecha',1,1,'C',true);
+            //datos
+            foreach ($datos as $item) {
+                $Propietario    = $item['propietario'];
+                $Conductor      = $item['conductor'];
+                $Placa          = $item['placa'];
+                $Vencimiento    = $item['Vencimiento'];
+                $Fecha          = $item['Fecha'];
+
+                $pdf->SetFont('Arial','',9);
+                $pdf->Cell(8);
+                $pdf->Cell(53,8,$Propietario,1,0,'L');
+                $pdf->Cell(53,8,$Conductor,1,0,'L');
+                $pdf->Cell(23,8,$Placa,1,0,'C');
+                $pdf->Cell(23,8,$Vencimiento,1,0,'C');
+                $pdf->Cell(23,8,$Fecha,1,1,'C');
+
+
+            }
+            
+            $pdf->Output();
+            $this->conexion->conectar();
+        } 
+
 }

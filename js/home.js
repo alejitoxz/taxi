@@ -118,22 +118,6 @@ $('#tabla_alerta').on('click','.enviarCorreo',function(){
 
 // FUNCION PARA EXPORTAR REPORTE
 function reporte(){
-    
-    var datosConductor = table.row().data();
-        
-    
-    var nombres = datosConductor.nombres;
-    var placa = datosConductor.placa;
-    var conductor = datosConductor.conductor;
-    var vLicencia = datosConductor.vLicencia;
-    var vMovilizacion = datosConductor.vMovilizacion;
-    var vSoat = datosConductor.vSoat;
-
-    var url = "../controlador/reporte/controlador_exportar_reporte.php?nombres="+nombres+"&placa="+placa
-    +"&placa="+placa
-    +"&vLicencia="+vLicencia
-    +"&vMovilizacion="+vMovilizacion
-    +"&vSoat="+vSoat
-    +"&conductor="+conductor
+    var url = "../controlador/home/controlador_exportar_reporte.php"
     window.open(url,'_blank');
 }
