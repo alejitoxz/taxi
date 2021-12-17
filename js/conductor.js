@@ -92,7 +92,9 @@ function listar_conductor(){
             { "data": "email" },
             { "data": "direccion" },
             { "data": "eps" },
+            { "data": "vEps" },
             { "data": "arl" },
+            { "data": "vArl" },
             { "data": "rh" },
             { "data": "fondoPension" },
             { "data": "vLicencia" },
@@ -130,7 +132,9 @@ $('#tabla_conductor').on('click','.editar',function(){
     var direccion = datosConductor.direccion;
     var email = datosConductor.email;
     var eps = datosConductor.eps;
+    var vEps = datosConductor.vEps;
     var arl = datosConductor.arl;
+    var vArl = datosConductor.vArl;
     var rh = datosConductor.rh;
     var fondoPension = datosConductor.fondoPension;
     var vLicencia = datosConductor.vLicencia;
@@ -145,7 +149,9 @@ $('#tabla_conductor').on('click','.editar',function(){
     $("#txt_dir_edit").val(direccion);
     $("#txt_ema_edit").val(email);
     $("#txt_eps_edit").val(eps);
+    $("#txt_vEps_edit").val(vEps);
     $("#txt_arl_edit").val(arl);
+    $("#txt_vArl_edit").val(vArl);
     $("#txt_rh_edit").val(rh);
     $("#txt_pen_edit").val(fondoPension);
     $("#txt_lic_edit").val(vLicencia);
@@ -163,11 +169,12 @@ function modificar_datos_conductor(){
     var direccion = $("#txt_dir_edit").val();
     var email =  $("#txt_ema_edit").val();
     var eps = $("#txt_eps_edit").val();
+    var vEps = $("#txt_vEps_edit").val();
     var arl = $("#txt_arl_edit").val();
+    var vArl = $("#txt_vArl_edit").val();
     var rh = $("#txt_rh_edit").val();
     var fondoPension = $("#txt_pen_edit").val();
     var vLicencia = $("#txt_lic_edit").val();
-    console.log("persona",idPersonaC)
     
 
     if( 
@@ -179,6 +186,8 @@ function modificar_datos_conductor(){
         email == '' ||
         eps == '' ||
         arl == '' ||
+        vEps == '' ||
+        vArl == '' ||
         rh == '' ||
         fondoPension == ''||
         vLicencia == ''
@@ -203,7 +212,9 @@ function modificar_datos_conductor(){
         email:email,
         idVehiculo:idVehiculo,
         eps:eps,
+        vEps:vEps,
         arl:arl,
+        vArl:vArl,
         rh:rh,
         fondoPension:fondoPension,
         vLicencia:vLicencia
@@ -323,7 +334,9 @@ function registrar_conductor(){
     var email = $("#txt_ema").val();
     var direccion = $("#txt_dir").val();
     var eps = $("#txt_eps").val();
+    var vEps = $("#txt_vEps").val();
     var arl = $("#txt_arl").val();
+    var vArl = $("#txt_vArl").val();
     var rh = $("#txt_rh").val();
     var fondoPension = $("#txt_pen").val();
     var vLicencia = $("#txt_lic").val();
@@ -336,7 +349,9 @@ function registrar_conductor(){
         email == '' ||
         direccion == '' ||
         eps == '' ||
+        vEps == '' ||
         arl == '' ||
+        vArl == '' ||
         rh == '' ||
         fondoPension == '' ||
         vLicencia == '' 
@@ -361,7 +376,9 @@ function registrar_conductor(){
         email:email,
         direccion:direccion,
         eps:eps,
+        vEps:vEps,
         arl:arl,
+        vArl:vArl,
         rh:rh,
         fondoPension:fondoPension,
         vLicencia:vLicencia,

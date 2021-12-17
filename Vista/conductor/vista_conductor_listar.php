@@ -44,7 +44,9 @@
                           <th>Direccion</th>
                           <th>Email</th>
                           <th>Eps</th>
+                          <th>Vencimiento Eps</th>
                           <th>Arl</th>
+                          <th>Vencimiento ARL</th>
                           <th>Rh</th>
                           <th>Fondo Pension</th>
                           <th>Vencimientos licencia</th>
@@ -126,8 +128,20 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
+              <label for="">Vencimiento eps</label>
+              <input type="date" class="form-control" id="txt_vEps" ><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
               <label for="">ARL</label>
               <input type="text" class="form-control" id="txt_arl" placeholder="Ingrese la arl"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">vencimiento arl</label>
+              <input type="date" class="form-control" id="txt_vArl"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -136,14 +150,15 @@
               <input type="text" class="form-control" id="txt_rh" placeholder="Ingrese el RH"><br>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Fondo Pension</label>
               <input type="text" class="form-control" id="txt_pen" placeholder="Ingrese el fondo Pension"><br>
             </div>
           </div>
+        </div>
+        <div class="row">
+          
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Vencimiento de licencia</label>
@@ -230,22 +245,29 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
+              <label for="">Vencimiento eps</label>
+              <input type="date" class="form-control" id="txt_vEps_edit" placeholder="Ingrese la eps"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
               <label for="">ARL</label>
               <input type="text" class="form-control" id="txt_arl_edit" placeholder="Ingrese la arl"><br>
             </div>
           </div>
+          
+        </div>
+        <div class="row">
           <div class="col-md-4">
             <div class="form-group">
               <label for="">GS.RH</label>
               <input type="text" class="form-control" id="txt_rh_edit" placeholder="Ingrese el RH"><br>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Fondo Pension</label>
-              <input type="text" class="form-control" id="txt_pen_edit" placeholder="Ingrese el fondo Pension"><br>
+              <input type="text" class="form-control" id="txt_pen_edit" placeholder="Ingrese fondo de pension"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -256,12 +278,19 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
+              <label for="">Vencimiento arl</label>
+              <input type="date" class="form-control" id="txt_vArl_edit" placeholder="Ingrese la arl"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
               <label for="">Placa del vehiculo</label>
               <select class="js-example-basic-single"  name="state" id="sel_placa_vehiculo_edit" style="width:100%; heigth: 40px;">               
               </select><br><br>
             </div>
           </div>
         </div>
+        
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> </i> Cancelar</button>
