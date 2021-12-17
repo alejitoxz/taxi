@@ -42,7 +42,7 @@ session_start();
 				$i++;
 			}
 
-            // prueba
+
             $sql2  = "SELECT
                     *
                     FROM

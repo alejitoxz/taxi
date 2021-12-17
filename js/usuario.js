@@ -429,7 +429,8 @@ function limpiarRegistro(){
     $("#txt_dir").val("");
     $("#txt_usu").val("");
     $("#txt_con").val("");
-    $("#txt_rol").val("");
+    $("#txt_con2").val("");
+    $("#sel_rol").val(0);
 }
 
 

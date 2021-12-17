@@ -16,7 +16,7 @@
             nit
             FROM
             company
-            WHERE estatus = 1 AND id not in (5);
+            WHERE estatus = 1 AND id not in (1);
             ";
 
             $resp = sqlsrv_query($conn, $sql);
