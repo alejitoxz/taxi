@@ -23,7 +23,9 @@ session_start();
                     p.email,
                     p.direccion,
                     con.eps,
+                    CONVERT ( VARCHAR, con.vEps ) AS vEps,
                     con.arl,
+                    CONVERT ( VARCHAR, con.vArl ) AS vArl,
                     con.rh,
                     con.fondoPension,
                     CONVERT ( VARCHAR, con.vLicencia ) AS vLicencia,
@@ -118,21 +120,21 @@ session_start();
             $this->conexion->conectar();
         }
 
-        function registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa){
+        function registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vEps,$vArl){
             $idCompany = $_SESSION['COMPANY'];
             $cadena = "";
             if($id){
                 $cadena = "
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany) 
-                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany)";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vEps,vArl) 
+                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vEps','$vArl')";
             }else{
                 
                 $cadena = "DECLARE @idPersona int
                 INSERT INTO persona(nombre,apellido,cedula,telefono,email,direccion)
                 VALUES('$nombre','$apellido','$cedula','$telefono','$email','$direccion')
                 SET @idPersona = SCOPE_IDENTITY()
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany) 
-                VALUES(@idPersona,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany)";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vEps,vArl) 
+                VALUES(@idPersona,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vEps','$vArl')";
             }
             
             $conn = $this->conexion->conectar();
@@ -201,7 +203,7 @@ session_start();
             $this->conexion->conectar();
         }
     
-        function modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia){
+        function modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vEps,$vArl){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
 
@@ -223,7 +225,9 @@ session_start();
                     arl= '$arl',
                     rh = '$rh',
                     fondoPension = '$fondoPension',
-                    idCompany = $idCompany
+                    idCompany = $idCompany,
+                    vEps= '$vEps',
+                    vArl= '$vArl'
                     WHERE id=$id
 
                     
@@ -233,7 +237,6 @@ session_start();
                     ROLLBACK TRAN
                     END CATCH
                     ";
-                    // echo $sql; exit;
             $resp = sqlsrv_query($conn, $sql);
             
             if( $resp === false) {
