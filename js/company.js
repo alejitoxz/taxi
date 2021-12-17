@@ -53,6 +53,7 @@ function registrar_company(){
             $("#modal_registro_company").modal('hide');
             Swal.fire("Mensaje De Confirmacion",'Registro realizado', "success").then((value)=>{
                 table_company.ajax.reload();
+                limpiarRegistro();
             });
         }else{
             Swal.fire("Mensaje De Advertencia",'El usuario ya se encuentra en uso', "warning");
@@ -62,6 +63,10 @@ function registrar_company(){
         }
     })
 
+}
+function limpiarRegistro(){
+    $("#txt_com").val("");
+    $("#txt_nit").val("");
 }
 
 // FUNCION PARA ELIMINAR (ANULAR) REGISTRO

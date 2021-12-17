@@ -16,7 +16,7 @@
             nit
             FROM
             company
-            WHERE estatus = 1;
+            WHERE estatus = 1 AND id not in (5);
             ";
 
             $resp = sqlsrv_query($conn, $sql);
@@ -81,7 +81,7 @@
             $sql  = "UPDATE company SET
                     entResp = '$entResp',
                     nit = '$nit'
-                    WHERE id=$id
+                    WHERE id=$id 
                     ";
                      
             $resp = sqlsrv_query($conn, $sql);

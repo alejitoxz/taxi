@@ -255,9 +255,12 @@
               <input type="text" class="form-control" id="txt_arl_edit" placeholder="Ingrese la arl"><br>
             </div>
           </div>
-          
-        </div>
-        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Vencimiento arl</label>
+              <input type="date" class="form-control" id="txt_vArl_edit" placeholder="Ingrese la arl"><br>
+            </div>
+          </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">GS.RH</label>
@@ -270,16 +273,13 @@
               <input type="text" class="form-control" id="txt_pen_edit" placeholder="Ingrese fondo de pension"><br>
             </div>
           </div>
+        </div>
+        <div class="row">
+          
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Vencimiento de licencia</label>
               <input type="date" class="form-control" id="txt_lic_edit" ><br>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="">Vencimiento arl</label>
-              <input type="date" class="form-control" id="txt_vArl_edit" placeholder="Ingrese la arl"><br>
             </div>
           </div>
           <div class="col-md-4">
