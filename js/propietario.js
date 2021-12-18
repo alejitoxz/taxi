@@ -71,7 +71,7 @@ function buscarPersonaP(valor){
 
 function registrar_propietario(){
 
-    var id = $("#idPersonaP").val();
+    var id = $("#idPersona").val();
     var nombre = $("#txt_nomp").val();
     var apellido = $("#txt_apep").val();
     var cedula = $("#txt_cedp").val();

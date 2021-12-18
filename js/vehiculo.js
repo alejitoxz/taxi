@@ -47,7 +47,7 @@ function AbrirModalRegistroVehiculo(){
 function listar_pro(){
     
     $.ajax({
-        "url": "../controlador/vehiculo/controlador_listar_vehiculo.php",
+        "url": "../controlador/vehiculo/controlador_listar_propietario.php",
         "type": "POST"
     }).done(function(resp){
         
@@ -58,7 +58,7 @@ function listar_pro(){
         if(data.length>0){
             cadena+="<option value='0'>Seleccionar</option>"; 
             for(var i=0; i < data.length; i++){
-                cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['placa']+"</option>";
+                cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['dueno']+"</option>";
             }
             
             $("#sel_pro_vehiculo").html(cadena);
