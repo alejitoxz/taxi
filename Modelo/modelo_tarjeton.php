@@ -12,11 +12,56 @@ session_start();
             $conn = $this->conexion->conectar();
 
             require('../../vista/plugins/fpdf/fpdf.php');
-            $pdf = new FPDF('L','cm','A4');
+            $pdf = new FPDF('P','cm',ARRAY(25,26));
             $pdf->AddPage();
-            $pdf->Image('../../vista/imagenes/amarillo.jpg' , 0 ,0, 0 , 25,'jpg');
+            $pdf->Image('../../vista/imagenes/tarjeton.jpeg' , 0 ,0, 0 , 26,'jpeg');
+
+            $pdf->SetFont('Arial','B',12);
+            $pdf->Ln(4.6);
+            $pdf->Cell(10);
+            $pdf->Cell(10,0,$nombres,0,1,'L');
+
+            $pdf->SetFont('Arial','B',12);
+            $pdf->Ln(1.8);
+            $pdf->Cell(7);
+            $pdf->Cell(3,0,$placa,0,0,'C');
+            $pdf->Cell(4.4);
+            $pdf->Cell(2,0,$nInterno,0,0,'C');
+            $pdf->Cell(4.7);
+            $pdf->Cell(1,0,$nMovilizacion,0,0,'C');
+
+            $pdf->SetFont('Arial','B',12);
+            $pdf->Ln(1.4);
+            $pdf->Cell(6);
+            $pdf->Cell(3,0,$vLicencia,0,0,'C');
+            $pdf->Cell(2.7);
+            $pdf->Cell(3,0,$vMovilizacion,0,0,'C');
+            $pdf->Cell(2.3);
+            $pdf->Cell(3,0,$vSoat,0,0,'C');
+
+            $pdf->SetFont('Arial','B',12);
+            $pdf->Ln(2.5);
+            $pdf->Cell(3);
+            $pdf->Cell(15,0,$eps,0,0,'L');
+            $pdf->Cell(2.7);
+            $pdf->Cell(1,0,$rh,0,0,'C');
             
             $pdf->SetFont('Arial','B',12);
+            $pdf->Ln(1.8);
+            $pdf->Cell(3);
+            $pdf->Cell(9,0,$arl,0,0,'L');
+            $pdf->Cell(5.4);
+            $pdf->Cell(4,0,$fondoPension,0,0,'C');
+
+            $pdf->SetFont('Arial','B',12);
+            $pdf->Ln(2.1);
+            $pdf->Cell(7);
+            $pdf->Cell(7,0,$arl,0,0,'L');
+            $pdf->Cell(3.5);
+            $pdf->Cell(4,0,$fondoPension,0,0,'C');
+
+            
+           /* $pdf->SetFont('Arial','B',12);
             $pdf->Image('../../vista/imagenes/logo-alcaldia.png' , 4 ,1, 0 , 3,'png');
             $pdf->SetFont('Arial','B',15);
             $pdf->Cell(27.5,1,'ALCALDIA DE IBAGUE',0,1,'C');
@@ -32,16 +77,10 @@ session_start();
             $pdf->Cell(3.2,3.5,'',1,0,'L',false);
             $pdf->Cell(1,1,'',0,0,'L',false);
             $pdf->SetFont('Arial','B',9);
-            $pdf->SetTextColor(2,2,3);
+            $pdf->SetTextColor(2,2,3);}
+            */
 
-            $pdf->SetTextColor(255,255,255);
-            $pdf->Cell(4,0.7,'NOMBRES Y APELLIDOS',1,0,'C',true);
-            $pdf->SetTextColor(0,0,0);
-            $pdf->Cell(1,0.7,'',0,0,'L',false);
-            $pdf->Cell(13,0.7,$nombres,0,1,'L',false);
-            $pdf->Ln(0.6);
-
-            $pdf->Cell(7.2,3,'',0,0,'L',false);
+       /*     $pdf->Cell(7.2,3,'',0,0,'L',false);
             $pdf->SetTextColor(255,255,255);
             $pdf->Cell(2,0.7,'PLACA',1,0,'C',true);
             $pdf->SetTextColor(0,0,0);
@@ -57,7 +96,7 @@ session_start();
             $pdf->SetTextColor(0,0,0);
             $pdf->Cell(3,0.7,$nMovilizacion,0,1,'C',false);
             $pdf->Ln(0.6);
-
+/*
             $pdf->SetFont('Arial','B',8);
             $pdf->Cell(7.2,3,'',0,0,'L',false);
             $pdf->SetTextColor(255,255,255);
@@ -143,7 +182,7 @@ session_start();
             $pdf->Ln(2.5);
             $pdf->Cell(11.5,0,'',0,0,'L',false);
             $pdf->Cell(4,0,'EMPRESARIAL TAXI',0,0,'C',false);
-
+*/
             $pdf->Output();
             $this->conexion->conectar();
         } 
