@@ -19,6 +19,14 @@ session_start();
         function listar_home(){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+            if ($Rol == 2) {
+                $wr = "and pro.idUsuario = $idUsuario";
+            }else{
+                $wr = "";
+            }
             $sql  = "DECLARE @Fecha DATE = DATEADD( DAY, 15, CONVERT ( DATE, GETDATE( ), 1 ) ), @fechaActual DATE = GETDATE( ) 
             SELECT
             * 
@@ -52,6 +60,7 @@ session_start();
                     WHERE
                         pro.estatus = 1 
                         AND c.id = $idCompany 
+                        $wr
                     UNION
                     SELECT
                         con.id,
@@ -81,6 +90,7 @@ session_start();
                         WHERE
                             pro.estatus = 1 
                             AND c.id = $idCompany 
+                            $wr
                         UNION
                         SELECT
                             con.id,
@@ -110,9 +120,10 @@ session_start();
                             WHERE
                                 pro.estatus = 1 
                                 AND c.id = $idCompany 
+                                $wr
                             ) tablas 
                     WHERE 
-                Vencimiento IS NOT NULL
+                Vencimiento IS NOT NULL  
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {

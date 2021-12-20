@@ -13,7 +13,13 @@ session_start();
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
             $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
 
+            if ($Rol == 2) {
+                $wr = "and pro.idUsuario = $idUsuario";
+            }else{
+                $wr = "";
+            }
             
 
             $sql  = "SELECT
@@ -35,7 +41,7 @@ session_start();
             INNER JOIN company AS co ON (v.idCompany = co.id)
             INNER JOIN propietario AS pro ON (v.idPropietario = pro.id)
             INNER JOIN persona AS p ON (pro.idPersona = p.id)
-            WHERE v.estatus = 1 and v.idCompany = $idCompany;
+            WHERE v.estatus = 1 and v.idCompany = $idCompany $wr;
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -62,13 +68,21 @@ session_start();
     function listar_pro(){
         $conn = $this->conexion->conectar();
         $idCompany = $_SESSION['COMPANY'];
+        $Rol = $_SESSION['ROL'];
+        $idUsuario = $_SESSION['S_ID'];
+
+        if ($Rol == 2) {
+            $wr = "and pro.idUsuario = $idUsuario";
+        }else{
+            $wr = "";
+        }
         $sql  = "SELECT 
         pro.id,
         (p.nombre + ' ' +p.apellido) as dueno
         from 
         propietario as pro
         INNER JOIN persona AS p ON (pro.idPersona = p.id)
-        where pro.idCompany = $idCompany and pro.estatus = 1
+        where pro.idCompany = $idCompany and pro.estatus = 1 $wr
         ";
         //echo $sql;
         $resp = sqlsrv_query($conn, $sql);
@@ -94,8 +108,10 @@ session_start();
     function registrar_vehiculo($placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat,$nMovilizacion){
         $conn = $this->conexion->conectar();
         $idCompany = $_SESSION['COMPANY'];
-        $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompany,idPropietario,nInterno,vMovilizacion,vSoat,estatus,nMovilizacion)
-                 VALUES('$placa','$marca','$modelo',$idCompany,'$idPropietario','$nInterno','$vMovilizacion','$vSoat',1,'$nMovilizacion')
+        $idUsuario = $_SESSION['S_ID'];
+
+        $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompany,idPropietario,nInterno,vMovilizacion,vSoat,estatus,nMovilizacion,idUsuario)
+                 VALUES('$placa','$marca','$modelo',$idCompany,'$idPropietario','$nInterno','$vMovilizacion','$vSoat',1,'$nMovilizacion',$idUsuario)
                  ";
         $resp = sqlsrv_query($conn, $sql);
         

@@ -1,3 +1,9 @@
+<?php
+session_start();
+$Rol = $_SESSION['ROL'];
+if ($Rol == 1 || $Rol == 4) {
+
+?>
 <div class="col-md-12">
     <div class="card">
         <div class="card-body">
@@ -74,6 +80,10 @@
     </div>
 </div> 
 
+<?php
+}
+?>
+
 <div class="col-md-12">
     <div class="card card-primary">
         <div class="card-header">
@@ -89,8 +99,8 @@
                     </div> 
                 </div>
             </div>
-        <table id="tabla_alerta" class="display responsive nowrap" style="width:100%">
-            <thead>
+        <table id="tabla_alerta" class="display responsive nowrap " style="width:100%">
+            <thead class="thead-dark">
                 <tr>
                     <th style="display:none"></th>
                     <th style="display:none"></th>
@@ -134,3 +144,8 @@
     contarPropietario();
     contarConductor();
 </script>
+<style>
+    .red{
+        background-color:red !important;
+    }
+</style>

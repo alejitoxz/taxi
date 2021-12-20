@@ -42,6 +42,7 @@ exit;*/
   <title>Visualsat | SUTC</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../Vista/imagenes/icon_taxi2.png" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -211,7 +212,7 @@ if(isset($Datos[$i]['submodulos'])){
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Bienvenidos</h1>
+            <h1 class="m-0 text-dark">Bienvenidos al SUTC - SISTEMA UNICO DE TARJETONES DE COLOMBIA</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->

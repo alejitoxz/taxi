@@ -14,7 +14,7 @@ session_start();
             require('../../vista/plugins/fpdf/fpdf.php');
             $pdf = new FPDF('P','cm',ARRAY(25,26));
             $pdf->AddPage();
-            $pdf->Image('../../vista/imagenes/tarjeton.jpeg' , 0 ,0, 0 , 26,'jpeg');
+            $pdf->Image('../../vista/imagenes/tarjeton.jpg' , 0 ,0, 0 , 26,'jpg');
 
             $pdf->SetFont('Arial','B',12);
             $pdf->Ln(4.6);

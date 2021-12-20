@@ -12,6 +12,14 @@ session_start();
         function listar_propietario(){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+            if ($Rol == 2) {
+                $wr = "and pro.idUsuario = $idUsuario";
+            }else{
+                $wr = "";
+            }
             $sql  = "SELECT
             pro.id,
             p.nombre,
@@ -27,7 +35,7 @@ session_start();
             INNER JOIN company AS c ON ( c.id = pro.idCompany ) 
             WHERE
             pro.estatus = 1
-            and c.id = $idCompany;
+            and c.id = $idCompany $wr;
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -83,19 +91,20 @@ session_start();
         //revisar el tema del alert, no funciona bien
         function registrar_propietario($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion){
             $idCompany = $_SESSION['COMPANY'];
+            $idUsuario = $_SESSION['S_ID'];
             $cadena = "";
             if($id){
                 $cadena = "
-                INSERT INTO propietario(id,estatus,idCompany) 
-                VALUES($id,1,$idCompany)";
+                INSERT INTO propietario(id,estatus,idCompany,idUsuario) 
+                VALUES($id,1,$idCompany,$idUsuario)";
             }else{
                 
                 $cadena = "DECLARE @idPersona int
                 INSERT INTO persona(nombre,apellido,cedula,telefono,email,direccion)
                 VALUES('$nombre','$apellido','$cedula','$telefono','$email','$direccion')
                 SET @idPersona = SCOPE_IDENTITY()
-                INSERT INTO propietario(idPersona,estatus,idCompany) 
-                VALUES(@idPersona,1,$idCompany)";
+                INSERT INTO propietario(idPersona,estatus,idCompany,idUsuario) 
+                VALUES(@idPersona,1,$idCompany,$idUsuario)";
             }
             $conn = $this->conexion->conectar();
             $sql  = "BEGIN TRY

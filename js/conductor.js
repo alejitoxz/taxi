@@ -70,6 +70,11 @@ function listar_conductor(){
                 "visible": false
             }
         ],
+       /* "createdRow": function( row, data, dataIndex){
+            if( data[2] == ){
+                $(row).addClass('table-danger');
+            }
+        },*/
         "columns": [
             { "data": "nInterno" },
             { "data": "nMovilizacion" },
@@ -244,6 +249,8 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
         var datosConductor = table.row($(this).parents('tr')).data();
     }
     
+    var fechaActual = moment().format('YYYY-MM-DD');
+    
     var nombres = datosConductor.dueno;
     var placa = datosConductor.placa;
     var nInterno = datosConductor.nInterno;
@@ -254,9 +261,35 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     var eps = datosConductor.eps;
     var rh = datosConductor.rh;
     var arl = datosConductor.arl;
+    var vArl = datosConductor.vArl;
+    var vEps = datosConductor.vEps;
     var fondoPension = datosConductor.fondoPension;
     var entResp = datosConductor.entResp;
     var nit = datosConductor.nit;
+
+    
+
+    vLicencia = moment(vLicencia).format('YYYY-MM-DD');
+    vArl = moment(vArl).format('YYYY-MM-DD');
+    vSoat = moment(vSoat).format('YYYY-MM-DD');
+    nMovilizacion = moment(nMovilizacion).format('YYYY-MM-DD');
+    vEps = moment(vEps).format('YYYY-MM-DD');
+
+    if (vLicencia < fechaActual )  {
+        swal.fire("Mensaje De Advertencia", "Su Licencia se encuentra vencida, por favor esté al día", "warning");
+        return;
+    } else if(vSoat < fechaActual )  {
+        swal.fire("Mensaje De Advertencia", "Su Soat se encuentra vencido, por favor esté al día", "warning");
+        return;        
+    }else if(vMovilizacion < fechaActual )  {
+        swal.fire("Mensaje De Advertencia", "Su Movilizacion se encuentra vencido, por favor esté al día", "warning");
+        return;        
+    }
+    else if(vArl < fechaActual )  {
+        swal.fire("Mensaje De Advertencia", "Su ARL se encuentra vencido, por favor esté al día", "warning");
+        return;        
+    }
+    
 
     var url = "../controlador/tarjeton/controlador_exportar.php?nombres="+nombres+"&placa="+placa
     +"&nInterno="+nInterno
