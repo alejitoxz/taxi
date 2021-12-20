@@ -56,9 +56,9 @@ session_start();
             $pdf->SetFont('Arial','B',12);
             $pdf->Ln(2.1);
             $pdf->Cell(7);
-            $pdf->Cell(7,0,$arl,0,0,'L');
+            $pdf->Cell(7,0,$entResp,0,0,'L');
             $pdf->Cell(3.5);
-            $pdf->Cell(4,0,$fondoPension,0,0,'C');
+            $pdf->Cell(4,0,$nit,0,0,'C');
 
             
            /* $pdf->SetFont('Arial','B',12);
