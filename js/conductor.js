@@ -517,5 +517,31 @@ function modificar_estatus(id,estatus){
     })
 }
 
+function editarVencimiento(){
+    $("#modal_editar_vencimientos").modal({backdrop:'static',keyboard:false})
+    $("#modal_editar_vencimientos").modal('show');
+}
 
-
+function listar_con(){
+    
+    $.ajax({
+        "url": "../controlador/conductor/controlador_listar_conductor.php",
+        "type": "POST"
+    }).done(function(resp){
+        
+        var data = JSON.parse(resp);
+        
+        var cadena="";
+        
+        if(data.length>0){
+            cadena+="<option value='0'>Seleccionar</option>"; 
+            for(var i=0; i < data.length; i++){
+                cadena+="<option value ='"+data[i]['id']+"'>"+data[i]['dueno']+"</option>";
+            }
+            
+            $("#sel_conductor").html(cadena);
+        }else{
+            cadena+="<option value='0'>No se encontraron registros</option>"; 
+        }
+    })
+}
