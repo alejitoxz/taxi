@@ -24,8 +24,12 @@ session_start();
 
             if ($Rol == 2) {
                 $wr = "and pro.idUsuario = $idUsuario";
+            }else if ($Rol == 1) {
+                $com = "";
+                $wr = "";
             }else{
                 $wr = "";
+                $com = "AND c.id = $idCompany ";
             }
             $sql  = "DECLARE @Fecha DATE = DATEADD( DAY, 15, CONVERT ( DATE, GETDATE( ), 1 ) ), @fechaActual DATE = GETDATE( ) 
             SELECT
@@ -59,7 +63,7 @@ session_start();
                         INNER JOIN persona AS prop ON ( pro.idPersona = prop.id ) 
                     WHERE
                         pro.estatus = 1 
-                        AND c.id = $idCompany 
+                        $com
                         $wr
                     UNION
                     SELECT
@@ -89,7 +93,7 @@ session_start();
                             INNER JOIN persona AS prop ON ( pro.idPersona = prop.id ) 
                         WHERE
                             pro.estatus = 1 
-                            AND c.id = $idCompany 
+                            $com
                             $wr
                         UNION
                         SELECT
@@ -119,7 +123,7 @@ session_start();
                                 INNER JOIN persona AS prop ON ( pro.idPersona = prop.id ) 
                             WHERE
                                 pro.estatus = 1 
-                                AND c.id = $idCompany 
+                                $com
                                 $wr
                             ) tablas 
                     WHERE 

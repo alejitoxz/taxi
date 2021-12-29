@@ -6,6 +6,7 @@ session_start();
 
         function __construct(){
             require_once 'modelo_conexion.php';
+            require  'phpqrcode/qrlib.php';
             $this->conexion = new conexion();
         }
 
@@ -17,8 +18,12 @@ session_start();
 
             if ($Rol == 2) {
                 $wr = "and con.idUsuario = $idUsuario";
+            }else if ($Rol == 1) {
+                $com = "";
+                $wr = "";
             }else{
                 $wr = "";
+                $com = "and con.idCompany = $idCompany";
             }
             $sql  = "SELECT
                     con.id,
@@ -31,9 +36,8 @@ session_start();
                     p.email,
                     p.direccion,
                     con.eps,
-                    CONVERT ( VARCHAR, con.vEps ) AS vEps,
+                    CONVERT ( VARCHAR, con.eps ) AS vSeguridad,
                     con.arl,
-                    CONVERT ( VARCHAR, con.vArl ) AS vArl,
                     con.rh,
                     con.fondoPension,
                     CONVERT ( VARCHAR, con.vLicencia ) AS vLicencia,
@@ -50,7 +54,7 @@ session_start();
                     INNER JOIN vehiculo AS v ON ( con.idVehiculo = v.id )
                     INNER JOIN persona AS p ON ( con.idPersona = p.id ) 
                     INNER JOIN company AS c ON ( c.id = con.idCompany ) 
-                    WHERE con.estatus = 1 and con.idCompany = $idCompany $wr
+                    WHERE con.estatus = 1 $com $wr
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -81,14 +85,18 @@ session_start();
 
             if ($Rol == 2) {
                 $wr = "and v.idUsuario = $idUsuario";
+            }else if ($Rol == 1) {
+                $com = "";
+                $wr = "";
             }else{
                 $wr = "";
+                $com = "and c.id = $idCompany";
             }
 
             $sql  = "SELECT v.id, v.placa 
             from vehiculo as v
             INNER JOIN company AS c ON ( c.id = v.idCompany ) 
-            where v.estatus = 1 and c.id = $idCompany $wr";
+            where v.estatus = 1 $com $wr";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -137,22 +145,22 @@ session_start();
             $this->conexion->conectar();
         }
 
-        function registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vEps,$vArl){
+        function registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vSeguridad){
             $idCompany = $_SESSION['COMPANY'];
             $idUsuario = $_SESSION['S_ID'];
             $cadena = "";
             if($id){
                 $cadena = "
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vEps,vArl,idUsuario) 
-                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vEps','$vArl',$idUsuario)";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vSeguridad,idUsuario) 
+                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vSeguridad',$idUsuario)";
             }else{
                 
                 $cadena = "DECLARE @idPersona int
                 INSERT INTO persona(nombre,apellido,cedula,telefono,email,direccion)
                 VALUES('$nombre','$apellido','$cedula','$telefono','$email','$direccion')
                 SET @idPersona = SCOPE_IDENTITY()
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vEps,vArl,idUsuario) 
-                VALUES(@idPersona,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vEps','$vArl',$idUsuario)";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vSeguridad,idUsuario) 
+                VALUES(@idPersona,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vSeguridad',$idUsuario)";
             }
             
             $conn = $this->conexion->conectar();
@@ -166,7 +174,7 @@ session_start();
                      BEGIN CATCH
                      ROLLBACK TRAN
                      END CATCH";
-                     echo $sql;
+                     //echo $sql;
             $resp = sqlsrv_query($conn, $sql);
 
             if( $resp === false) {
@@ -178,11 +186,57 @@ session_start();
             $this->conexion->conectar();
         }
 
+        function generarqr($id){
+            $dir = "../../Vista/imagenes/qr/";
+            // consulta
+            if($id){
+                $idF = $id;
+            }else{
+                $conn = $this->conexion->conectar();
+                $sql  = "SELECT MAX(id) as id from conductor";
+                $resp = sqlsrv_query($conn, $sql);
+                $i = 0;
+                while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+                {
+                    $data[$i] = $row;
+                    $i++;
+                }
+
+                $idF = $data[0]['id'];
+            }
+            if(!file_exists($dir)){
+                mkdir($dir);
+            }
+            $filename = $dir."qr-".$idF.".png";
+            //echo "<img src='$filename'> ";
+            $tamano = 10;
+            $level = "M";
+            $frameSize = 3;
+            $contenido = "https://www.visualsatco.com/visualsat.sutc/qr.php?conductor=".$idF;
+
+            QRcode::png($contenido,$filename,$level,$tamano,$frameSize);
+
+        
+        }
+
         function contador_conductor(){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
-            $sql  = "select COUNT(id) as contadorConductor from conductor
-            where estatus = 1 AND idCompany = $idCompany";
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+            if ($Rol == 2) {
+                $wr = "idUsuario = $idUsuario";
+                $com = "AND idCompany = $idCompany";
+            }else if ($Rol == 1) {
+                $com = "";
+                $wr = "";
+            }else{
+                $com = "AND idCompany = $idCompany";
+                $wr = "";
+            }
+            $sql  = "SELECT COUNT(id) as contadorConductor from conductor
+            where estatus = 1 $wr $com";
            //echo $sql;
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -221,9 +275,10 @@ session_start();
             $this->conexion->conectar();
         }
     
-        function modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vEps,$vArl){
+        function modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vSeguridad){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
+            
 
             $sql  = "BEGIN TRY
                     BEGIN TRAN
@@ -244,8 +299,7 @@ session_start();
                     rh = '$rh',
                     fondoPension = '$fondoPension',
                     idCompany = $idCompany,
-                    vEps= '$vEps',
-                    vArl= '$vArl'
+                    vSeguridad= '$vSeguridad'
                     WHERE id=$id
 
                     

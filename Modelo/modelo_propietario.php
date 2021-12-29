@@ -17,8 +17,13 @@ session_start();
 
             if ($Rol == 2) {
                 $wr = "and pro.idUsuario = $idUsuario";
-            }else{
+                $com = "and c.id = $idCompany";
+            }else if ($Rol == 1) {
+                $com = "";
                 $wr = "";
+            }else{ 
+                $wr = "";
+                $com = "and c.id = $idCompany";
             }
             $sql  = "SELECT
             pro.id,
@@ -35,8 +40,9 @@ session_start();
             INNER JOIN company AS c ON ( c.id = pro.idCompany ) 
             WHERE
             pro.estatus = 1
-            and c.id = $idCompany $wr;
+            $com $wr
             ";
+           //echo $sql;
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -117,7 +123,6 @@ session_start();
                      BEGIN CATCH
                      ROLLBACK TRAN
                      END CATCH";
-                   
             $resp = sqlsrv_query($conn, $sql);
            
             if( $resp === false) {
@@ -173,8 +178,21 @@ session_start();
         function contador_propietario(){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
-            $sql  = "select COUNT(id) as contadorPropietario from propietario
-            where estatus = 1 AND idCompany = $idCompany";
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+            if ($Rol == 2) {
+                $wr = "idUsuario = $idUsuario";
+                $com = "AND idCompany = $idCompany";
+            }else if ($Rol == 1) {
+                $com = "";
+                $wr = "";
+            }else{
+                $com = "AND idCompany = $idCompany";
+                $wr = "";
+            }
+            $sql  = "SELECT COUNT(id) as contadorPropietario from propietario
+            where estatus = 1 $wr $com ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;

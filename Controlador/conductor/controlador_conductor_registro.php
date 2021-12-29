@@ -14,8 +14,8 @@
     $rh = htmlspecialchars($_POST['rh'],ENT_QUOTES,'UTF-8');
     $fondoPension = htmlspecialchars($_POST['fondoPension'],ENT_QUOTES,'UTF-8');
     $vLicencia = htmlspecialchars($_POST['vLicencia'],ENT_QUOTES,'UTF-8');
-    $vEps = htmlspecialchars($_POST['vEps'],ENT_QUOTES,'UTF-8');
-    $vArl = htmlspecialchars($_POST['vArl'],ENT_QUOTES,'UTF-8');
+    $vSeguridad = htmlspecialchars($_POST['vSeguridad'],ENT_QUOTES,'UTF-8');
     $placa = htmlspecialchars($_POST['placa'],ENT_QUOTES,'UTF-8');
-    $consulta = $MU->registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vEps,$vArl);
+    $consulta = $MU->registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vSeguridad);
+    $qr = $MU->generarqr(false);
     echo $consulta;

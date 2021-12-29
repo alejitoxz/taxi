@@ -97,9 +97,8 @@ function listar_conductor(){
             { "data": "email" },
             { "data": "direccion" },
             { "data": "eps" },
-            { "data": "vEps" },
+            { "data": "vSeguridad" },
             { "data": "arl" },
-            { "data": "vArl" },
             { "data": "rh" },
             { "data": "fondoPension" },
             { "data": "vLicencia" },
@@ -137,9 +136,8 @@ $('#tabla_conductor').on('click','.editar',function(){
     var direccion = datosConductor.direccion;
     var email = datosConductor.email;
     var eps = datosConductor.eps;
-    var vEps = datosConductor.vEps;
+    var vSeguridad = datosConductor.vSeguridad;
     var arl = datosConductor.arl;
-    var vArl = datosConductor.vArl;
     var rh = datosConductor.rh;
     var fondoPension = datosConductor.fondoPension;
     var vLicencia = datosConductor.vLicencia;
@@ -154,9 +152,8 @@ $('#tabla_conductor').on('click','.editar',function(){
     $("#txt_dir_edit").val(direccion);
     $("#txt_ema_edit").val(email);
     $("#txt_eps_edit").val(eps);
-    $("#txt_vEps_edit").val(vEps);
+    $("#txt_vSeguridad_edit").val(vSeguridad);
     $("#txt_arl_edit").val(arl);
-    $("#txt_vArl_edit").val(vArl);
     $("#txt_rh_edit").val(rh);
     $("#txt_pen_edit").val(fondoPension);
     $("#txt_lic_edit").val(vLicencia);
@@ -174,9 +171,8 @@ function modificar_datos_conductor(){
     var direccion = $("#txt_dir_edit").val();
     var email =  $("#txt_ema_edit").val();
     var eps = $("#txt_eps_edit").val();
-    var vEps = $("#txt_vEps_edit").val();
+    var vSeguridad = $("#txt_vSeguridad_edit").val();
     var arl = $("#txt_arl_edit").val();
-    var vArl = $("#txt_vArl_edit").val();
     var rh = $("#txt_rh_edit").val();
     var fondoPension = $("#txt_pen_edit").val();
     var vLicencia = $("#txt_lic_edit").val();
@@ -191,8 +187,7 @@ function modificar_datos_conductor(){
         email == '' ||
         eps == '' ||
         arl == '' ||
-        vEps == '' ||
-        vArl == '' ||
+        vSeguridad == '' ||
         rh == '' ||
         fondoPension == ''||
         vLicencia == ''
@@ -217,9 +212,8 @@ function modificar_datos_conductor(){
         email:email,
         idVehiculo:idVehiculo,
         eps:eps,
-        vEps:vEps,
+        vSeguridad:vSeguridad,
         arl:arl,
-        vArl:vArl,
         rh:rh,
         fondoPension:fondoPension,
         vLicencia:vLicencia
@@ -261,19 +255,17 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     var eps = datosConductor.eps;
     var rh = datosConductor.rh;
     var arl = datosConductor.arl;
-    var vArl = datosConductor.vArl;
-    var vEps = datosConductor.vEps;
+    var vSeguridad = datosConductor.vSeguridad;
     var fondoPension = datosConductor.fondoPension;
     var entResp = datosConductor.entResp;
     var nit = datosConductor.nit;
-
+    var id = datosConductor.id;
     
 
     vLicencia = moment(vLicencia).format('YYYY-MM-DD');
-    vArl = moment(vArl).format('YYYY-MM-DD');
     vSoat = moment(vSoat).format('YYYY-MM-DD');
-    nMovilizacion = moment(nMovilizacion).format('YYYY-MM-DD');
-    vEps = moment(vEps).format('YYYY-MM-DD');
+    vMovilizacion = moment(vMovilizacion).format('YYYY-MM-DD');
+    vSeguridad = moment(vSeguridad).format('YYYY-MM-DD');
 
     if (vLicencia < fechaActual )  {
         swal.fire("Mensaje De Advertencia", "Su Licencia se encuentra vencida, por favor esté al día", "warning");
@@ -285,10 +277,7 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
         swal.fire("Mensaje De Advertencia", "Su Movilizacion se encuentra vencido, por favor esté al día", "warning");
         return;        
     }
-    else if(vArl < fechaActual )  {
-        swal.fire("Mensaje De Advertencia", "Su ARL se encuentra vencido, por favor esté al día", "warning");
-        return;        
-    }
+
     
 
     var url = "../controlador/tarjeton/controlador_exportar.php?nombres="+nombres+"&placa="+placa
@@ -302,7 +291,8 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     +"&arl="+arl
     +"&fondoPension="+fondoPension
     +"&entResp="+entResp
-    +"&nit="+nit;
+    +"&nit="+nit
+    +"&id="+id;
     window.open(url,'_blank');
 })
 
@@ -367,9 +357,8 @@ function registrar_conductor(){
     var email = $("#txt_ema").val();
     var direccion = $("#txt_dir").val();
     var eps = $("#txt_eps").val();
-    var vEps = $("#txt_vEps").val();
+    var vSeguridad = $("#txt_vSeguridad").val();
     var arl = $("#txt_arl").val();
-    var vArl = $("#txt_vArl").val();
     var rh = $("#txt_rh").val();
     var fondoPension = $("#txt_pen").val();
     var vLicencia = $("#txt_lic").val();
@@ -382,9 +371,8 @@ function registrar_conductor(){
         email == '' ||
         direccion == '' ||
         eps == '' ||
-        vEps == '' ||
+        vSeguridad == '' ||
         arl == '' ||
-        vArl == '' ||
         rh == '' ||
         fondoPension == '' ||
         vLicencia == '' 
@@ -409,9 +397,8 @@ function registrar_conductor(){
         email:email,
         direccion:direccion,
         eps:eps,
-        vEps:vEps,
+        vSeguridad:vSeguridad,
         arl:arl,
-        vArl:vArl,
         rh:rh,
         fondoPension:fondoPension,
         vLicencia:vLicencia,

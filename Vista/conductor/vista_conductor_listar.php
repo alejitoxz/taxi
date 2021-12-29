@@ -44,9 +44,8 @@
                           <th>Direccion</th>
                           <th>Email</th>
                           <th>Eps</th>
-                          <th>Vencimiento Eps</th>
+                          <th>Vencimiento Seguridad</th>
                           <th>Arl</th>
-                          <th>Vencimiento ARL</th>
                           <th>Rh</th>
                           <th>Fondo Pension</th>
                           <th>Vencimientos licencia</th>
@@ -128,20 +127,14 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Vencimiento eps</label>
-              <input type="date" class="form-control" id="txt_vEps" ><br>
+              <label for="">Vencimiento Seguridad</label>
+              <input type="date" class="form-control" id="txt_vSeguridad" ><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">ARL</label>
               <input type="text" class="form-control" id="txt_arl" placeholder="Ingrese la arl"><br>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="">vencimiento arl</label>
-              <input type="date" class="form-control" id="txt_vArl"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -156,15 +149,16 @@
               <input type="text" class="form-control" id="txt_pen" placeholder="Ingrese el fondo Pension"><br>
             </div>
           </div>
-        </div>
-        <div class="row">
-          
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Vencimiento de licencia</label>
               <input type="date" class="form-control" id="txt_lic" ><br>
             </div>
           </div>
+        </div>
+        <div class="row">
+          
+          
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Placa del vehiculo</label>
@@ -245,20 +239,14 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Vencimiento eps</label>
-              <input type="date" class="form-control" id="txt_vEps_edit" placeholder="Ingrese la eps"><br>
+              <label for="">Vencimiento Seguridad</label>
+              <input type="date" class="form-control" id="txt_vSeguridad_edit" placeholder="Ingrese la seguridad"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">ARL</label>
               <input type="text" class="form-control" id="txt_arl_edit" placeholder="Ingrese la arl"><br>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="">Vencimiento arl</label>
-              <input type="date" class="form-control" id="txt_vArl_edit" placeholder="Ingrese la arl"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -273,15 +261,15 @@
               <input type="text" class="form-control" id="txt_pen_edit" placeholder="Ingrese fondo de pension"><br>
             </div>
           </div>
-        </div>
-        <div class="row">
-          
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Vencimiento de licencia</label>
               <input type="date" class="form-control" id="txt_lic_edit" ><br>
             </div>
           </div>
+        </div>
+        <div class="row">
+      
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Placa del vehiculo</label>
