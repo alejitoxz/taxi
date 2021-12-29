@@ -17,5 +17,4 @@
     $vSeguridad = htmlspecialchars($_POST['vSeguridad'],ENT_QUOTES,'UTF-8');
     $idPersonaC = htmlspecialchars($_POST['idPersonaC'],ENT_QUOTES,'UTF-8');
     $consulta = $MU->modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vSeguridad);
-    $qr = $MU->generarqr($id);
     echo $consulta;
