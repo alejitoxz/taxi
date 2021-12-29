@@ -14,8 +14,7 @@
     $rh = htmlspecialchars($_POST['rh'],ENT_QUOTES,'UTF-8');
     $fondoPension = htmlspecialchars($_POST['fondoPension'],ENT_QUOTES,'UTF-8');
     $vLicencia = htmlspecialchars($_POST['vLicencia'],ENT_QUOTES,'UTF-8');
-    $vEps = htmlspecialchars($_POST['vEps'],ENT_QUOTES,'UTF-8');
-    $vArl = htmlspecialchars($_POST['vArl'],ENT_QUOTES,'UTF-8');
+    $vSeguridad = htmlspecialchars($_POST['vSeguridad'],ENT_QUOTES,'UTF-8');
     $idPersonaC = htmlspecialchars($_POST['idPersonaC'],ENT_QUOTES,'UTF-8');
-    $consulta = $MU->modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vEps,$vArl);
+    $consulta = $MU->modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vSeguridad);
     echo $consulta;

@@ -31,9 +31,8 @@ session_start();
                     p.email,
                     p.direccion,
                     con.eps,
-                    CONVERT ( VARCHAR, con.vEps ) AS vEps,
+                    CONVERT ( VARCHAR, con.vSeguridad ) AS vSeguridad,
                     con.arl,
-                    CONVERT ( VARCHAR, con.vArl ) AS vArl,
                     con.rh,
                     con.fondoPension,
                     CONVERT ( VARCHAR, con.vLicencia ) AS vLicencia,
@@ -137,22 +136,22 @@ session_start();
             $this->conexion->conectar();
         }
 
-        function registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vEps,$vArl){
+        function registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vSeguridad){
             $idCompany = $_SESSION['COMPANY'];
             $idUsuario = $_SESSION['S_ID'];
             $cadena = "";
             if($id){
                 $cadena = "
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vEps,vArl,idUsuario) 
-                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vEps','$vArl',$idUsuario)";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vSeguridad,idUsuario) 
+                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vSeguridad',$idUsuario)";
             }else{
                 
                 $cadena = "DECLARE @idPersona int
                 INSERT INTO persona(nombre,apellido,cedula,telefono,email,direccion)
                 VALUES('$nombre','$apellido','$cedula','$telefono','$email','$direccion')
                 SET @idPersona = SCOPE_IDENTITY()
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vEps,vArl,idUsuario) 
-                VALUES(@idPersona,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vEps','$vArl',$idUsuario)";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vSeguridad,idUsuario) 
+                VALUES(@idPersona,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vSeguridad',$idUsuario)";
             }
             
             $conn = $this->conexion->conectar();
@@ -221,7 +220,7 @@ session_start();
             $this->conexion->conectar();
         }
     
-        function modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vEps,$vArl){
+        function modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vSeguridad){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
 
@@ -244,8 +243,7 @@ session_start();
                     rh = '$rh',
                     fondoPension = '$fondoPension',
                     idCompany = $idCompany,
-                    vEps= '$vEps',
-                    vArl= '$vArl'
+                    vSeguridad= '$vSeguridad'
                     WHERE id=$id
 
                     
