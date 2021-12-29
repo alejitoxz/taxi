@@ -55,8 +55,6 @@ function registrar_company(){
                 table_company.ajax.reload();
                 limpiarRegistro();
             });
-        }else{
-            Swal.fire("Mensaje De Advertencia",'El usuario ya se encuentra en uso', "warning");
         }
         }else{
             Swal.fire("Mensaje De Error",'No se pudo completar el Registro', "error");

@@ -16,7 +16,8 @@
             <div class="form-group">
                 <div class="col-lg-10">
                     <div class="col-lg-2">
-                    <button type="button" class="btn btn-primary"  onclick="AbrirModalRegistroConductor()" ><i class="fas fa-plus"></i> Registrar</button>
+                    <button type="button"  class="btn btn-primary"  onclick="AbrirModalRegistroConductor()" ><i class="fas fa-plus"></i> Registrar</button>                  
+                    <button type="button"  class="btn btn-primary"  onclick="editarVencimiento()" ><i class="fas fa-tasks" ></i> Editar</button>
                     </div> 
                 </div>
             </div>
@@ -288,12 +289,72 @@
       
     </div>
   </div>
+  </form>
+
+
+    <!-- MODAL PARA EDITAR REGISTRO -->
+  <div class="modal fade" id="modal_editar_vencimientos" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header modal-primary">
+        <h4 class="modal-title"><b>Editar Vencimientos</b></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <!-- FORMULARIO REGISTRO DE vehiculo, CAMPOS -->
+        <form class="form">
+        <div class="form-group">
+                  <label>Multiple</label>
+                  <div class="bootstrap-duallistbox-container row moveonselect moveondoubleclick"> <div class="box1 col-md-6">   <label for="bootstrap-duallistbox-nonselected-list_" style="display: none;"></label>   
+                  <span class="info-container">     
+                  <span class="info">Empty list</span>    
+                  <button type="button" class="btn btn-sm clear1" style="float:right!important;">show all</button>   
+                  </span>   
+                  <input class="form-control filter" type="text" placeholder="Filter">   
+                  <div class="btn-group buttons">   
+                  <button type="button" class="btn moveall btn-outline-secondary" title="Move all">&gt;&gt;</button>  
+                  </div>   
+                  <select multiple="multiple" id="bootstrap-duallistbox-nonselected-list_" name="_helper1" style="height: 102px;"></select> 
+                  </div>
+                  <div class="box2 col-md-6">   
+                  <label for="bootstrap-duallistbox-selected-list_" style="display: none;"></label>   
+                  <span class="info-container">    
+                  <span class="info"></span>     
+                  <button type="button" class="btn btn-sm clear2" style="float:right!important;">show all</button>   
+                  </span>   
+                  <input class="form-control filter" type="text" placeholder="Filter">   
+                  <div class="btn-group buttons">          
+                  <button type="button" class="btn removeall btn-outline-secondary" title="Remove all">&lt;&lt;</button>
+                  </div>   
+                  <select multiple="multiple" id="bootstrap-duallistbox-selected-list_ sel_conductor" name="_helper2" style="height: 102px;">
+                  
+                  </select> 
+                  </div>
+                  </div>
+                  <select class="duallistbox" multiple="multiple" style="display: none;">
+                  </select>
+                </div>
+        
+        
+        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> </i> Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="modificar_vencimientos()"><i class="fa fa-check"> </i> Guardar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
 
   </form>
 <script type="text/javascript" src="../js/conductor.js"></script>
 <script>
   $(document).ready(function(){
     listar_conductor();
+    listar_con();
     $('.js-example-basic-single').select2();
     listar_placa();
     $("#modal_registro_conductor").on('shown.bs.modal',function(){
