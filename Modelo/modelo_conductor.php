@@ -36,7 +36,7 @@ session_start();
                     p.email,
                     p.direccion,
                     con.eps,
-                    CONVERT ( VARCHAR, con.eps ) AS vSeguridad,
+                    CONVERT ( VARCHAR, con.vSeguridad ) AS vSeguridad,
                     con.arl,
                     con.rh,
                     con.fondoPension,
@@ -315,6 +315,38 @@ session_start();
                 return 0;
             }else{
                 return 1;
+            }
+            
+            $this->conexion->conectar();
+        }
+
+
+        function listar_vencimientos(){
+            $conn = $this->conexion->conectar();
+            $idCompany = $_SESSION['COMPANY'];
+            $sql  = "SELECT 
+            con.id,
+            (p.nombre + ' ' +p.apellido) as dueno
+            from 
+            conductor as con
+            INNER JOIN persona AS p ON (con.idPersona = p.id)
+            where con.idCompany = $idCompany and con.estatus = 1
+            ";
+            $resp = sqlsrv_query($conn, $sql);
+            if( $resp === false) {
+                return 0;
+            }
+            $i = 0;
+            $data = [];
+            while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+            {
+                $data[$i] = $row;
+                $i++;
+            }
+            if($data>0){
+                return $data;
+            }else{
+                return 0;
             }
             
             $this->conexion->conectar();
