@@ -17,5 +17,5 @@
     $vSeguridad = htmlspecialchars($_POST['vSeguridad'],ENT_QUOTES,'UTF-8');
     $placa = htmlspecialchars($_POST['placa'],ENT_QUOTES,'UTF-8');
     $consulta = $MU->registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vSeguridad);
-    $qr = $MU->generarqr();
+    $qr = $MU->generarqr(false);
     echo $consulta;
