@@ -1,16 +1,47 @@
 <?php
 session_start();
     class modelo_tarjeton{
-        private $conexion;
 
-        function __construct(){
-            require_once 'modelo_conexion.php';
-            $this->conexion = new conexion();
-        }
-
-        function exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit){
-            $conn = $this->conexion->conectar();
-
+        function exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id){
+            if($nInterno == 'null'){
+                $nInterno = 0;
+            }
+            if($nombres == 'null'){
+                $nombres = 0;
+            }
+            if($placa == 'null'){
+                $placa = 0;
+            }
+            if($nMovilizacion == 'null'){
+                $nMovilizacion = 0;
+            }
+            if($vLicencia == 'null'){
+                $vLicencia = 0;
+            }
+            if($vMovilizacion == 'null'){
+                $vMovilizacion = 0;
+            }
+            if($vSoat == 'null'){
+                $vSoat = 0;
+            }
+            if($eps == 'null'){
+                $eps = 0;
+            }
+            if($rh == 'null'){
+                $rh = 0;
+            }
+            if($arl == 'null'){
+                $arl = 0;
+            }
+            if($fondoPension == 'null'){
+                $fondoPension = 0;
+            }
+            if($entResp == 'null'){
+                $entResp = 0;
+            }
+            if($nit == 'null'){
+                $nit = 0;
+            }
             require('../../vista/plugins/fpdf/fpdf.php');
             $pdf = new FPDF('P','cm',ARRAY(25,26));
             $pdf->AddPage();
@@ -60,6 +91,9 @@ session_start();
             $pdf->Cell(3.5);
             $pdf->Cell(4,0,$nit,0,0,'C');
 
+            $pdf->Ln(2.1);
+            $pdf->Image('../../vista/imagenes/qr/qr-'.$id.'.png' , 2.1 ,18.3, 0 , 6,'png');
+            
             
            /* $pdf->SetFont('Arial','B',12);
             $pdf->Image('../../vista/imagenes/logo-alcaldia.png' , 4 ,1, 0 , 3,'png');

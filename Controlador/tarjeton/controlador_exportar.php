@@ -15,4 +15,5 @@
     $fondoPension = htmlspecialchars($_GET['fondoPension'],ENT_QUOTES,'UTF-8');
     $entResp = htmlspecialchars($_GET['entResp'],ENT_QUOTES,'UTF-8');
     $nit = htmlspecialchars($_GET['nit'],ENT_QUOTES,'UTF-8');
-    $consulta = $MT->exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit);
+    $id = htmlspecialchars($_GET['id'],ENT_QUOTES,'UTF-8');
+    $consulta = $MT->exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id);

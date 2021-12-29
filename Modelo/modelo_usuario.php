@@ -110,8 +110,13 @@ session_start();
 
             if ($Rol == 2) {
                 $wr = "and u.id = $idUsuario";
+                $com = "and u.idCompany = $idCompany";
+            }else if ($Rol == 1) {
+                $com = "";
+                $wr = "";
             }else{
                 $wr = "";
+                $com = "and u.idCompany = $idCompany";
             }
             $sql  = "SELECT
                     u.id,
@@ -133,7 +138,7 @@ session_start();
                     INNER JOIN company AS co ON (u.idCompany = co.id)
                     INNER JOIN rol AS r ON (u.idRol = r.id)
                     INNER JOIN persona AS p ON (u.idPersona = p.id)
-                    WHERE u.estatus = 1 and u.idCompany = $idCompany and r.Id not in (1) $wr
+                    WHERE u.estatus = 1 $com and r.Id not in (1) $wr
             ";
            // echo $sql;
             $resp = sqlsrv_query($conn, $sql);
@@ -236,10 +241,24 @@ session_start();
         function contador_usuario(){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
-            $sql  = "select COUNT(u.id) as contadorUsuario 
+            $Rol = $_SESSION['ROL'];
+            $idUsuario = $_SESSION['S_ID'];
+
+            if ($Rol == 2) {
+                $wr = "AND u.id = $idUsuario";
+                $com = "AND u.idCompany = $idCompany ";
+            }else if ($Rol == 1) {
+                $com = "";
+                $wr = "";
+            }else{
+                $com = "AND u.idCompany = $idCompany ";
+                $wr = "";
+            }
+
+            $sql  = "SELECT COUNT(u.id) as contadorUsuario 
             from usuario as u
             INNER JOIN rol as r ON (r.id = u.idRol)
-            where u.estatus = 1 AND u.idCompany = $idCompany 
+            where u.estatus = 1 $wr $com
             and r.Id not in (1)";
            
             $resp = sqlsrv_query($conn, $sql);

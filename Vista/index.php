@@ -211,7 +211,8 @@ if(isset($Datos[$i]['submodulos'])){
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-sm-8">
+          <img src="../Vista/imagenes/logo_administracion2021.png" class="logosHome">
             <h1 class="m-0 text-dark">Bienvenidos al SUTC - SISTEMA UNICO DE TARJETONES DE COLOMBIA</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->

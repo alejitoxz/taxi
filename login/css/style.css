@@ -1,10 +1,16 @@
 .fondoTaxi{
     margin: 0 !important;
     padding: 0 !important;
-    background: url(../../Vista/imagenes/fondo/taxiFondo.png ) !important;
+    background-image: url(../../Vista/imagenes/fondo/taxiFondo.png ) !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
     background-attachment: fixed;
     height: 100vh !important;
+    
+}
+
+.logosIndex{
+   width: 250px;
+   height: 60px; 
 }

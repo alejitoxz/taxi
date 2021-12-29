@@ -17,7 +17,12 @@ session_start();
 
             if ($Rol == 2) {
                 $wr = "and pro.idUsuario = $idUsuario";
+                $com = "and v.idCompany = $idCompany";
+            }else if ($Rol == 1) {
+                $com = "";
+                $wr = "";
             }else{
+                $com = "and v.idCompany = $idCompany";
                 $wr = "";
             }
             
@@ -41,7 +46,7 @@ session_start();
             INNER JOIN company AS co ON (v.idCompany = co.id)
             INNER JOIN propietario AS pro ON (v.idPropietario = pro.id)
             INNER JOIN persona AS p ON (pro.idPersona = p.id)
-            WHERE v.estatus = 1 and v.idCompany = $idCompany $wr;
+            WHERE v.estatus = 1 $com $wr;
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -73,7 +78,12 @@ session_start();
 
         if ($Rol == 2) {
             $wr = "and pro.idUsuario = $idUsuario";
+            $com = "pro.idCompany = $idCompany";
+        }else if ($Rol == 1) {
+            $com = "";
+            $wr = "";
         }else{
+            $com = "pro.idCompany = $idCompany";
             $wr = "";
         }
         $sql  = "SELECT 
@@ -82,7 +92,7 @@ session_start();
         from 
         propietario as pro
         INNER JOIN persona AS p ON (pro.idPersona = p.id)
-        where pro.idCompany = $idCompany and pro.estatus = 1 $wr
+        where $com  and pro.estatus = 1 $wr
         ";
         //echo $sql;
         $resp = sqlsrv_query($conn, $sql);
@@ -113,6 +123,7 @@ session_start();
         $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompany,idPropietario,nInterno,vMovilizacion,vSoat,estatus,nMovilizacion,idUsuario)
                  VALUES('$placa','$marca','$modelo',$idCompany,'$idPropietario','$nInterno','$vMovilizacion','$vSoat',1,'$nMovilizacion',$idUsuario)
                  ";
+                 //echo $sql;
         $resp = sqlsrv_query($conn, $sql);
         
         if( $resp === false) {
@@ -171,8 +182,24 @@ session_start();
     function contador_vehiculo(){
         $conn = $this->conexion->conectar();
         $idCompany = $_SESSION['COMPANY'];
-        $sql  = "select COUNT(id) as contadorVehiculo from vehiculo
-        where estatus = 1 AND idCompany = $idCompany";
+        $Rol = $_SESSION['ROL'];
+        $idUsuario = $_SESSION['S_ID'];
+
+        if ($Rol == 2) {
+            $wr = "and idUsuario = $idUsuario";
+            $com = "AND idCompany = $idCompany";
+        }else if ($Rol == 1) {
+            $com = "";
+            $wr = "";
+        }else{
+            $com = "AND idCompany = $idCompany";
+            $wr = "";
+        }
+
+        $sql  = "SELECT  
+                COUNT(id) as contadorVehiculo 
+                from vehiculo
+                where estatus = 1 $com";
        //echo $sql;
         $resp = sqlsrv_query($conn, $sql);
         if( $resp === false) {
