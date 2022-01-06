@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="card card-success">
             <div class="card-header">
-            <h3 class="card-title">Bienvenido al contenido de la compañia</h3>
+            <h3 class="card-title">Tarifa</h3>
 
             <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="/pages/widgets.html" data-source-selector="#card-refresh-content"><i class="fas fa-sync-alt"></i></button>
@@ -46,7 +46,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header modal-primary">
-        <h4 class="modal-title"><b>Registro de compañia</b></h4>
+        <h4 class="modal-title"><b>Registro de tarifa</b></h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
@@ -77,12 +77,12 @@
   </div>
 
   <!-- MODAL PARA EDITAR REGISTRO -->
-  <div class="modal fade" id="modal_editar_C" role="dialog">
+  <div class="modal fade" id="modal_editar" role="dialog">
 
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header modal-primary">
-        <h4 class="modal-title"><b>Editar Usuario</b></h4>
+        <h4 class="modal-title"><b>Editar Tarifa</b></h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
@@ -93,21 +93,21 @@
           <div class="col-md-4">
           <input type="hidden" id="id" >
             <div class="form-group">
-              <label for="">Compañia</label>
-              <input type="text" class="form-control" id="txt_com_edit" placeholder="Ingrese el nombre de la empresa"><br>
+              <label for="">Concepto</label>
+              <input type="text" class="form-control" id="txt_con_edit" placeholder="Ingrese el nombre de la empresa"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">NIT</label>
-              <input type="text" class="form-control" id="txt_nit_edit" placeholder="Ingrese el nit"><br>
+              <label for="">Tarifa</label>
+              <input type="text" class="form-control" id="txt_tar_edit" placeholder="Ingrese el nit"><br>
             </div>
           </div>
         </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> </i> Cancelar</button>
-          <button type="button" class="btn btn-primary" onclick="modificar_company()"><i class="fa fa-check"> </i> Modificar</button>
+          <button type="button" class="btn btn-primary" onclick="modificar_tarifa()"><i class="fa fa-check"> </i> Modificar</button>
         </div>
       </div>
     </div>

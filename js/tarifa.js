@@ -18,7 +18,7 @@ function listar_tarifa(){
             { "data": "concepto" },
             { "data": "tarifa" },
             {"defaultContent":
-            "<button style='font-size:13px;' type='button' class='eliminarc btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editarc btn btn-info'><i class='fa fa-edit'></i></button>"}
+            "<button style='font-size:13px;' type='button' class='eliminarc btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editar btn btn-info'><i class='fa fa-edit'></i></button>"}
         ],
         "language":idioma_espanol,
        select: true
@@ -119,4 +119,64 @@ function modificar_estatus(id,estatus){
             }
         }
     })
+}
+
+function AbrirModalEditar(){
+    $("#modal_editar").modal({backdrop:'static',keyboard:false})
+    $("#modal_editar").modal('show');
+}
+
+// FUNCION PARA EDITAR REGISTRO
+$('#tabla_tarifa').on('click','.editar',function(){
+    
+    if(table.row(this).child.isShown()){
+        var datosTarifa = table.row(this).data();
+    }else{
+        var datosTarifa = table.row($(this).parents('tr')).data();
+    }
+    
+    var id = datosTarifa.id;
+    var concepto = datosTarifa.concepto;
+    var tarifa = datosTarifa.tarifa;
+    //levantar modal
+    AbrirModalEditar();
+    //ingresas datos modal
+    $("#id").val(id);
+    $("#txt_con_edit").val(concepto);
+    $("#txt_tar_edit").val(tarifa);
+   
+})
+function modificar_tarifa(){
+    var id = $("#id").val();
+    var concepto = $("#txt_con_edit").val();
+    var tarifa = $("#txt_tar_edit").val();
+
+    if( concepto == '' ||
+        tarifa == '' 
+    ){
+            return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
+        }
+
+    $.ajax({
+        "url": "../controlador/tarifa/controlador_tarifa_modificar.php",
+        "type": "POST",
+        data:{
+        id:id,
+        concepto:concepto,
+        tarifa:tarifa,
+        }
+    }).done(function(resp){
+        console.log(resp);
+        if(resp > 0){
+            $("#modal_editar").modal('hide');
+            Swal.fire("Mensaje De Confirmacion",'Datos Actualizados', "success")
+                .then((value)=>{
+                table.ajax.reload();
+            });
+        
+        }else{
+            Swal.fire("Mensaje De Error",'No se pudo completar la edicion', "error");
+        }
+    })
+
 }

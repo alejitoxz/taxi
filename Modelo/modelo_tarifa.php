@@ -75,4 +75,25 @@
             $this->conexion->conectar();
         }
 
+
+        function editar_tarifa($id,$concepto,$tarifa){
+            $conn = $this->conexion->conectar();
+    
+            $sql  = "UPDATE tarifa SET
+                    concepto = '$concepto',
+                    tarifa = '$tarifa'
+                    WHERE id=$id 
+                    ";
+                     
+            $resp = sqlsrv_query($conn, $sql);
+            
+            if( $resp === false) {
+                return 0;
+            }else{
+                return 1;
+            }
+            
+            $this->conexion->conectar();
+        }
+
 }        
