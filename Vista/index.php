@@ -175,12 +175,12 @@ if(isset($Datos[$i]['submodulos'])){
                   <p><?php echo $SubDescripcion; ?></p>
                 </a>
               </li>
-              <li class="nav-item">
+             <!-- <li class="nav-item">
               <a onclick="cargar_contenido('contenido_principal','tarifa/vista_tarifa_listar.php')" class="nav-link">
                   <i class="fas fa-building"></i>
                   <p>Tarifas</p>
                 </a>
-              </li>
+              </li>-->
             </ul>
 <?php
       
