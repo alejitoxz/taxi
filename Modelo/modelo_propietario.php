@@ -101,7 +101,7 @@ session_start();
             $cadena = "";
             if($id){
                 $cadena = "
-                INSERT INTO propietario(id,estatus,idCompany,idUsuario) 
+                INSERT INTO propietario(idPersona,estatus,idCompany,idUsuario) 
                 VALUES($id,1,$idCompany,$idUsuario)";
             }else{
                 

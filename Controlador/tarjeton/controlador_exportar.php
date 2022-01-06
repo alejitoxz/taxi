@@ -1,7 +1,10 @@
 <?php
     require '../../modelo/modelo_tarjeton.php';
+    require '../../modelo/modelo_tarifa.php';
 
+    $TA = new modelo_tarifa();
     $MT = new modelo_tarjeton();
+
     $nombres = htmlspecialchars($_GET['nombres'],ENT_QUOTES,'UTF-8');
     $placa = htmlspecialchars($_GET['placa'],ENT_QUOTES,'UTF-8');
     $nInterno = htmlspecialchars($_GET['nInterno'],ENT_QUOTES,'UTF-8');
@@ -16,4 +19,5 @@
     $entResp = htmlspecialchars($_GET['entResp'],ENT_QUOTES,'UTF-8');
     $nit = htmlspecialchars($_GET['nit'],ENT_QUOTES,'UTF-8');
     $id = htmlspecialchars($_GET['id'],ENT_QUOTES,'UTF-8');
-    $consulta = $MT->exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id);
+    $tarifas = $TA->listar_tarifa();
+    $consulta = $MT->exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas);

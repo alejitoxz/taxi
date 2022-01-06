@@ -254,7 +254,7 @@ function modificar_vehiculo(){
     }).done(function(resp){
         console.log(resp);
         if(resp > 0){
-            $("#modal_editarV").modal('hide');
+            $("#modal_editar_V").modal('hide');
             Swal.fire("Mensaje De Confirmacion",'Datos Actualizados', "success")
                 .then((value)=>{
                 table.ajax.reload();
@@ -264,7 +264,6 @@ function modificar_vehiculo(){
             Swal.fire("Mensaje De Error",'No se pudo completar la edicion', "error");
         }
     })
-
 }
 
 function contarVehiculo(){

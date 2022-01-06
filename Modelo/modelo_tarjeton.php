@@ -2,7 +2,7 @@
 session_start();
     class modelo_tarjeton{
 
-        function exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id){
+        function exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas){
             if($nInterno == 'null'){
                 $nInterno = 0;
             }
@@ -93,8 +93,45 @@ session_start();
 
             $pdf->Ln(2.1);
             $pdf->Image('../../vista/imagenes/qr/qr-'.$id.'.png' , 2.1 ,18.3, 0 , 6,'png');
+
+            
+            $pdf->Ln(0.35);
+            // Colores, ancho de línea y fuente en negrita
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->SetTextColor(255,255,255);
+            $header = ['Concepto','Tarifa'];
+            $w = array(5.6, 1.5);
+            $pdf->Cell(15);
+            for($i=0;$i<count($header);$i++){
+                $pdf->Cell($w[$i],0.8,$header[$i],1,0,'C',true);
+            }
+            $pdf->Ln();
+            // Restauración de colores y fuentes
+            $pdf->SetFillColor(224,235,255);
+            $pdf->SetTextColor(0);
+            $pdf->SetFont('Arial','B',8);
+            
+            // Datos
+            $fill = false;
+            for ($i=0 ; $i < count($tarifas['data']) ; $i++) {
+                $tarifa = $tarifas['data'][$i]['tarifa'];
+                $concepto = $tarifas['data'][$i]['concepto'];
+
+                $pdf->Cell(15);
+                
+                $pdf->Cell($w[0],0.6,$concepto,1,0,'L',$fill);
+                // $pdf->Cell(0.2);
+                $pdf->Cell($w[1],0.6,$tarifa,1,0,'C',$fill);
+                $pdf->Ln(0.6);
+                $fill = !$fill;
+
+            }
+
             
             $pdf->Output();
             $this->conexion->conectar();
-        } 
+        }
+
+        
     }

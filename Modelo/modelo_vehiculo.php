@@ -78,7 +78,6 @@ session_start();
 
         if ($Rol == 2) {
             $wr = "and pro.idUsuario = $idUsuario";
-            $com = "pro.idCompany = $idCompany";
         }else if ($Rol == 1) {
             $com = "";
             $wr = "";
@@ -92,9 +91,8 @@ session_start();
         from 
         propietario as pro
         INNER JOIN persona AS p ON (pro.idPersona = p.id)
-        where $com  and pro.estatus = 1 $wr
+        where  pro.estatus = 1 $wr $com
         ";
-        //echo $sql;
         $resp = sqlsrv_query($conn, $sql);
         if( $resp === false) {
             return 0;
