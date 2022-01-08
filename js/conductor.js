@@ -450,6 +450,7 @@ function limpiarRegistro(){
     $("#txt_dir").val("");
     $("#txt_eps").val("");
     $("#txt_arl").val("");
+    $("#txt_vSeguridad").val("");
     $("#txt_rh").val("");
     $("#txt_pen").val("");
     $("#txt_lic").val("");
