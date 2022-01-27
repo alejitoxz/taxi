@@ -259,8 +259,16 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     var fondoPension = datosConductor.fondoPension;
     var entResp = datosConductor.entResp;
     var nit = datosConductor.nit;
+    var cedula = datosConductor.cedula;
     var id = datosConductor.id;
     
+    var rol = $("#rol").val();
+    // VALIDAMOS POR ROL
+    if(rol == 2){
+        var documentito = cedula;
+    }else{
+        var documentito = nit;
+    }
 
     vLicencia = moment(vLicencia).format('YYYY-MM-DD');
     vSoat = moment(vSoat).format('YYYY-MM-DD');
@@ -291,7 +299,7 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     +"&arl="+arl
     +"&fondoPension="+fondoPension
     +"&entResp="+entResp
-    +"&nit="+nit
+    +"&nit="+documentito
     +"&id="+id;
     window.open(url,'_blank');
 })

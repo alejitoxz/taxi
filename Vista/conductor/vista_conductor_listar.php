@@ -1,3 +1,7 @@
+<?php
+ session_start();
+?>
+<input type="hidden" id="rol" value="<?php echo $_SESSION['ROL']; ?>">
 <div class="col-md-12">
     <div class="card card-primary">
             <div class="card-header">
