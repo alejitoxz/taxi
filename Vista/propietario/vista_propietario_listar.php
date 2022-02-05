@@ -179,6 +179,9 @@
 <script>
   $(document).ready(function(){
     listar_propietario();
+$('#txt_cedp').on('input', function () { 
+        this.value = this.value.replace(/[^0-9]/g,'');
+    });
     $("#modal_registro_propietario").on('shown.bs.modal',function(){
 
     });

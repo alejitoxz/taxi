@@ -69,6 +69,11 @@ function listar_conductor(){
                 "targets": [ 13 ],
                 "visible": false
             }
+            ,
+            {
+                "targets": [ 14 ],
+                "visible": false
+            }
         ],
        /* "createdRow": function( row, data, dataIndex){
             if( data[2] == ){
@@ -76,6 +81,7 @@ function listar_conductor(){
             }
         },*/
         "columns": [
+            { "data": "url_foto" },
             { "data": "nInterno" },
             { "data": "nMovilizacion" },
             { "data": "vMovilizacion" },
@@ -141,6 +147,14 @@ $('#tabla_conductor').on('click','.editar',function(){
     var rh = datosConductor.rh;
     var fondoPension = datosConductor.fondoPension;
     var vLicencia = datosConductor.vLicencia;
+    var url_foto = datosConductor.url_foto;
+
+    if(url_foto){
+        var imagen = "imagenes/foto/foto-"+id+"."+url_foto;
+    }else{
+        var imagen = "imagenes/avatar.jpg";
+    }
+    
     //ingresas datos modal
     $("#id").val(id);
     $("#idPersonaC").val(idPersonaC);
@@ -157,9 +171,25 @@ $('#tabla_conductor').on('click','.editar',function(){
     $("#txt_rh_edit").val(rh);
     $("#txt_pen_edit").val(fondoPension);
     $("#txt_lic_edit").val(vLicencia);
+    $('#imagenPrevisualizacionedit').prop("src",imagen);
+
     
 })
 function modificar_datos_conductor(){
+
+    var len = document.getElementById("fotoedit").files.length;
+    lista_img = new FormData();
+
+        for(i=0 ; i < len; i++){
+        img = document.getElementById('fotoedit').files[i];
+        if(!!img.type.match(/image.*/)){
+            if(window.FileReader){
+            img_leida = new FileReader();
+            img_leida.readAsDataURL(img);
+            }
+        lista_img.append('img_extra[]', img);
+        }
+    }
  
     var id = $("#id").val()
     var idPersonaC =  $("#idPersonaC").val();
@@ -198,7 +228,26 @@ function modificar_datos_conductor(){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }
 
-    $.ajax({
+    lista_img.append('id', id);
+    lista_img.append('idPersonaC', idPersonaC);
+    lista_img.append('nombre', nombre);
+    lista_img.append('apellido', apellido);
+    lista_img.append('cedula', cedula);
+    lista_img.append('telefono', telefono);
+    lista_img.append('email', email);
+    lista_img.append('idVehiculo', idVehiculo);
+    lista_img.append('eps', eps);
+    lista_img.append('vSeguridad', vSeguridad);
+    lista_img.append('vLicencia', vLicencia);
+    lista_img.append('arl', arl);
+    lista_img.append('rh', rh);
+    lista_img.append('fondoPension', fondoPension);
+    lista_img.append('vLicencia', vLicencia);
+    lista_img.append('direccion', direccion);
+
+  /* */
+
+   /* $.ajax({
         "url": "../controlador/conductor/controlador_conductor_modificar.php",
         "type": "POST",
         data:{
@@ -218,12 +267,21 @@ function modificar_datos_conductor(){
         fondoPension:fondoPension,
         vLicencia:vLicencia
         }
-    }).done(function(resp){
-        console.log(resp);
+    }).done(function(resp){*/
+        $.ajax({
+            "url": "../controlador/conductor/controlador_conductor_modificar.php",
+            "type": "POST",
+            data:lista_img,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).done(function(resp){
         if(resp > 0){
             $("#modal_editar_conductor").modal('hide');
             Swal.fire("Mensaje De Confirmacion",'Datos Actualizados', "success")
                 .then((value)=>{
+                $("#imagenPrevisualizacionedit").prop("src","imagenes/avatar.jpg");
+                $('#fotoedit').val("");
                 table.ajax.reload();
             });
         
@@ -261,6 +319,7 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     var nit = datosConductor.nit;
     var cedula = datosConductor.cedula;
     var id = datosConductor.id;
+    var url_foto = datosConductor.url_foto;
     
     var rol = $("#rol").val();
     // VALIDAMOS POR ROL
@@ -300,7 +359,9 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     +"&fondoPension="+fondoPension
     +"&entResp="+entResp
     +"&nit="+documentito
-    +"&id="+id;
+    +"&control="+cedula
+    +"&id="+id
+    +"&ext="+url_foto;
     window.open(url,'_blank');
 })
 
@@ -357,6 +418,20 @@ function buscarPersona(valor){
 }
 function registrar_conductor(){
 
+    var len = document.getElementById("foto").files.length;
+    lista_img = new FormData();
+
+        for(i=0 ; i < len; i++){
+        img = document.getElementById('foto').files[i];
+        if(!!img.type.match(/image.*/)){
+            if(window.FileReader){
+            img_leida = new FileReader();
+            img_leida.readAsDataURL(img);
+            }
+        lista_img.append('img_extra[]', img);
+        }
+    }
+
     var id = $("#idPersonaC").val();
     var nombre = $("#txt_nom").val();
     var apellido = $("#txt_ape").val();
@@ -372,7 +447,23 @@ function registrar_conductor(){
     var vLicencia = $("#txt_lic").val();
     var placa = $("#sel_placa_vehiculo").val();
 
-    if( nombre == '' ||
+    lista_img.append('id', id);
+    lista_img.append('nombre', nombre);
+    lista_img.append('apellido', apellido);
+    lista_img.append('cedula', cedula);
+    lista_img.append('telefono', telefono);
+    lista_img.append('email', email);
+    lista_img.append('eps', eps);
+    lista_img.append('vSeguridad', vSeguridad);
+    lista_img.append('vLicencia', vLicencia);
+    lista_img.append('arl', arl);
+    lista_img.append('rh', rh);
+    lista_img.append('placa', placa);
+    lista_img.append('fondoPension', fondoPension);
+    lista_img.append('vLicencia', vLicencia);
+    lista_img.append('direccion', direccion);
+
+   /* if( nombre == '' ||
         apellido == '' ||
         cedula == '' ||
         telefono == '' ||
@@ -391,33 +482,23 @@ function registrar_conductor(){
     if(
         placa == 0 ){
         return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
-    }
+    }*/
 
     $.ajax({
         "url": "../controlador/conductor/controlador_conductor_registro.php",
         "type": "POST",
-        data:{
-        id:id,
-        nombre:nombre,
-        apellido:apellido,
-        cedula:cedula,
-        telefono:telefono,
-        email:email,
-        direccion:direccion,
-        eps:eps,
-        vSeguridad:vSeguridad,
-        arl:arl,
-        rh:rh,
-        fondoPension:fondoPension,
-        vLicencia:vLicencia,
-        placa:placa
-        }
+        data:lista_img,
+        cache: false,
+        contentType: false,
+        processData: false
     }).done(function(resp){
         console.log(resp);
         if(resp > 0){
             if(resp==1){
             $("#modal_registro_conductor").modal('hide');
             Swal.fire("Mensaje De Confirmacion",'Registro realizado', "success").then((value)=>{
+                $("#imagenPrevisualizacion").prop("src","imagenes/avatar.jpg");
+                $('#foto').val("");
                 table.ajax.reload();
                 limpiarRegistro();
             });

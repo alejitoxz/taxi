@@ -108,16 +108,25 @@ session_start();
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
 
-            if ($Rol == 2) {
-                $wr = "and u.id = $idUsuario";
-                $com = "and u.idCompany = $idCompany";
-            }else if ($Rol == 1) {
+            // admin ve todo
+            if ($Rol == 1) {
+                $wr = "";
                 $com = "";
-                $wr = "";
-            }else{
-                $wr = "";
-                $com = "and u.idCompany = $idCompany";
+                $rol = "AND r.Id IN (3,4)";
             }
+            // compañia ve todo de su compañia
+            else if ($Rol == 4) {
+                $com = "AND u.idCompany = $idCompany";
+                $wr = "";
+                $rol = "AND r.Id IN (4)";
+            }
+            // independiente ve solo lo de su usuario
+            else if ($Rol == 3) {
+                $com = "AND u.idCompany = $idCompany";
+                $wr = "AND u.id = $idUsuario";
+            }
+
+           
             $sql  = "SELECT
                     u.id,
                     p.nombre,
@@ -138,7 +147,7 @@ session_start();
                     INNER JOIN company AS co ON (u.idCompany = co.id)
                     INNER JOIN rol AS r ON (u.idRol = r.id)
                     INNER JOIN persona AS p ON (u.idPersona = p.id)
-                    WHERE u.estatus = 1 $com and r.Id not in (1) $wr
+                    WHERE u.estatus = 1 $com $wr $rol
             ";
            // echo $sql;
             $resp = sqlsrv_query($conn, $sql);
@@ -169,7 +178,7 @@ session_start();
                     *
                     FROM
                     persona 
-                    WHERE cedula = $valor
+                    WHERE cedula = '$valor'
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -194,7 +203,15 @@ session_start();
 
         function listar_rol(){
             $conn = $this->conexion->conectar();
-            $sql  = "SELECT id, tipoRol from rol where Id not in (1,6)";
+            $Rol = $_SESSION['ROL'];
+            $wr = "";
+
+            if ($Rol == 1) {
+                $wr = "where Id IN (3,4)";
+            }else if ($Rol == 4) {
+                $wr = "where Id IN (4)";
+            }
+            $sql  = "SELECT id, tipoRol from rol $wr";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
                 return 0;
@@ -244,22 +261,30 @@ session_start();
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
 
-            if ($Rol == 2) {
-                $wr = "AND u.id = $idUsuario";
-                $com = "AND u.idCompany = $idCompany ";
-            }else if ($Rol == 1) {
+            // admin ve todo
+            if ($Rol == 1) {
+                $wr = "";
                 $com = "";
-                $wr = "";
-            }else{
-                $com = "AND u.idCompany = $idCompany ";
-                $wr = "";
+                $rol = "AND r.Id IN (3,4)";
             }
+            // compañia ve todo de su compañia
+            else if ($Rol == 4) {
+                $com = "AND u.idCompany = $idCompany";
+                $wr = "";
+                $rol = "AND r.Id IN (4)";
+            }
+            // independiente ve solo lo de su usuario
+            else if ($Rol == 3) {
+                $com = "AND u.idCompany = $idCompany";
+                $wr = "AND u.id = $idUsuario";
+            }
+
+          
 
             $sql  = "SELECT COUNT(u.id) as contadorUsuario 
             from usuario as u
             INNER JOIN rol as r ON (r.id = u.idRol)
-            where u.estatus = 1 $wr $com
-            and r.Id not in (1)";
+            where u.estatus = 1 $wr $com $rol";
            
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -350,7 +375,7 @@ session_start();
                     UPDATE persona SET
                     nombre = '$nombre', 
                     apellido = '$apellido',
-                    cedula = $cedula,
+                    cedula = '$cedula',
                     telefono = '$telefono',
                     email = '$email',
                     direccion = '$direccion'

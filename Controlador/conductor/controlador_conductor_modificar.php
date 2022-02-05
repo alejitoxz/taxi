@@ -16,6 +16,17 @@
     $vLicencia = htmlspecialchars($_POST['vLicencia'],ENT_QUOTES,'UTF-8');
     $vSeguridad = htmlspecialchars($_POST['vSeguridad'],ENT_QUOTES,'UTF-8');
     $idPersonaC = htmlspecialchars($_POST['idPersonaC'],ENT_QUOTES,'UTF-8');
-    $consulta = $MU->modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vSeguridad);
+
+    if(isset($_FILES["img_extra"]["name"][0])){
+        $ext = explode('.', $_FILES["img_extra"]["name"][0]);
+        $imagen = $_FILES["img_extra"]["tmp_name"][0]; 
+        $consulta = $MU->modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vSeguridad,$ext[1],$imagen);
+
+    }else{
+        $consulta = $MU->modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vSeguridad,false,false);
+
+    }
+    
+
     $qr = $MU->generarqr($id);
     echo $consulta;

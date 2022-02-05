@@ -1,4 +1,4 @@
-<div class="col-md-12">
+﻿<div class="col-md-12">
     <div class="card card-success">
             <div class="card-header">
             <h3 class="card-title">Bienvenido al contenido del usuario</h3>
@@ -246,6 +246,9 @@
 <script>
   $(document).ready(function(){
     listar_usuario();
+$('#txt_ced').on('input', function () { 
+        this.value = this.value.replace(/[^0-9]/g,'');
+    });
     $('.js-example-basic-single').select2();
     listar_rol();
     listar_ent();

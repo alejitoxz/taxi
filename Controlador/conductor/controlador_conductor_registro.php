@@ -16,6 +16,15 @@
     $vLicencia = htmlspecialchars($_POST['vLicencia'],ENT_QUOTES,'UTF-8');
     $vSeguridad = htmlspecialchars($_POST['vSeguridad'],ENT_QUOTES,'UTF-8');
     $placa = htmlspecialchars($_POST['placa'],ENT_QUOTES,'UTF-8');
-    $consulta = $MU->registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vSeguridad);
+    $cont = 0;
+    if(isset($_FILES["img_extra"]["name"][0])){
+        $ext = explode('.', $_FILES["img_extra"]["name"][0]);
+        $imagen = $_FILES["img_extra"]["tmp_name"][0];   
+        $consulta = $MU->registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vSeguridad,$ext[1],$imagen);
+    }else{
+        $consulta = $MU->registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vSeguridad,false,false);
+
+    }
+
     $qr = $MU->generarqr(false);
     echo $consulta;

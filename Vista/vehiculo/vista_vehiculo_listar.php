@@ -32,8 +32,9 @@
                           <th>nombre</th>
                           <th>apellido</th>
                           <th>Numero Interno</th>
-                          <th>Vencimiento Movilizacion</th>
-                          <th>Vencimiento Soat</th>
+                          <th>Venc. Movilizacion</th>
+                          <th>Venc. Soat</th>
+                          <th>Venc. Tecnomecánica</th>
                           <th>N. Movilizacion</th>
                           <th align="right" >Acciones</th>
                         </tr>
@@ -102,11 +103,16 @@
           </div>
         </div>
         <div class="row">
-          
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Dueño</label>
-              <select class="js-example-basic-single"  name="state" id="sel_pro_vehiculo" style="width:100%; heigth: 40px;">   
+              <label for="vTecnomecanica">Vencimiento Tecno Mec.</label>
+              <input type="date" class="form-control" id="vTecnomecanica" name="vTecnomecanica"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="sel_pro_vehiculo">Propietario</label>
+              <select class="js-example-basic-single"  name="sel_pro_vehiculo" id="sel_pro_vehiculo" style="width:100%; ">   
               </select><br><br>
             </div>
           </div>
@@ -182,7 +188,12 @@
           </div>
         </div>
         <div class="row">
-          
+        <div class="col-md-4">
+            <div class="form-group">
+              <label for="vTecnomecanica_edit">Vencimiento Tecno Mec.</label>
+              <input type="date" class="form-control" id="vTecnomecanica_edit" name="vTecnomecanica_edit" ><br>
+            </div>
+          </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Propietario</label>

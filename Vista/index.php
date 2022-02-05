@@ -61,6 +61,9 @@ exit;*/
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <!-- dropzonejs -->
+  <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
+  
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -69,6 +72,11 @@ exit;*/
 </head>
 <body class="sidebar-mini layout-fixed sidebar-collapse">
 <div class="wrapper">
+
+   <!-- Preloader -->
+   <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="../Vista/imagenes/icon_taxi2.png" alt="SUTC" height="60" width="60">
+  </div>
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -243,6 +251,7 @@ if(isset($Datos[$i]['submodulos'])){
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
+  $.widget.bridge('uibutton', $.ui.button)
   var idioma_espanol = {
 			select: {
 			rows: "%d fila seleccionada"
@@ -303,10 +312,13 @@ if(isset($Datos[$i]['submodulos'])){
 <script src="plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- dropzonejs -->
+<script src="plugins/dropzone/min/dropzone.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <script src="https://kit.fontawesome.com/3a4b2807a0.js" crossorigin="anonymous"></script>

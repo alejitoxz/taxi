@@ -2,7 +2,8 @@
 session_start();
     class modelo_tarjeton{
 
-        function exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas){
+        function exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext){
+            $Rol = $_SESSION['ROL'];
             if($nInterno == 'null'){
                 $nInterno = 0;
             }
@@ -42,13 +43,34 @@ session_start();
             if($nit == 'null'){
                 $nit = 0;
             }
+            // VALIMOS ROL
+            if($Rol == 3){
+                $empresa = "INDEPENDIENTE";
+            }else{
+                $empresa = $entResp;
+            }
+            
+            if ($ext != '') {
+                $foto = "foto-".$id.".".$ext;
+            }else{
+                $foto = "blanco.jpg";
+            }
+
             require('../../vista/plugins/fpdf/fpdf.php');
             $pdf = new FPDF('P','cm',ARRAY(25,26));
             $pdf->AddPage();
             $pdf->Image('../../vista/imagenes/tarjeton.jpg' , 0 ,0, 0 , 26,'jpg');
+            
+            $pdf->SetFont('Arial','B',12);
+            $pdf->Image('../../vista/imagenes/foto/'.$foto , 1.9 ,5.6, 3.6 , 4.3);
 
             $pdf->SetFont('Arial','B',12);
-            $pdf->Ln(4.6);
+            $pdf->Ln(3);
+            $pdf->Cell(9);
+            $pdf->Cell(5,0,$control,0,0,'C');
+
+            $pdf->SetFont('Arial','B',12);
+            $pdf->Ln(1.6);
             $pdf->Cell(10);
             $pdf->Cell(10,0,$nombres,0,1,'L');
 
@@ -87,7 +109,7 @@ session_start();
             $pdf->SetFont('Arial','B',12);
             $pdf->Ln(2.1);
             $pdf->Cell(7);
-            $pdf->Cell(7,0,$entResp,0,0,'L');
+            $pdf->Cell(7,0,$empresa,0,0,'L');
             $pdf->Cell(3.5);
             $pdf->Cell(4,0,$nit,0,0,'C');
 

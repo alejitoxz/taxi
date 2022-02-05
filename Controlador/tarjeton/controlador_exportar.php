@@ -18,6 +18,9 @@
     $fondoPension = htmlspecialchars($_GET['fondoPension'],ENT_QUOTES,'UTF-8');
     $entResp = htmlspecialchars($_GET['entResp'],ENT_QUOTES,'UTF-8');
     $nit = htmlspecialchars($_GET['nit'],ENT_QUOTES,'UTF-8');
+    $control = htmlspecialchars($_GET['control'],ENT_QUOTES,'UTF-8');
     $id = htmlspecialchars($_GET['id'],ENT_QUOTES,'UTF-8');
+    $ext = htmlspecialchars($_GET['ext'],ENT_QUOTES,'UTF-8');
     $tarifas = $TA->listar_tarifa();
-    $consulta = $MT->exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas);
+
+    $consulta = $MT->exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext);

@@ -9,6 +9,7 @@
     $nInterno = htmlspecialchars($_POST['nInterno'],ENT_QUOTES,'UTF-8');
     $vMovilizacion = htmlspecialchars($_POST['vMovilizacion'],ENT_QUOTES,'UTF-8');
     $vSoat = htmlspecialchars($_POST['vSoat'],ENT_QUOTES,'UTF-8');
+    $vTecnomecanica = htmlspecialchars($_POST['vTecnomecanica'],ENT_QUOTES,'UTF-8');
     $nMovilizacion = htmlspecialchars($_POST['nMovilizacion'],ENT_QUOTES,'UTF-8');
-    $consulta = $MU->registrar_vehiculo($placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat,$nMovilizacion);
+    $consulta = $MU->registrar_vehiculo($placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat,$nMovilizacion,$vTecnomecanica);
     echo $consulta;

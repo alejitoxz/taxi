@@ -31,6 +31,7 @@ function listar_vehiculo(){
             { "data": "nInterno" },
             { "data": "vMovilizacion" },
             { "data": "vSoat" },
+            { "data": "vTecnomecanica" },
             { "data": "nMovilizacion" },
             {"defaultContent":
             "<button style='font-size:13px;' type='button' class='eliminarv btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editarv btn btn-info'><i class='fa fa-edit'></i></button>"}
@@ -78,6 +79,7 @@ function registrar_vehiculo(){
     var vMovilizacion = $("#txt_mov").val();
     var vSoat = $("#txt_soa").val();
     var nMovilizacion = $("#txt_nmov").val();
+    var vTecnomecanica = $("#vTecnomecanica").val();
 
 
     if( placa == '' ||
@@ -86,7 +88,8 @@ function registrar_vehiculo(){
         nInterno == '' ||
         vMovilizacion == '' ||
         vSoat == ''||
-        nMovilizacion == ''
+        nMovilizacion == '' ||
+        vTecnomecanica == ''
     ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }if(
@@ -106,6 +109,7 @@ function registrar_vehiculo(){
             vMovilizacion:vMovilizacion,
             vSoat:vSoat,
             nMovilizacion:nMovilizacion,
+            vTecnomecanica:vTecnomecanica
             
         }
     }).done(function(resp){
@@ -198,6 +202,7 @@ $('#tabla_vehiculo').on('click','.editarv',function(){
     var vMovilizacion = datosVehiculo.vMovilizacion;
     var vSoat = datosVehiculo.vSoat;
     var nMovilizacion = datosVehiculo.nMovilizacion;
+    var vTecnomecanica = datosVehiculo.vTecnomecanica;
     //levantar modal
     AbrirModalEditarV();
     //ingresas datos modal
@@ -210,6 +215,7 @@ $('#tabla_vehiculo').on('click','.editarv',function(){
     $("#txt_mov_edit").val(vMovilizacion);
     $("#txt_soa_edit").val(vSoat);
     $("#txt_nmov_edit").val(nMovilizacion);
+    $("#vTecnomecanica_edit").val(vTecnomecanica);
 
 })
 function modificar_vehiculo(){
@@ -222,6 +228,7 @@ function modificar_vehiculo(){
     var vMovilizacion = $("#txt_mov_edit").val();
     var vSoat = $("#txt_soa_edit").val();
     var nMovilizacion = $("#txt_nmov_edit").val();
+    var vTecnomecanica = $("#vTecnomecanica_edit").val();
 
     if( placa == '' ||
         marca == '' ||
@@ -230,6 +237,8 @@ function modificar_vehiculo(){
         vMovilizacion == '' ||
         vSoat == ''||
         vMovilizacion == '' 
+        ||
+        vTecnomecanica == '' 
     ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }if(
@@ -250,6 +259,7 @@ function modificar_vehiculo(){
         vMovilizacion:vMovilizacion,
         vSoat:vSoat,
         nMovilizacion:nMovilizacion,    
+        vTecnomecanica:vTecnomecanica,  
         }
     }).done(function(resp){
         console.log(resp);

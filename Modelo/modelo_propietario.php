@@ -15,16 +15,23 @@ session_start();
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
 
-            if ($Rol == 2) {
-                $wr = "and pro.idUsuario = $idUsuario";
-                $com = "and c.id = $idCompany";
-            }else if ($Rol == 1) {
+            // admin ve todo
+            if ($Rol == 1) {
+                $wr = "";
                 $com = "";
-                $wr = "";
-            }else{ 
-                $wr = "";
-                $com = "and c.id = $idCompany";
             }
+            // compañia ve todo de su compañia
+            else if ($Rol == 4) {
+                $com = "and c.id = $idCompany";
+                $wr = "";
+            }
+            // independiente ve solo lo de su usuario
+            else if ($Rol == 3) {
+                $com = "and c.id = $idCompany";
+                $wr = "and pro.idUsuario = $idUsuario";
+            }
+
+            
             $sql  = "SELECT
             pro.id,
             p.nombre,
@@ -71,7 +78,7 @@ session_start();
                     *
                     FROM
                     persona 
-                    WHERE cedula = $valor
+                    WHERE cedula = '$valor'
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -123,6 +130,7 @@ session_start();
                      BEGIN CATCH
                      ROLLBACK TRAN
                      END CATCH";
+                     
             $resp = sqlsrv_query($conn, $sql);
            
             if( $resp === false) {
@@ -158,7 +166,7 @@ session_start();
             $sql  = "UPDATE persona SET
                     nombre = '$nombre', 
                     apellido = '$apellido',
-                    cedula = $cedula,
+                    cedula = '$cedula',
                     telefono = '$telefono',
                     email = '$email',
                     direccion = '$direccion'

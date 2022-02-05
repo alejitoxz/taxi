@@ -16,15 +16,23 @@ session_start();
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
 
-            if ($Rol == 2) {
-                $wr = "and con.idUsuario = $idUsuario";
-            }else if ($Rol == 1) {
+            // admin ve todo
+            if ($Rol == 1) {
+                $wr = "";
                 $com = "";
-                $wr = "";
-            }else{
-                $wr = "";
-                $com = "and con.idCompany = $idCompany";
             }
+            // compañia ve todo de su compañia
+            else if ($Rol == 4) {
+                $com = "AND con.idCompany = $idCompany";
+                $wr = "";
+            }
+            // independiente ve solo lo de su usuario
+            else if ($Rol == 3) {
+                $com = "AND con.idCompany = $idCompany";
+                $wr = "AND con.idUsuario = $idUsuario";
+            }
+
+            
             $sql  = "SELECT
                     con.id,
                     p.id as idPersonaC,
@@ -40,6 +48,7 @@ session_start();
                     con.arl,
                     con.rh,
                     con.fondoPension,
+                    con.url_foto,
                     CONVERT ( VARCHAR, con.vLicencia ) AS vLicencia,
                     CONVERT ( VARCHAR, v.vSoat ) AS vSoat,
                     CONVERT ( VARCHAR, v.vMovilizacion ) AS vMovilizacion,
@@ -54,7 +63,7 @@ session_start();
                     INNER JOIN vehiculo AS v ON ( con.idVehiculo = v.id )
                     INNER JOIN persona AS p ON ( con.idPersona = p.id ) 
                     INNER JOIN company AS c ON ( c.id = con.idCompany ) 
-                    WHERE con.estatus = 1 $com $wr
+                    WHERE con.estatus = 1 $com $wr order by con.id asc
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -83,15 +92,23 @@ session_start();
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
 
-            if ($Rol == 2) {
-                $wr = "and v.idUsuario = $idUsuario";
-            }else if ($Rol == 1) {
+            // admin ve todo
+            if ($Rol == 1) {
+                $wr = "";
                 $com = "";
-                $wr = "";
-            }else{
-                $wr = "";
-                $com = "and c.id = $idCompany";
             }
+            // compañia ve todo de su compañia
+            else if ($Rol == 4) {
+                $com = "AND c.id = $idCompany";
+                $wr = "";
+            }
+            // independiente ve solo lo de su usuario
+            else if ($Rol == 3) {
+                $com = "AND c.id = $idCompany";
+                $wr = "AND v.idUsuario = $idUsuario";
+            }
+
+            
 
             $sql  = "SELECT v.id, v.placa 
             from vehiculo as v
@@ -122,7 +139,7 @@ session_start();
                     *
                     FROM
                     persona 
-                    WHERE cedula = $valor
+                    WHERE cedula = '$valor'
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {
@@ -145,22 +162,29 @@ session_start();
             $this->conexion->conectar();
         }
 
-        function registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vSeguridad){
+        function registrar_conductor($id,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$eps,$arl,$rh,$fondoPension,$vLicencia,$placa,$vSeguridad,$ext,$imagen){
             $idCompany = $_SESSION['COMPANY'];
             $idUsuario = $_SESSION['S_ID'];
             $cadena = "";
+
+            if($ext){
+                $url = $ext;
+            }else{
+                $url = "";
+            }
+
             if($id){
                 $cadena = "
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vSeguridad,idUsuario) 
-                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vSeguridad',$idUsuario)";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vSeguridad,idUsuario,url_foto) 
+                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vSeguridad',$idUsuario,'$url')";
             }else{
                 
                 $cadena = "DECLARE @idPersona int
                 INSERT INTO persona(nombre,apellido,cedula,telefono,email,direccion)
                 VALUES('$nombre','$apellido','$cedula','$telefono','$email','$direccion')
                 SET @idPersona = SCOPE_IDENTITY()
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vSeguridad,idUsuario) 
-                VALUES(@idPersona,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vSeguridad',$idUsuario)";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vSeguridad,idUsuario,url_foto) 
+                VALUES(@idPersona,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vSeguridad',$idUsuario,'$url')";
             }
             
             $conn = $this->conexion->conectar();
@@ -175,16 +199,39 @@ session_start();
                      ROLLBACK TRAN
                      END CATCH";
                      //echo $sql;
-            $resp = sqlsrv_query($conn, $sql);
-
+            $resp = sqlsrv_query($conn, $sql);            
+            $dir = "../../Vista/imagenes/foto/";
+            // consulta
             if( $resp === false) {
                 return 0;
             }else{
+
+                if($imagen){
+                    $sql  = "SELECT MAX(id) as id from conductor";
+                    $resp = sqlsrv_query($conn, $sql);
+                    $i = 0;
+                    while($row = sqlsrv_fetch_array( $resp, SQLSRV_FETCH_ASSOC))
+                    {
+                        $data[$i] = $row;
+                        $i++;
+                    }
+    
+                    $idF = $data[0]['id'];
+                
+                    if(!file_exists($dir)){
+                        mkdir($dir);
+                    }
+
+                    $url =  $dir."foto-".$idF.".".$ext;
+                    move_uploaded_file($imagen,$url);
+                }
                 return 1;
             }
             
             $this->conexion->conectar();
         }
+
+   
 
         function generarqr($id){
             $dir = "../../Vista/imagenes/qr/";
@@ -225,16 +272,23 @@ session_start();
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
 
-            if ($Rol == 2) {
-                $wr = "idUsuario = $idUsuario";
-                $com = "AND idCompany = $idCompany";
-            }else if ($Rol == 1) {
-                $com = "";
+            // admin ve todo
+            if ($Rol == 1) {
                 $wr = "";
-            }else{
+                $com = "";
+            }
+            // compañia ve todo de su compañia
+            else if ($Rol == 4) {
                 $com = "AND idCompany = $idCompany";
                 $wr = "";
             }
+            // independiente ve solo lo de su usuario
+            else if ($Rol == 3) {
+                $com = "AND idCompany = $idCompany";
+                $wr = "AND idUsuario = $idUsuario";
+            }
+
+            
             $sql  = "SELECT COUNT(id) as contadorConductor from conductor
             where estatus = 1 $wr $com";
            //echo $sql;
@@ -275,17 +329,22 @@ session_start();
             $this->conexion->conectar();
         }
     
-        function modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vSeguridad){
+        function modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vSeguridad,$ext,$imagen){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
             
+            if($ext){
+                $url = $ext;
+            }else{
+                $utl = "";
+            }
 
             $sql  = "BEGIN TRY
                     BEGIN TRAN
                     UPDATE persona SET
                     nombre = '$nombre', 
                     apellido = '$apellido',
-                    cedula = $cedula,
+                    cedula = '$cedula',
                     telefono = '$telefono',
                     email = '$email',
                     direccion = '$direccion'
@@ -299,7 +358,8 @@ session_start();
                     rh = '$rh',
                     fondoPension = '$fondoPension',
                     idCompany = $idCompany,
-                    vSeguridad= '$vSeguridad'
+                    vSeguridad= '$vSeguridad',
+                    url_foto = '$ext'
                     WHERE id=$id
 
                     
@@ -309,11 +369,22 @@ session_start();
                     ROLLBACK TRAN
                     END CATCH
                     ";
+                    
             $resp = sqlsrv_query($conn, $sql);
-            
+            $dir = "../../Vista/imagenes/foto/";
+            // consulta
             if( $resp === false) {
                 return 0;
             }else{
+                if($imagen){
+                    if(!file_exists($dir)){
+                        mkdir($dir);
+                    }
+    
+                    $url =  $dir."foto-".$id.".".$ext;
+                    move_uploaded_file($imagen,$url);
+                }                
+                
                 return 1;
             }
             

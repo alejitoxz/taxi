@@ -1,4 +1,4 @@
-<?php
+﻿<?php
  session_start();
 ?>
 <input type="hidden" id="rol" value="<?php echo $_SESSION['ROL']; ?>">
@@ -42,6 +42,7 @@
                           <th style="display:none"></th>
                           <th style="display:none"></th>
                           <th style="display:none"></th>
+                          <th style="display:none"></th>
                           <th>#</th>
                           <th>Nombre</th>
                           <th>Cedula</th>
@@ -71,7 +72,7 @@
 <form autocomplete="false" onsubmit="return false">
 
 <div class="modal fade" id="modal_registro_conductor" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header modal-primary">
         <h4 class="modal-title"><b>Registro de conductor</b></h4>
@@ -80,7 +81,40 @@
         <div class="modal-body">
           <!-- FORMULARIO REGISTRO DE conductor, CAMPOS -->
         <form class="form">
+
+
+        <div class="row">
+        <div class="col-md-3 ">
+          <div class="form-group">
+              <div class="card" >
+                <div class="div_centrado">
+                  <output id="miniatura">
+                    <img id="imagenPrevisualizacion" src="imagenes/avatar.jpg">
+                  </output>
+
+              </div>
+                
+          </div>
+          </div>
+          </div>
+          <div class="col-md-1 align-self-end">
+          <div class="form-group">
+          <button type="button" class="btn btn-danger" id="borrarFoto"><i class="fa fa-trash"> </i></button>
+          </div>
+          </div>
+
+        <div class="col-md-4 align-self-end">
+        <div class="form-group">
+              
+              <input type="file" class="custom-file-input" id="foto" name ="foto" accept="image/*">
+              <label class="custom-file-label" for="foto">Seleccionar</label>
+              </div>
+        </div>
+          
+        </div>
+
         
+
         <div class="row">
           <div class="col-md-4">
                 <div class="form-group">
@@ -185,7 +219,7 @@
 
   <!-- MODAL PARA EDITAR REGISTRO -->
   <div class="modal fade" id="modal_editar_conductor" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header modal-primary">
         <h4 class="modal-title"><b>Editar conductor</b></h4>
@@ -194,6 +228,37 @@
         <div class="modal-body">
           <!-- FORMULARIO REGISTRO DE vehiculo, CAMPOS -->
         <form class="form">
+
+        <div class="row">
+        <div class="col-md-3 ">
+          <div class="form-group">
+              <div class="card" >
+                <div class="div_centrado">
+                  <output id="miniaturaedit">
+                    <img id="imagenPrevisualizacionedit" src="imagenes/avatar.jpg">
+                  </output>
+
+              </div>
+                
+          </div>
+          </div>
+          </div>
+          <div class="col-md-1 align-self-end">
+          <div class="form-group">
+          <button type="button" class="btn btn-danger" id="borrarFotoedit"><i class="fa fa-trash"> </i></button>
+          </div>
+          </div>
+
+        <div class="col-md-4 align-self-end">
+        <div class="form-group">
+              
+              <input type="file" class="custom-file-input" id="fotoedit" name ="fotoedit" accept="image/*">
+              <label class="custom-file-label" for="fotoedit">Seleccionar</label>
+              </div>
+        </div>
+          
+        </div>
+
         <div class="row">
           <div class="col-md-4">
                 <div class="form-group">
@@ -359,9 +424,84 @@
   $(document).ready(function(){
     listar_conductor();
     listar_con();
+$('#txt_ced').on('input', function () { 
+        this.value = this.value.replace(/[^0-9]/g,'');
+    });
     $('.js-example-basic-single').select2();
     listar_placa();
     $("#modal_registro_conductor").on('shown.bs.modal',function(){
     });
-  });
+    
+    $('#borrarFoto').click(function(){
+      $('#imagenPrevisualizacion').prop("src","imagenes/avatar.jpg");
+      $('#foto').val("");
+    });
+
+    $('#borrarFotoedit').click(function(){
+      $('#imagenPrevisualizacionedit').prop("src","imagenes/avatar.jpg");
+      $('#fotoedit').val("");
+    });
+
+  const $seleccionArchivos = document.querySelector("#foto"),
+  $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
+
+  const $seleccionArchivosedit = document.querySelector("#fotoedit"),
+  $imagenPrevisualizacionedit = document.querySelector("#imagenPrevisualizacionedit");
+
+// Escuchar cuando cambie
+$seleccionArchivos.addEventListener("change", () => {
+  // Los archivos seleccionados, pueden ser muchos o uno
+  const archivos = $seleccionArchivos.files;
+  // Si no hay archivos salimos de la función y quitamos la imagen
+  if (!archivos || !archivos.length) {
+    $imagenPrevisualizacion.src = "";
+    return;
+  }
+  // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+  const primerArchivo = archivos[0];
+  // Lo convertimos a un objeto de tipo objectURL
+  const objectURL = URL.createObjectURL(primerArchivo);
+  // Y a la fuente de la imagen le ponemos el objectURL
+  $imagenPrevisualizacion.src = objectURL;
+});
+
+// Escuchar cuando cambie
+$seleccionArchivosedit.addEventListener("change", () => {
+  // Los archivos seleccionados, pueden ser muchos o uno
+  const archivos = $seleccionArchivosedit.files;
+  // Si no hay archivos salimos de la función y quitamos la imagen
+  if (!archivos || !archivos.length) {
+    $imagenPrevisualizacionedit.src = "";
+    return;
+  }
+  // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+  const primerArchivo = archivos[0];
+  // Lo convertimos a un objeto de tipo objectURL
+  const objectURL = URL.createObjectURL(primerArchivo);
+  // Y a la fuente de la imagen le ponemos el objectURL
+  $imagenPrevisualizacionedit.src = objectURL;
+});
+
+
+
+});
 </script>
+
+<style>
+@charset "utf-8";
+img {max-width: 150px;height: 200px;}
+
+.ie6 img{width:150px;}
+
+.div_centrado{
+  width: 150px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  float: left;
+ 
+}
+
+
+         
+  </style>

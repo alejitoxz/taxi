@@ -14,16 +14,20 @@ session_start();
             $idCompany = $_SESSION['COMPANY'];
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
-
-            if ($Rol == 2) {
-                $wr = "and pro.idUsuario = $idUsuario";
-                $com = "and v.idCompany = $idCompany";
-            }else if ($Rol == 1) {
+            // admin ve todo
+            if ($Rol == 1) {
+                $wr = "";
                 $com = "";
-                $wr = "";
-            }else{
+            }
+            // compañia ve todo de su compañia
+            else if ($Rol == 4) {
                 $com = "and v.idCompany = $idCompany";
                 $wr = "";
+            }
+            // independiente ve solo lo de su usuario
+            else if ($Rol == 3) {
+                $com = "and v.idCompany = $idCompany";
+                $wr = "and pro.idUsuario = $idUsuario";
             }
             
 
@@ -38,6 +42,7 @@ session_start();
             v.nInterno,
             CONVERT(varchar,v.vMovilizacion) as vMovilizacion,
             CONVERT(varchar,v.vSoat) as vSoat,
+            CONVERT(varchar,v.vTecnomecanica) as vTecnomecanica,
             v.nMovilizacion,
             co.id as idEntResp,
             pro.id as idPropietario
@@ -76,15 +81,24 @@ session_start();
         $Rol = $_SESSION['ROL'];
         $idUsuario = $_SESSION['S_ID'];
 
-        if ($Rol == 2) {
-            $wr = "and pro.idUsuario = $idUsuario";
-        }else if ($Rol == 1) {
-            $com = "";
+         // admin ve todo
+         if ($Rol == 1) {
             $wr = "";
-        }else{
-            $com = "pro.idCompany = $idCompany";
+            $com = "";
+        }
+        // compañia ve todo de su compañia
+        else if ($Rol == 4) {
+            $com = "and pro.idCompany = $idCompany";
             $wr = "";
         }
+        // independiente ve solo lo de su usuario
+        else if ($Rol == 3) {
+            $com = "and pro.idCompany = $idCompany";
+            $wr = "and pro.idUsuario = $idUsuario";
+        }
+        
+        
+
         $sql  = "SELECT 
         pro.id,
         (p.nombre + ' ' +p.apellido) as dueno
@@ -113,13 +127,13 @@ session_start();
         $this->conexion->conectar();
     }
     
-    function registrar_vehiculo($placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat,$nMovilizacion){
+    function registrar_vehiculo($placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat,$nMovilizacion,$vTecnomecanica){
         $conn = $this->conexion->conectar();
         $idCompany = $_SESSION['COMPANY'];
         $idUsuario = $_SESSION['S_ID'];
 
-        $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompany,idPropietario,nInterno,vMovilizacion,vSoat,estatus,nMovilizacion,idUsuario)
-                 VALUES('$placa','$marca','$modelo',$idCompany,'$idPropietario','$nInterno','$vMovilizacion','$vSoat',1,'$nMovilizacion',$idUsuario)
+        $sql  = "INSERT INTO vehiculo(placa,marca,modelo,idCompany,idPropietario,nInterno,vMovilizacion,vSoat,estatus,nMovilizacion,idUsuario,vTecnomecanica)
+                 VALUES('$placa','$marca','$modelo',$idCompany,'$idPropietario','$nInterno','$vMovilizacion','$vSoat',1,'$nMovilizacion',$idUsuario,'$vTecnomecanica')
                  ";
                  //echo $sql;
         $resp = sqlsrv_query($conn, $sql);
@@ -151,7 +165,7 @@ session_start();
         $this->conexion->conectar();
     }
 
-    function editar_vehiculo($id,$placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat,$nMovilizacion){
+    function editar_vehiculo($id,$placa,$marca,$modelo,$idPropietario,$nInterno,$vMovilizacion,$vSoat,$nMovilizacion,$vTecnomecanica){
         $conn = $this->conexion->conectar();
 
         $sql  = "UPDATE vehiculo SET
@@ -162,7 +176,8 @@ session_start();
                 nInterno = '$nInterno',
                 vMovilizacion = '$vMovilizacion',
                 vSoat = '$vSoat',
-                nMovilizacion = '$nMovilizacion'
+                nMovilizacion = '$nMovilizacion',
+                vTecnomecanica = '$vTecnomecanica'
                 WHERE id=$id
                 ";
                  

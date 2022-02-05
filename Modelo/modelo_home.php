@@ -22,15 +22,23 @@ session_start();
             $Rol = $_SESSION['ROL'];
             $idUsuario = $_SESSION['S_ID'];
 
-            if ($Rol == 2) {
-                $wr = "and pro.idUsuario = $idUsuario";
-            }else if ($Rol == 1) {
+            // admin ve todo
+            if ($Rol == 1) {
+                $wr = "";
                 $com = "";
-                $wr = "";
-            }else{
-                $wr = "";
-                $com = "AND c.id = $idCompany ";
             }
+            // compañia ve todo de su compañia
+            else if ($Rol == 4) {
+                $com = "AND c.id = $idCompany";
+                $wr = "";
+            }
+            // independiente ve solo lo de su usuario
+            else if ($Rol == 3) {
+                $com = "AND c.id = $idCompany";
+                $wr = "AND pro.idUsuario = $idUsuario";
+            }
+
+            
             $sql  = "DECLARE @Fecha DATE = DATEADD( DAY, 15, CONVERT ( DATE, GETDATE( ), 1 ) ), @fechaActual DATE = GETDATE( ) 
             SELECT
             * 
