@@ -100,8 +100,8 @@ function listar_conductor(){
             { "data": "dueno" },
             { "data": "cedula" },
             { "data": "telefono" },
-            { "data": "email" },
             { "data": "direccion" },
+            { "data": "email" },
             { "data": "eps" },
             { "data": "vSeguridad" },
             { "data": "arl" },
@@ -548,7 +548,7 @@ function limpiarRegistro(){
     $("#txt_rh").val("");
     $("#txt_pen").val("");
     $("#txt_lic").val("");
-    $("#sel_placa_vehiculo").val(0);
+    $("#sel_placa_vehiculo").val(0).trigger('change');
 }
 // FUNCION PARA ELIMINAR (ANULAR) REGISTRO
 $('#tabla_conductor').on('click','.eliminar',function(){

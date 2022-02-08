@@ -76,7 +76,7 @@
       <div class="modal-content">
         <div class="modal-header modal-primary">
         <h4 class="modal-title"><b>Registro de conductor</b></h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-dismiss="modal" onclick="limpiarRegistro()">&times;</button>
         </div>
         <div class="modal-body">
           <!-- FORMULARIO REGISTRO DE conductor, CAMPOS -->
@@ -160,7 +160,7 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Eps</label>
+              <label for="">EPS</label>
               <input type="text" class="form-control" id="txt_eps" placeholder="Ingrese la eps"><br>
             </div>
           </div>
@@ -208,7 +208,7 @@
         </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> </i> Cancelar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="limpiarRegistro()"><i class="fa fa-close" > </i> Cancelar</button>
           <button type="button" class="btn btn-primary" onclick="registrar_conductor()"><i class="fa fa-check"> </i> Guardar</button>
         </div>
       </div>
@@ -303,7 +303,7 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Eps</label>
+              <label for="">EPS</label>
               <input type="text" class="form-control" id="txt_eps_edit" placeholder="Ingrese la eps"><br>
             </div>
           </div>
@@ -408,7 +408,7 @@
         
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"> </i> Cancelar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="limpiarRegistro()"><i class="fa fa-close" > </i> Cancelar</button>
           <button type="button" class="btn btn-primary" onclick="modificar_vencimientos()"><i class="fa fa-check"> </i> Guardar</button>
         </div>
       </div>
@@ -425,6 +425,9 @@
     listar_conductor();
     listar_con();
 $('#txt_ced').on('input', function () { 
+        this.value = this.value.replace(/[^0-9]/g,'');
+    });
+    $('#txt_ced_edit').on('input', function () { 
         this.value = this.value.replace(/[^0-9]/g,'');
     });
     $('.js-example-basic-single').select2();

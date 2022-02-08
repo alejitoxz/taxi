@@ -247,8 +247,12 @@
   $(document).ready(function(){
     listar_usuario();
 $('#txt_ced').on('input', function () { 
+    this.value = this.value.replace(/[^0-9]/g,'');
+});
+$('#txt_ced_edit').on('input', function () { 
         this.value = this.value.replace(/[^0-9]/g,'');
     });
+ 
     $('.js-example-basic-single').select2();
     listar_rol();
     listar_ent();

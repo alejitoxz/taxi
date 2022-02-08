@@ -432,9 +432,7 @@ exit;
                 $concepto = $tarifas['data'][$i]['concepto'];
 
                 $pdf->Cell(11.2);
-                
                 $pdf->Cell($w[0],0.4,$concepto,1,0,'L',$fill);
-                // $pdf->Cell(0.2);
                 $pdf->Cell($w[1],0.4,$tarifa,1,0,'C',$fill);
                 $pdf->Ln(0.4);
                 $fill = !$fill;
