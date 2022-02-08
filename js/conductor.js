@@ -320,6 +320,8 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     var cedula = datosConductor.cedula;
     var id = datosConductor.id;
     var url_foto = datosConductor.url_foto;
+    var dir = datosConductor.direccion;
+    var tel = datosConductor.telefono;
     
     var rol = $("#rol").val();
     // VALIDAMOS POR ROL
@@ -361,7 +363,10 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     +"&nit="+documentito
     +"&control="+cedula
     +"&id="+id
-    +"&ext="+url_foto;
+    +"&ext="+url_foto
+    +"&dir="+dir
+    +"&tel="+tel
+    ;
     window.open(url,'_blank');
 })
 

@@ -21,6 +21,8 @@
     $control = htmlspecialchars($_GET['control'],ENT_QUOTES,'UTF-8');
     $id = htmlspecialchars($_GET['id'],ENT_QUOTES,'UTF-8');
     $ext = htmlspecialchars($_GET['ext'],ENT_QUOTES,'UTF-8');
+    $dir = htmlspecialchars($_GET['dir'],ENT_QUOTES,'UTF-8');
+    $tel = htmlspecialchars($_GET['tel'],ENT_QUOTES,'UTF-8');
     $tarifas = $TA->listar_tarifa();
 
-    $consulta = $MT->exportar($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext);
+    $consulta = $MT->exportarTarjeton($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext,$dir,$tel);
