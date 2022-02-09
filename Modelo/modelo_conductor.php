@@ -332,11 +332,12 @@ session_start();
         function modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vSeguridad,$ext,$imagen){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
-            
+  
+
             if($ext){
-                $url = $ext;
+                $url = ",url_foto = '$ext'";
             }else{
-                $utl = "";
+                $url = "";
             }
 
             $sql  = "BEGIN TRY
@@ -358,8 +359,8 @@ session_start();
                     rh = '$rh',
                     fondoPension = '$fondoPension',
                     idCompany = $idCompany,
-                    vSeguridad= '$vSeguridad',
-                    url_foto = '$ext'
+                    vSeguridad= '$vSeguridad'
+                    $url
                     WHERE id=$id
 
                     
@@ -377,6 +378,7 @@ session_start();
                 return 0;
             }else{
                 if($imagen){
+                   // var_dump($imagen);
                     if(!file_exists($dir)){
                         mkdir($dir);
                     }

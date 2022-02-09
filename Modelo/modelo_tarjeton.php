@@ -209,23 +209,28 @@ exit;
                 $direccion = 0;
             }
             // VALIMOS ROL
-            if($Rol == 3){
-                $empresa = "INDEPENDIENTE";
+            if($entResp == "INDEPENDIENTE" || $entResp == "ALCALDIA"){
+                $empresa = $nombres;
+                $nit = $control;
             }else{
                 $empresa = $entResp;
+                $nit = $nit;
             }
-            
+            //var_dump($entResp);
             if ($ext != '') {
                 $foto = "foto-".$id.".".$ext;
             }else{
                 $foto = "blanco.jpg";
             }
 
-            if($empresa == 'ITAXISTA'){
-                $publicidad = "itaxista.jpg";
+            if($empresa == 'MEGATAXI'){
+                $publicidad = "megataxi.jpeg";
+            }else if($empresa == 'TUTAXI'){
+                $publicidad = "tutaxi.jpeg";
             }else{
-                $publicidad = "itaxista.jpg";
+                $publicidad = "blanco.jpg";
             }
+
             require('../../vista/plugins/fpdf/fpdf.php');
             $pdf = new FPDF('P','cm',ARRAY(21.59,27.94));
             $pdf->AddPage();
@@ -275,7 +280,7 @@ exit;
             $pdf->SetFillColor(0);
             $pdf->SetTextColor(0);
             $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(9,1,$nombres,1,1,'C');
+            $pdf->Cell(9,1,utf8_decode($nombres),1,1,'C');
 
             //cedula
             $pdf->Ln(0.9);
@@ -323,7 +328,7 @@ exit;
             $pdf->SetFillColor(0);
             $pdf->SetTextColor(0);
             $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(13.5,0.9,$direccion,1,1,'C');
+            $pdf->Cell(13.5,0.9,utf8_decode($direccion),1,1,'C');
 
             //EPS
             $pdf->Ln(0.9);
@@ -339,8 +344,7 @@ exit;
             $pdf->SetFillColor(0);
             $pdf->SetTextColor(0);
             $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(5.3,0.9,$rh,1,0,'C');
-            var_dump($empresa);exit;
+            $pdf->Cell(5.3,0.9,utf8_decode($rh),1,0,'C');
             //ALR
             $pdf->SetLineWidth(0);
             $pdf->SetFont('Arial','B',11);
@@ -353,7 +357,7 @@ exit;
             $pdf->SetFillColor(0);
             $pdf->SetTextColor(0);
             $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(5.2,0.9,$eps,1,1,'C');
+            $pdf->Cell(5.2,0.9,utf8_decode($eps),1,1,'C');
 
             //EMPRESA
             $pdf->Ln(0.9);
@@ -369,7 +373,7 @@ exit;
             $pdf->SetFillColor(0);
             $pdf->SetTextColor(0);
             $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(5.3,0.9,$arl,1,0,'C');
+            $pdf->Cell(5.3,0.9,utf8_decode($arl),1,0,'C');
 
             //NIT
             $pdf->SetLineWidth(0);
@@ -377,13 +381,13 @@ exit;
             $pdf->SetDrawColor(50);
             $pdf->SetFillColor(20,100,220);
             $pdf->SetTextColor(255,255,255);
-            $pdf->Cell(3,0.9,"Empresa",1,0,'C',true);
+            $pdf->Cell(3,0.9,"NIT",1,0,'C',true);
             // variable NIT
             $pdf->SetFont('Arial','B',11);
             $pdf->SetFillColor(0);
             $pdf->SetTextColor(0);
             $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(5.2,0.9,$empresa,1,1,'C');
+            $pdf->Cell(5.2,0.9,$nit,1,1,'C');
 
             //rh
             $pdf->Ln(0.9);
@@ -393,13 +397,13 @@ exit;
             $pdf->SetDrawColor(50);
             $pdf->SetFillColor(20,100,220);
             $pdf->SetTextColor(255,255,255);
-            $pdf->Cell(3,0.9,"NIT",1,0,'C',true);
+            $pdf->Cell(3,0.9,"Empresa",1,0,'C',true);
             // variable rh
             $pdf->SetFont('Arial','B',11);
             $pdf->SetFillColor(0);
             $pdf->SetTextColor(0);
             $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(5.2,0.9,$nit,1,1,'C');
+            $pdf->Cell(13.5,0.9,$empresa,1,1,'C');
             
             // QR, VIBRA, PUBLICIDAD Y TARIFAS            
             $pdf->Image('../../vista/imagenes/qr/qr-'.$id.'.png' , 2 ,20.6, 0 , 5.5,'png');
@@ -441,7 +445,8 @@ exit;
             
 
             $pdf->Output('D','Tarjeton-'.$id.'.pdf');
-            $this->conexion->conectar();
+            //$pdf->Output();
+            //$this->conexion->conectar();
         }
 
         
