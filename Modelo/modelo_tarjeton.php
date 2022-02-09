@@ -218,7 +218,7 @@ exit;
             if ($ext != '') {
                 $foto = "foto-".$id.".".$ext;
             }else{
-                $foto = "amarillo.jpg";
+                $foto = "blanco.jpg";
             }
 
             if($empresa == 'ITAXISTA'){
@@ -340,7 +340,7 @@ exit;
             $pdf->SetTextColor(0);
             $pdf->SetFillColor(20,100,220);
             $pdf->Cell(5.3,0.9,$rh,1,0,'C');
-
+            var_dump($empresa);exit;
             //ALR
             $pdf->SetLineWidth(0);
             $pdf->SetFont('Arial','B',11);

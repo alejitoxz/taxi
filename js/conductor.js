@@ -320,7 +320,7 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     var cedula = datosConductor.cedula;
     var id = datosConductor.id;
     var url_foto = datosConductor.url_foto;
-    var dir = datosConductor.direccion;
+    var direccion = datosConductor.direccion;
     var tel = datosConductor.telefono;
     
     var rol = $("#rol").val();
@@ -347,7 +347,7 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
         return;        
     }
 
-    
+    console.log("tel",tel);
 
     var url = "../controlador/tarjeton/controlador_exportar.php?nombres="+nombres+"&placa="+placa
     +"&nInterno="+nInterno
@@ -364,8 +364,8 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     +"&control="+cedula
     +"&id="+id
     +"&ext="+url_foto
-    +"&dir="+dir
-    +"&tel="+tel
+    +"&tele="+tel
+    +"&dir="+direccion
     ;
     window.open(url,'_blank');
 })
