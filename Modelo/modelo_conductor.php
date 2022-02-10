@@ -34,36 +34,40 @@ session_start();
 
             
             $sql  = "SELECT
-                    con.id,
-                    p.id as idPersonaC,
-                    p.nombre,
-                    p.apellido,
-                    (p.nombre + ' ' + p.apellido) AS dueno, 
-                    p.cedula,
-                    p.telefono,
-                    p.email,
-                    p.direccion,
-                    con.eps,
-                    CONVERT ( VARCHAR, con.vSeguridad ) AS vSeguridad,
-                    con.arl,
-                    con.rh,
-                    con.fondoPension,
-                    con.url_foto,
-                    CONVERT ( VARCHAR, con.vLicencia ) AS vLicencia,
-                    CONVERT ( VARCHAR, v.vSoat ) AS vSoat,
-                    CONVERT ( VARCHAR, v.vMovilizacion ) AS vMovilizacion,
-                    v.nMovilizacion,
-                    v.placa,
-                    v.nInterno,
-                    v.id as idVehiculo,
-                    c.entResp,
-                    c.nit
-                    FROM
-                    conductor AS con
-                    INNER JOIN vehiculo AS v ON ( con.idVehiculo = v.id )
-                    INNER JOIN persona AS p ON ( con.idPersona = p.id ) 
-                    INNER JOIN company AS c ON ( c.id = con.idCompany ) 
-                    WHERE con.estatus = 1 $com $wr order by con.id asc
+            con.id,
+            p.id AS idPersonaC,
+            p.nombre,
+            p.apellido,
+            ( p.nombre + ' ' + p.apellido ) AS conductor,
+            ( propp.nombre + ' ' + propp.apellido ) AS dueno,
+            p.cedula,
+            propp.cedula AS cedulap,
+            p.telefono,
+            p.email,
+            p.direccion,
+            con.eps,
+            CONVERT ( VARCHAR, con.vSeguridad ) AS vSeguridad,
+            con.arl,
+            con.rh,
+            con.fondoPension,
+            con.url_foto,
+            CONVERT ( VARCHAR, con.vLicencia ) AS vLicencia,
+            CONVERT ( VARCHAR, v.vSoat ) AS vSoat,
+            CONVERT ( VARCHAR, v.vMovilizacion ) AS vMovilizacion,
+            v.nMovilizacion,
+            v.placa,
+            v.nInterno,
+            v.id AS idVehiculo,
+            c.entResp,
+            c.nit 
+        FROM
+            conductor AS con
+            INNER JOIN vehiculo AS v ON ( con.idVehiculo = v.id )
+            INNER JOIN persona AS p ON ( con.idPersona = p.id )
+            INNER JOIN propietario AS prop ON ( v.idPropietario = prop.id )
+            INNER JOIN persona AS propp ON ( prop.idPersona = propp.id )
+            INNER JOIN company AS c ON ( c.id = con.idCompany ) 
+            WHERE con.estatus = 1 $com $wr order by con.id asc
             ";
             $resp = sqlsrv_query($conn, $sql);
             if( $resp === false) {

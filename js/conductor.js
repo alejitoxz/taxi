@@ -97,7 +97,7 @@ function listar_conductor(){
             { "data": "apellido" },
             { "data": "idVehiculo" },
             { "data": "id" },
-            { "data": "dueno" },
+            { "data": "conductor" },
             { "data": "cedula" },
             { "data": "telefono" },
             { "data": "direccion" },
@@ -303,7 +303,8 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     
     var fechaActual = moment().format('YYYY-MM-DD');
     
-    var nombres = datosConductor.dueno;
+    var dueno = datosConductor.dueno;
+    var conductor = datosConductor.conductor;
     var placa = datosConductor.placa;
     var nInterno = datosConductor.nInterno;
     var nMovilizacion = datosConductor.nMovilizacion;
@@ -318,15 +319,15 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     var entResp = datosConductor.entResp;
     var nit = datosConductor.nit;
     var cedula = datosConductor.cedula;
+    var cedulap = datosConductor.cedulap;
     var id = datosConductor.id;
     var url_foto = datosConductor.url_foto;
     var direccion = datosConductor.direccion;
     var tel = datosConductor.telefono;
     
-    var rol = $("#rol").val();
     // VALIDAMOS POR ROL
-    if(rol == 2){
-        var documentito = cedula;
+    if(entResp == 'INDEPENDIENTE' || entResp == 'ALCALDIA'){
+        var documentito = cedulap;
     }else{
         var documentito = nit;
     }
@@ -349,7 +350,7 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
 
     console.log("tel",tel);
 
-    var url = "../controlador/tarjeton/controlador_exportar.php?nombres="+nombres+"&placa="+placa
+    var url = "../controlador/tarjeton/controlador_exportar.php?dueno="+dueno+"&conductor="+conductor+"&placa="+placa
     +"&nInterno="+nInterno
     +"&nMovilizacion="+nMovilizacion
     +"&vLicencia="+vLicencia

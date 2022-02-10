@@ -161,13 +161,16 @@ exit;
             $this->conexion->conectar();
         }
 
-        function exportarTarjeton($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext,$direccion,$telefono){
+        function exportarTarjeton($dueno,$conductor,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext,$direccion,$telefono){
             $Rol = $_SESSION['ROL'];
             if($nInterno == 'null'){
                 $nInterno = 0;
             }
-            if($nombres == 'null'){
-                $nombres = 0;
+            if($dueno == 'null'){
+                $dueno = 0;
+            }
+            if($conductor == 'null'){
+                $conductor = 0;
             }
             if($placa == 'null'){
                 $placa = 0;
@@ -208,15 +211,16 @@ exit;
             if($direccion == 'null'){
                 $direccion = 0;
             }
+            
             // VALIMOS ROL
             if($entResp == "INDEPENDIENTE" || $entResp == "ALCALDIA"){
-                $empresa = $nombres;
-                $nit = $control;
+                $empresa = $dueno;
+                $nit = $nit;
             }else{
                 $empresa = $entResp;
                 $nit = $nit;
             }
-            //var_dump($entResp);
+            
             if ($ext != '') {
                 $foto = "foto-".$id.".".$ext;
             }else{
@@ -280,7 +284,7 @@ exit;
             $pdf->SetFillColor(0);
             $pdf->SetTextColor(0);
             $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(9,1,utf8_decode($nombres),1,1,'C');
+            $pdf->Cell(9,1,utf8_decode($conductor),1,1,'C');
 
             //cedula
             $pdf->Ln(0.9);
@@ -367,7 +371,7 @@ exit;
             $pdf->SetDrawColor(50);
             $pdf->SetFillColor(20,100,220);
             $pdf->SetTextColor(255,255,255);
-            $pdf->Cell(3,0.9,"ALR",1,0,'C',true);
+            $pdf->Cell(3,0.9,"ARL",1,0,'C',true);
             // variable EMPRESA
             $pdf->SetFont('Arial','B',11);
             $pdf->SetFillColor(0);
@@ -407,7 +411,6 @@ exit;
             
             // QR, VIBRA, PUBLICIDAD Y TARIFAS            
             $pdf->Image('../../vista/imagenes/qr/qr-'.$id.'.png' , 2 ,20.6, 0 , 5.5,'png');
-            $pdf->Image('../../vista/imagenes/empresas/'.$publicidad , 7.4 ,21, 5.5 , 3);
             $pdf->Image('../../vista/imagenes/vibra.png' , 9.4 ,24.2, 0 , 1.5,'png');
             $pdf->Ln(1.1);
             $pdf->Cell(11.2);

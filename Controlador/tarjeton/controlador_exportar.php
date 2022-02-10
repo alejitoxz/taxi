@@ -5,7 +5,8 @@
     $TA = new modelo_tarifa();
     $MT = new modelo_tarjeton();
 
-    $nombres = htmlspecialchars($_GET['nombres'],ENT_QUOTES,'UTF-8');
+    $dueno = htmlspecialchars($_GET['dueno'],ENT_QUOTES,'UTF-8');
+    $conductor = htmlspecialchars($_GET['conductor'],ENT_QUOTES,'UTF-8');
     $placa = htmlspecialchars($_GET['placa'],ENT_QUOTES,'UTF-8');
     $nInterno = htmlspecialchars($_GET['nInterno'],ENT_QUOTES,'UTF-8');
     $nMovilizacion = htmlspecialchars($_GET['nMovilizacion'],ENT_QUOTES,'UTF-8');
@@ -24,4 +25,4 @@
     $dir = htmlspecialchars($_GET['dir'],ENT_QUOTES,'UTF-8');
     $tele = htmlspecialchars($_GET['tele'],ENT_QUOTES,'UTF-8');
     $tarifas = $TA->listar_tarifa();
-    $consulta = $MT->exportarTarjeton($nombres,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext,$dir,$tele);
+    $consulta = $MT->exportarTarjeton($dueno,$conductor,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext,$dir,$tele);
