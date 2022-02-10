@@ -403,11 +403,25 @@ exit;
             $pdf->SetTextColor(255,255,255);
             $pdf->Cell(3,0.9,"Empresa",1,0,'C',true);
             // variable rh
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetFillColor(0);
+            $pdf->SetTextColor(0);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->Cell(7.3,0.9,$empresa,1,0,'C');
+
+            //rh
+            $pdf->SetLineWidth(0);
+            $pdf->SetFont('Arial','B',11);
+            $pdf->SetDrawColor(50);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->SetTextColor(255,255,255);
+            $pdf->Cell(3,0.9,"Placa",1,0,'C',true);
+            // variable rh
             $pdf->SetFont('Arial','B',11);
             $pdf->SetFillColor(0);
             $pdf->SetTextColor(0);
             $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(13.5,0.9,$empresa,1,1,'C');
+            $pdf->Cell(3.2,0.9,$placa,1,1,'C');
             
             // QR, VIBRA, PUBLICIDAD Y TARIFAS            
             $pdf->Image('../../vista/imagenes/qr/qr-'.$id.'.png' , 2 ,20.6, 0 , 5.5,'png');
