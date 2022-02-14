@@ -394,7 +394,7 @@ session_start();
                     ROLLBACK TRAN
                     END CATCH
                     ";
-                     
+                     echo $sql;
             $resp = sqlsrv_query($conn, $sql);
             
             if( $resp === false) {
