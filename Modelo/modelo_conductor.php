@@ -54,6 +54,7 @@ session_start();
             CONVERT ( VARCHAR, con.vLicencia ) AS vLicencia,
             CONVERT ( VARCHAR, v.vSoat ) AS vSoat,
             CONVERT ( VARCHAR, v.vMovilizacion ) AS vMovilizacion,
+            CONVERT ( VARCHAR, v.vTecnomecanica ) AS vTecnomecanica,
             v.nMovilizacion,
             v.placa,
             v.nInterno,

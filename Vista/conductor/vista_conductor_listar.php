@@ -43,6 +43,7 @@
                           <th style="display:none"></th>
                           <th style="display:none"></th>
                           <th style="display:none"></th>
+                          <th style="display:none"></th>
                           <th>#</th>
                           <th>Nombre</th>
                           <th>Cedula</th>

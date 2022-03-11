@@ -24,5 +24,6 @@
     $ext = htmlspecialchars($_GET['ext'],ENT_QUOTES,'UTF-8');
     $dir = htmlspecialchars($_GET['dir'],ENT_QUOTES,'UTF-8');
     $tele = htmlspecialchars($_GET['tele'],ENT_QUOTES,'UTF-8');
+    $vTecnomecanica = htmlspecialchars($_GET['vTecnomecanica'],ENT_QUOTES,'UTF-8');
     $tarifas = $TA->listar_tarifa();
-    $consulta = $MT->exportarTarjeton($dueno,$conductor,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext,$dir,$tele);
+    $consulta = $MT->exportarTarjeton($dueno,$conductor,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext,$dir,$tele,$vTecnomecanica);

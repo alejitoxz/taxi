@@ -161,7 +161,7 @@ exit;
             $this->conexion->conectar();
         }
 
-        function exportarTarjeton($dueno,$conductor,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext,$direccion,$telefono){
+        function exportarTarjeton222($dueno,$conductor,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext,$direccion,$telefono,$tecnoMec){
             $Rol = $_SESSION['ROL'];
             if($nInterno == 'null'){
                 $nInterno = 0;
@@ -261,14 +261,14 @@ exit;
             $pdf->SetLineWidth(0);
             $pdf->Cell(6,1,$control,1,1,'C');
             // FORM
-            $pdf->Ln(1);
+            $pdf->Ln(0.9);
             $pdf->SetFont('Arial','',11);
             $pdf->line(19.5,7.2,2,7.2);
             $pdf->line(2,20.2,2,7.2);
             $pdf->line(19.5,7.2,19.5,20.2);
             $pdf->line(19.5,20.2,2,20.2);
             //foto
-            $pdf->Image('../../vista/imagenes/foto/'.$foto , 2.5 ,7.7, 3.8 , 4.8);
+            $pdf->Image('../../vista/imagenes/foto/'.$foto , 2.5 ,7.7, 3.9 , 5.5);
             //nombres
             $pdf->Ln(1.2);
             $pdf->Cell(5);
@@ -287,7 +287,7 @@ exit;
             $pdf->Cell(9,1,utf8_decode($conductor),1,1,'C');
 
             //cedula
-            $pdf->Ln(0.9);
+            $pdf->Ln(0.6);
             $pdf->Cell(5);
             $pdf->SetLineWidth(0);
             $pdf->SetFont('Arial','B',11);
@@ -302,9 +302,84 @@ exit;
             $pdf->SetFillColor(20,100,220);
             $pdf->Cell(9,0.9,$control,1,1,'C');
 
-            //direccion
-            $pdf->Ln(0.9);
+            //tecno mec anica
+            $pdf->Ln(0.6);
             $pdf->Cell(5);
+            $pdf->SetLineWidth(0);
+            $pdf->SetFont('Arial','B',11);
+            $pdf->SetDrawColor(50);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->SetTextColor(255,255,255);
+            $pdf->Cell(3,0.9,"Licencia",1,0,'C',true);
+            // variable cedula
+            $pdf->SetFont('Arial','B',11);
+            $pdf->SetFillColor(0);
+            $pdf->SetTextColor(0);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->Cell(3,0.9,$vLicencia,1,0,'C');
+
+            //soat
+
+            $pdf->SetLineWidth(0);
+            $pdf->SetFont('Arial','B',11);
+            $pdf->SetDrawColor(50);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->SetTextColor(255,255,255);
+            $pdf->Cell(3,0.9,'Soat',1,0,'C',true);
+            // variable cedula
+            $pdf->SetFont('Arial','B',11);
+            $pdf->SetFillColor(0);
+            $pdf->SetTextColor(0);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->Cell(3,0.9,$vSoat,1,1,'C');
+
+            //Licencia
+            $pdf->Ln(0.6);
+            $pdf->Cell(5);
+            $pdf->SetLineWidth(0);
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetDrawColor(50);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->SetTextColor(255,255,255);
+            $pdf->Cell(3,0.9,"Tecno Mecanica",1,0,'C',true);
+            // variable cedula
+            $pdf->SetFont('Arial','B',11);
+            $pdf->SetFillColor(0);
+            $pdf->SetTextColor(0);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->Cell(3,0.9,$tecnoMec,1,0,'C');
+
+            //Fondo Pension
+            $pdf->SetLineWidth(0);
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetDrawColor(50);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->SetTextColor(255,255,255);
+            $pdf->Cell(3,0.9,"Fondo Pension",1,0,'C',true);
+            // variable cedula
+            $pdf->SetFont('Arial','B',11);
+            $pdf->SetFillColor(0);
+            $pdf->SetTextColor(0);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->Cell(3,0.9,$fondoPension,1,1,'C');
+
+            //direccion
+            $pdf->Ln(0.6);
+            $pdf->Cell(0.5);
+            $pdf->SetLineWidth(0);
+            $pdf->SetFont('Arial','B',11);
+            $pdf->SetDrawColor(50);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->SetTextColor(255,255,255);
+            $pdf->Cell(3,0.9,"Direccion",1,0,'C',true);
+            // variable telefono
+            $pdf->SetFont('Arial','B',8);
+            $pdf->SetFillColor(0);
+            $pdf->SetTextColor(0);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->Cell(7.5,0.9,utf8_decode($direccion),1,0,'C');
+
+            //telefono
             $pdf->SetLineWidth(0);
             $pdf->SetFont('Arial','B',11);
             $pdf->SetDrawColor(50);
@@ -316,26 +391,40 @@ exit;
             $pdf->SetFillColor(0);
             $pdf->SetTextColor(0);
             $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(9,0.9,$telefono,1,1,'C');
+            $pdf->Cell(3,0.9,$telefono,1,1,'C');
 
-            //telefono
-            $pdf->Ln(0.9);
+            //empresa
+            $pdf->Ln(0.6);
             $pdf->Cell(0.5);
             $pdf->SetLineWidth(0);
             $pdf->SetFont('Arial','B',11);
             $pdf->SetDrawColor(50);
             $pdf->SetFillColor(20,100,220);
             $pdf->SetTextColor(255,255,255);
-            $pdf->Cell(3,0.9,"Direccion",1,0,'C',true);
-            // variable telefono
+            $pdf->Cell(3,0.9,"Empresa",1,0,'C',true);
+            // variable rh
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetFillColor(0);
+            $pdf->SetTextColor(0);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->Cell(7.5,0.9,$empresa,1,0,'C');
+
+            //placa
+            $pdf->SetLineWidth(0);
+            $pdf->SetFont('Arial','B',11);
+            $pdf->SetDrawColor(50);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->SetTextColor(255,255,255);
+            $pdf->Cell(3,0.9,"Placa",1,0,'C',true);
+            // variable rh
             $pdf->SetFont('Arial','B',11);
             $pdf->SetFillColor(0);
             $pdf->SetTextColor(0);
             $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(13.5,0.9,utf8_decode($direccion),1,1,'C');
+            $pdf->Cell(3,0.9,$placa,1,1,'C');
 
             //EPS
-            $pdf->Ln(0.9);
+            $pdf->Ln(0.6);
             $pdf->Cell(0.5);
             $pdf->SetLineWidth(0);
             $pdf->SetFont('Arial','B',11);
@@ -363,8 +452,8 @@ exit;
             $pdf->SetFillColor(20,100,220);
             $pdf->Cell(5.2,0.9,utf8_decode($eps),1,1,'C');
 
-            //EMPRESA
-            $pdf->Ln(0.9);
+            //arl
+            $pdf->Ln(0.6);
             $pdf->Cell(0.5);
             $pdf->SetLineWidth(0);
             $pdf->SetFont('Arial','B',11);
@@ -393,35 +482,7 @@ exit;
             $pdf->SetFillColor(20,100,220);
             $pdf->Cell(5.2,0.9,$nit,1,1,'C');
 
-            //rh
-            $pdf->Ln(0.9);
-            $pdf->Cell(0.5);
-            $pdf->SetLineWidth(0);
-            $pdf->SetFont('Arial','B',11);
-            $pdf->SetDrawColor(50);
-            $pdf->SetFillColor(20,100,220);
-            $pdf->SetTextColor(255,255,255);
-            $pdf->Cell(3,0.9,"Empresa",1,0,'C',true);
-            // variable rh
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetFillColor(0);
-            $pdf->SetTextColor(0);
-            $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(7.3,0.9,$empresa,1,0,'C');
-
-            //rh
-            $pdf->SetLineWidth(0);
-            $pdf->SetFont('Arial','B',11);
-            $pdf->SetDrawColor(50);
-            $pdf->SetFillColor(20,100,220);
-            $pdf->SetTextColor(255,255,255);
-            $pdf->Cell(3,0.9,"Placa",1,0,'C',true);
-            // variable rh
-            $pdf->SetFont('Arial','B',11);
-            $pdf->SetFillColor(0);
-            $pdf->SetTextColor(0);
-            $pdf->SetFillColor(20,100,220);
-            $pdf->Cell(3.2,0.9,$placa,1,1,'C');
+            
             
             // QR, VIBRA, PUBLICIDAD Y TARIFAS            
             $pdf->Image('../../vista/imagenes/qr/qr-'.$id.'.png' , 2 ,20.6, 0 , 5.5,'png');
@@ -446,7 +507,7 @@ exit;
             // Restauración de colores y fuentes
             $pdf->SetFillColor(224,235,255);
             $pdf->SetTextColor(0);
-            $pdf->SetFont('Arial','',7);
+            $pdf->SetFont('Arial','B',7);
             $fill = false;
             for ($i=0 ; $i < count($tarifas['data']) ; $i++) {
                 $tarifa = $tarifas['data'][$i]['tarifa'];
@@ -461,8 +522,186 @@ exit;
             }
             
 
-            $pdf->Output('D','Tarjeton-'.$id.'.pdf');
-            //$pdf->Output();
+            //$pdf->Output('D','Tarjeton-'.$id.'.pdf');
+            $pdf->Output();
+            //$this->conexion->conectar();
+        }
+
+        function exportarTarjeton($dueno,$conductor,$placa,$nInterno,$nMovilizacion,$vLicencia,$vMovilizacion,$vSoat,$eps,$rh,$arl,$fondoPension,$entResp,$nit,$id,$tarifas,$control,$ext,$direccion,$telefono,$tecnoMec){
+            $Rol = $_SESSION['ROL'];
+            if($nInterno == 'null'){
+                $nInterno = 0;
+            }
+            if($dueno == 'null'){
+                $dueno = 0;
+            }
+            if($conductor == 'null'){
+                $conductor = 0;
+            }
+            if($placa == 'null'){
+                $placa = 0;
+            }
+            if($telefono == 'null'){
+                $telefono = 0;
+            }
+            if($nMovilizacion == 'null'){
+                $nMovilizacion = 0;
+            }
+            if($vLicencia == 'null'){
+                $vLicencia = 0;
+            }
+            if($vMovilizacion == 'null'){
+                $vMovilizacion = 0;
+            }
+            if($vSoat == 'null'){
+                $vSoat = 0;
+            }
+            if($eps == 'null'){
+                $eps = 0;
+            }
+            if($rh == 'null'){
+                $rh = 0;
+            }
+            if($arl == 'null'){
+                $arl = 0;
+            }
+            if($fondoPension == 'null'){
+                $fondoPension = 0;
+            }
+            if($entResp == 'null'){
+                $entResp = 0;
+            }
+            if($nit == 'null'){
+                $nit = 0;
+            }
+            if($direccion == 'null'){
+                $direccion = 0;
+            }
+            if($control == 'null'){
+                $control = 0;
+            }
+            
+            // VALIMOS ROL
+            if($entResp == "INDEPENDIENTE" || $entResp == "ALCALDIA"){
+                $empresa = $dueno;
+                $nit = $nit;
+            }else{
+                $empresa = $entResp;
+                $nit = $nit;
+            }
+            
+            if ($ext != '') {
+                $foto = "foto-".$id.".".$ext;
+            }else{
+                $foto = "blanco.jpg";
+            }
+
+            if($empresa == 'MEGATAXI'){
+                $publicidad = "megataxi.jpeg";
+            }else if($empresa == 'TUTAXI'){
+                $publicidad = "tutaxi.jpeg";
+            }else{
+                $publicidad = "blanco.jpg";
+            }
+
+            require('../../vista/plugins/fpdf/fpdf.php');
+            $pdf = new FPDF('L','cm',ARRAY(25,25));
+            $pdf->SetFont('Arial','B',12);
+            $pdf->AddPage();
+            // Tarjeton
+            //$pdf->Image('../../vista/imagenes/tarjetonactualizado.jpeg' , 0 ,0, 25, 25,'jpeg');
+            // control
+            $pdf->Ln(2.3);
+            $pdf->Cell(8);
+            $pdf->Cell(7,1,$control,0,1,'C');
+            //foto
+            $pdf->Image('../../vista/imagenes/foto/'.$foto , 1.9 ,5.4, 3.6 , 4.1);
+            // Nombre
+            $pdf->Ln(0.6);
+            $pdf->Cell(10);
+            $pdf->Cell(10,1,$conductor,0,1,'L');
+            // PLACA
+            $pdf->Ln(0.8);
+            $pdf->Cell(7);
+            $pdf->Cell(3,1,$placa,0,0,'C');
+            // INTERNO
+            $pdf->Cell(4.2);
+            $pdf->Cell(2.4,1,$nInterno,0,0,'C');
+            // movilizacion
+            $pdf->Cell(4.4);
+            $pdf->Cell(1.4,1,$nMovilizacion,0,1,'C');
+            // licencia
+            $pdf->Ln(0.2);
+            $pdf->Cell(5.5);
+            $pdf->Cell(3.9,1,$vLicencia,0,0,'C');
+            // vmov
+            $pdf->Cell(1.8);
+            $pdf->Cell(3.9,1,$vMovilizacion,0,0,'C');
+            // soat
+            $pdf->Cell(1.5);
+            $pdf->Cell(3.9,1,$vSoat,0,1,'C');
+            // EPS
+            $pdf->Ln(1.4);
+            $pdf->Cell(3);
+            $pdf->Cell(15,1,$eps,0,0,'L');
+            // RH
+            $pdf->Cell(2.5);
+            $pdf->Cell(2,1,$rh,0,1,'L');
+            // ARL
+            $pdf->Ln(0.8);
+            $pdf->Cell(3);
+            $pdf->Cell(9,1,$arl,0,0,'L');
+            // PENSION
+            $pdf->Cell(5);
+            $pdf->Cell(5,1,$fondoPension,0,1,'L');
+            // empresa
+            $pdf->Ln(1);
+            $pdf->Cell(6.5);
+            $pdf->Cell(8.5,1,$empresa,0,0,'L');
+            // nit
+            $pdf->Cell(2.1);
+            $pdf->Cell(5,1,$nit,0,1,'L');
+            
+            // QR         
+            $pdf->Image('../../vista/imagenes/qr/qr-'.$id.'.png' , 2.4 ,17.7, 0 , 5.4,'png');
+            // TARIFAS   
+            $pdf->Ln(1.5); 
+            $pdf->Cell(17);
+            $pdf->SetFont('Arial','B',8);
+            $pdf->Cell(6.3,0.6,"DECRETO 0943 / 0944",0,1,'L');
+            // Colores, ancho de línea y fuente en negrita
+            $pdf->SetLineWidth(0);
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetFillColor(20,100,220);
+            $pdf->SetTextColor(255,255,255);
+            
+            $header = ['Concepto','Tarifa'];
+            $w = array(5.7, 1.4);
+            $pdf->Cell(15);
+            for($i=0;$i<count($header);$i++){
+                $pdf->Cell($w[$i],0.7,$header[$i],1,0,'C',true);
+            }
+            $pdf->Ln();
+            // Restauración de colores y fuentes
+            $pdf->SetFillColor(224,235,255);
+            $pdf->SetTextColor(0);
+            $pdf->SetFont('Arial','B',8);
+            $fill = false;
+            for ($i=0 ; $i < count($tarifas['data']) ; $i++) {
+                $tarifa = $tarifas['data'][$i]['tarifa'];
+                $concepto = $tarifas['data'][$i]['concepto'];
+
+                $pdf->Cell(15);
+                $pdf->Cell($w[0],0.5,$concepto,1,0,'L',$fill);
+                $pdf->Cell($w[1],0.5,$tarifa,1,0,'C',$fill);
+                $pdf->Ln(0.5);
+                $fill = !$fill;
+
+            }
+            
+
+            //$pdf->Output('D','Tarjeton-'.$id.'.pdf');
+            $pdf->Output();
             //$this->conexion->conectar();
         }
 

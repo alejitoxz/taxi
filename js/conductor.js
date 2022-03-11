@@ -74,6 +74,11 @@ function listar_conductor(){
                 "targets": [ 14 ],
                 "visible": false
             }
+            ,
+            {
+                "targets": [ 15 ],
+                "visible": false
+            }
         ],
        /* "createdRow": function( row, data, dataIndex){
             if( data[2] == ){
@@ -81,6 +86,7 @@ function listar_conductor(){
             }
         },*/
         "columns": [
+            { "data": "vTecnomecanica" },
             { "data": "url_foto" },
             { "data": "nInterno" },
             { "data": "nMovilizacion" },
@@ -324,6 +330,7 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     var url_foto = datosConductor.url_foto;
     var direccion = datosConductor.direccion;
     var tel = datosConductor.telefono;
+    var vTecnomecanica = datosConductor.vTecnomecanica;
     
     // VALIDAMOS POR ROL
     if(entResp == 'INDEPENDIENTE' || entResp == 'ALCALDIA'){
@@ -367,6 +374,7 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     +"&ext="+url_foto
     +"&tele="+tel
     +"&dir="+direccion
+    +"&vTecnomecanica="+vTecnomecanica
     ;
     window.open(url,'_blank');
 })

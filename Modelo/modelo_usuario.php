@@ -28,6 +28,7 @@ session_start();
                     WHERE u.usuario = '$usuario' AND u.estatus = 1 
                     and m.nivel = 2 
                     ORDER BY m.orden";
+               
             $resp1 = sqlsrv_query($conn, $sql1);
            
             if( $resp1 === false) {
