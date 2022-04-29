@@ -107,7 +107,7 @@
         <div class="col-md-4 align-self-end">
         <div class="form-group">
               
-              <input type="file" class="custom-file-input" id="foto" name ="foto" accept="image/*">
+              <input type="file" class="custom-file-input" id="foto" name ="foto" >
               <label class="custom-file-label" for="foto">Seleccionar</label>
               </div>
         </div>
@@ -253,7 +253,7 @@
         <div class="col-md-4 align-self-end">
         <div class="form-group">
               
-              <input type="file" class="custom-file-input" id="fotoedit" name ="fotoedit" accept="image/*">
+              <input type="file" class="custom-file-input" id="fotoedit" name ="fotoedit">
               <label class="custom-file-label" for="fotoedit">Seleccionar</label>
               </div>
         </div>

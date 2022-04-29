@@ -596,6 +596,7 @@ exit;
                 $foto = "blanco.jpg";
             }
 
+            //echo $foto;exit;
             if($empresa == 'MEGATAXI'){
                 $publicidad = "megataxi.jpeg";
             }else if($empresa == 'TUTAXI'){
@@ -604,21 +605,25 @@ exit;
                 $publicidad = "blanco.jpg";
             }
 
-            require('../../vista/plugins/fpdf/fpdf.php');
-            $pdf = new FPDF('L','cm',ARRAY(25,25));
-            $pdf->SetFont('Arial','B',12);
+            //require('../../vista/plugins/fpdf/fpdf.php');
+            require('../../vista/plugins/image_alpha/image_alpha.php');
+
+           // $pdf=new PDF_ImageAlpha();
+
+            $pdf = new PDF_ImageAlpha('p','cm',ARRAY(26,26));
+            $pdf->SetFont('Arial','B',20);
             $pdf->AddPage();
             // Tarjeton
-            //$pdf->Image('../../vista/imagenes/tarjetonactualizado.jpeg' , 0 ,0, 25, 25,'jpeg');
+            $pdf->Image('../../vista/imagenes/tarjetonactualizado.jpeg' , 0 ,0, 26, 26,'jpeg');
             // control
-            $pdf->Ln(2.3);
+            $pdf->Ln(2.5);
             $pdf->Cell(8);
-            $pdf->Cell(7,1,$control,0,1,'C');
+            $pdf->Cell(8,1,$control,0,1,'C');
             //foto
-            $pdf->Image('../../vista/imagenes/foto/'.$foto , 1.9 ,5.4, 3.6 , 4.1);
+            $pdf->Image('../../vista/imagenes/foto/'.$foto , 2.3 ,5.7, 3.6 , 4.1);
             // Nombre
             $pdf->Ln(0.6);
-            $pdf->Cell(10);
+            $pdf->Cell(11);
             $pdf->Cell(10,1,$conductor,0,1,'L');
             // PLACA
             $pdf->Ln(0.8);
@@ -628,42 +633,42 @@ exit;
             $pdf->Cell(4.2);
             $pdf->Cell(2.4,1,$nInterno,0,0,'C');
             // movilizacion
-            $pdf->Cell(4.4);
-            $pdf->Cell(1.4,1,$nMovilizacion,0,1,'C');
+            $pdf->Cell(2);
+            $pdf->Cell(1.5,0,$nMovilizacion,0,1,'C');
             // licencia
-            $pdf->Ln(0.2);
-            $pdf->Cell(5.5);
+            $pdf->Ln(1.3);
+            $pdf->Cell(5.8);
             $pdf->Cell(3.9,1,$vLicencia,0,0,'C');
             // vmov
-            $pdf->Cell(1.8);
+            $pdf->Cell(2);
             $pdf->Cell(3.9,1,$vMovilizacion,0,0,'C');
             // soat
             $pdf->Cell(1.5);
             $pdf->Cell(3.9,1,$vSoat,0,1,'C');
             // EPS
-            $pdf->Ln(1.4);
-            $pdf->Cell(3);
+            $pdf->Ln(1.6);
+            $pdf->Cell(3.8);
             $pdf->Cell(15,1,$eps,0,0,'L');
             // RH
-            $pdf->Cell(2.5);
+            $pdf->Cell(2.7);
             $pdf->Cell(2,1,$rh,0,1,'L');
             // ARL
             $pdf->Ln(0.8);
-            $pdf->Cell(3);
+            $pdf->Cell(4);
             $pdf->Cell(9,1,$arl,0,0,'L');
             // PENSION
             $pdf->Cell(5);
             $pdf->Cell(5,1,$fondoPension,0,1,'L');
             // empresa
             $pdf->Ln(1);
-            $pdf->Cell(6.5);
+            $pdf->Cell(7.2);
             $pdf->Cell(8.5,1,$empresa,0,0,'L');
             // nit
-            $pdf->Cell(2.1);
+            $pdf->Cell(2.2);
             $pdf->Cell(5,1,$nit,0,1,'L');
             
             // QR         
-            $pdf->Image('../../vista/imagenes/qr/qr-'.$id.'.png' , 2.4 ,17.7, 0 , 5.4,'png');
+            $pdf->Image('../../vista/imagenes/qr/qr-'.$id.'.png' , 2.6 ,18.5, 0 , 5.4,'png');
             // TARIFAS   
             $pdf->Ln(1.5); 
             $pdf->Cell(17);
@@ -677,7 +682,7 @@ exit;
             
             $header = ['Concepto','Tarifa'];
             $w = array(5.7, 1.4);
-            $pdf->Cell(15);
+            $pdf->Cell(15.6);
             for($i=0;$i<count($header);$i++){
                 $pdf->Cell($w[$i],0.7,$header[$i],1,0,'C',true);
             }
@@ -691,7 +696,7 @@ exit;
                 $tarifa = $tarifas['data'][$i]['tarifa'];
                 $concepto = $tarifas['data'][$i]['concepto'];
 
-                $pdf->Cell(15);
+                $pdf->Cell(15.6);
                 $pdf->Cell($w[0],0.5,$concepto,1,0,'L',$fill);
                 $pdf->Cell($w[1],0.5,$tarifa,1,0,'C',$fill);
                 $pdf->Ln(0.5);
