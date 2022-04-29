@@ -13,7 +13,9 @@
             $sql  = "SELECT
             id,
             entResp,
-            nit
+            nit,
+            telefono,
+            direccion
             FROM
             company
             WHERE estatus = 1 AND id not in (1);
@@ -40,13 +42,12 @@
            
         }
 
-        function registrar_company($entResp,$nit){
+        function registrar_company($entResp,$nit,$telefono,$direccion){
             $conn = $this->conexion->conectar();
             $sql  = "INSERT INTO company(
-                    entResp,nit,estatus)
-                     VALUES ('$entResp','$nit',1)
+                    entResp,nit,estatus,telefono,direccion)
+                     VALUES ('$entResp','$nit',1,'$telefono','$direccion')
                      ";
-                   
             $resp = sqlsrv_query($conn, $sql);
             
             if( $resp === false) {
@@ -75,12 +76,14 @@
             $this->conexion->conectar();
         }
         
-        function editar_company($id,$entResp,$nit){
+        function editar_company($id,$entResp,$nit,$telefono,$direccion){
             $conn = $this->conexion->conectar();
     
             $sql  = "UPDATE company SET
                     entResp = '$entResp',
-                    nit = '$nit'
+                    nit = '$nit',
+                    telefono = '$telefono',
+                    direccion = '$direccion'
                     WHERE id=$id 
                     ";
                      

@@ -17,6 +17,8 @@ function listar_company(){
             { "data": "id" },
             { "data": "entResp" },
             { "data": "nit" },
+            { "data": "telefono" },
+            { "data": "direccion" },
             {"defaultContent":
             "<button style='font-size:13px;' type='button' class='eliminarc btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editarc btn btn-info'><i class='fa fa-edit'></i></button>"}
         ],
@@ -33,8 +35,12 @@ function AbrirModalRegistroCompany(){
 function registrar_company(){
     var entResp = $("#txt_com").val();
     var nit = $("#txt_nit").val();
+    var telefono = $("#txt_tel").val();
+    var direccion = $("#txt_dir").val();
 
-    if( entResp == '' ||
+    if(     entResp == '' ||
+            nit == ''     ||
+            entResp == '' ||
             nit == ''
         ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
@@ -44,7 +50,9 @@ function registrar_company(){
         "type": "POST",
         data:{
         entResp:entResp,
-        nit:nit
+        nit:nit,
+        telefono:telefono,
+        direccion:direccion
         }
     }).done(function(resp){
         console.log(resp);
@@ -65,6 +73,8 @@ function registrar_company(){
 function limpiarRegistro(){
     $("#txt_com").val("");
     $("#txt_nit").val("");
+    $("#txt_tel").val("");
+    $("#txt_dir").val("");
 }
 
 // FUNCION PARA ELIMINAR (ANULAR) REGISTRO
@@ -137,21 +147,29 @@ $('#tabla_company').on('click','.editarc',function(){
     var id = datosCompany.id;
     var entResp = datosCompany.entResp;
     var nit = datosCompany.nit;
+    var telefono = datosCompany.telefono;
+    var direccion = datosCompany.direccion;
     //levantar modal
     AbrirModalEditarC();
     //ingresas datos modal
     $("#id").val(id);
     $("#txt_com_edit").val(entResp);
     $("#txt_nit_edit").val(nit);
+    $("#txt_tel_edit").val(telefono);
+    $("#txt_dir_edit").val(direccion);
    
 })
 function modificar_company(){
     var id = $("#id").val();
     var entResp = $("#txt_com_edit").val();
     var nit = $("#txt_nit_edit").val();
+    var telefono = $("#txt_tel_edit").val();
+    var direccion = $("#txt_dir_edit").val();
 
     if( entResp == '' ||
-        nit == '' 
+        nit == ''     ||
+        telefono == '' ||
+        direccion == '' 
     ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }
@@ -163,6 +181,8 @@ function modificar_company(){
         id:id,
         entResp:entResp,
         nit:nit,
+        telefono:telefono,
+        direccion:direccion
         }
     }).done(function(resp){
         console.log(resp);

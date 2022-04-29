@@ -5,5 +5,7 @@
     $id = htmlspecialchars($_POST['id'],ENT_QUOTES,'UTF-8');
     $entResp = htmlspecialchars($_POST['entResp'],ENT_QUOTES,'UTF-8');
     $nit = htmlspecialchars($_POST['nit'],ENT_QUOTES,'UTF-8');
-    $consulta = $MU->editar_company($id,$entResp,$nit);
+    $telefono = htmlspecialchars($_POST['telefono'],ENT_QUOTES,'UTF-8');
+    $direccion = htmlspecialchars($_POST['direccion'],ENT_QUOTES,'UTF-8');
+    $consulta = $MU->editar_company($id,$entResp,$nit,$telefono,$direccion);
     echo $consulta;

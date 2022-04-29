@@ -26,6 +26,8 @@
                           <th>#</th>
                           <th>Compañia</th>
                           <th>NIT</th>
+                          <th>Telefono</th>
+                          <th>Direccion</th>
                           <th>Editar</th>
                         </tr>
                     </thead>
@@ -54,16 +56,30 @@
         <form class="form">
 
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="">Compañia</label>
               <input type="text" class="form-control" id="txt_com" placeholder="Ingrese el nombre de la compañia"><br>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="">NIT</label>
               <input type="text" class="form-control" id="txt_nit" placeholder="Ingrese el nit"><br>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Telefono</label>
+              <input type="text" class="form-control" id="txt_tel" placeholder="Ingrese el nombre de la compañia"><br>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Direccion</label>
+              <input type="text" class="form-control" id="txt_dir" placeholder="Ingrese el nit"><br>
             </div>
           </div>
         </div>
@@ -101,6 +117,21 @@
             <div class="form-group">
               <label for="">NIT</label>
               <input type="text" class="form-control" id="txt_nit_edit" placeholder="Ingrese el nit"><br>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+          <input type="hidden" id="id" >
+            <div class="form-group">
+              <label for="">Telefono</label>
+              <input type="text" class="form-control" id="txt_tel_edit" placeholder="Ingrese el Telefono"><br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Direccion</label>
+              <input type="text" class="form-control" id="txt_dir_edit" placeholder="Ingrese la Direccion"><br>
             </div>
           </div>
         </div>
