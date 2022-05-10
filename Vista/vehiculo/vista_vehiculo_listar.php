@@ -118,7 +118,7 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Numero Movilizacion</label>
+              <label for="">tarjeta de operacion</label>
               <input type="text" class="form-control" id="txt_nmov" placeholder="Ingrese el numero interno"><br>
             </div>
           </div>
@@ -203,7 +203,7 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="">Numero Movilizacion</label>
+              <label for="">Tarjeta de operacion</label>
               <input type="text" class="form-control" id="txt_nmov_edit" placeholder="Ingrese el numero de movilizacion"><br>
             </div>
           </div>
