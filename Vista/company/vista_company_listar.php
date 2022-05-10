@@ -59,7 +59,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="">Compañia</label>
-              <input type="text" class="form-control" id="txt_com" placeholder="Ingrese el nombre de la compañia"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_com" placeholder="Ingrese el nombre de la compañia"><br>
             </div>
           </div>
           <div class="col-md-6">
@@ -79,7 +79,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="">Direccion</label>
-              <input type="text" class="form-control" id="txt_dir" placeholder="Ingrese el nit"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_dir" placeholder="Ingrese el nit"><br>
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@
           <input type="hidden" id="id" >
             <div class="form-group">
               <label for="">Compañia</label>
-              <input type="text" class="form-control" id="txt_com_edit" placeholder="Ingrese el nombre de la empresa"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_com_edit" placeholder="Ingrese el nombre de la empresa"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -131,7 +131,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Direccion</label>
-              <input type="text" class="form-control" id="txt_dir_edit" placeholder="Ingrese la Direccion"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_dir_edit" placeholder="Ingrese la Direccion"><br>
             </div>
           </div>
         </div>

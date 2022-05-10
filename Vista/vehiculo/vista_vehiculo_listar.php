@@ -66,13 +66,13 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Placa</label>
-              <input type="text" class="form-control" id="txt_pla" placeholder="Ingrese placa"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_pla" placeholder="Ingrese placa"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Marca</label>
-              <input type="text" class="form-control" id="txt_mar" placeholder="Ingrese la marca"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_mar" placeholder="Ingrese la marca"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -151,13 +151,13 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Placa</label>
-              <input type="text" class="form-control" id="txt_pla_edit" placeholder="Ingrese placa"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_pla_edit" placeholder="Ingrese placa"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Marca</label>
-              <input type="text" class="form-control" id="txt_mar_edit" placeholder="Ingrese la marca"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_mar_edit" placeholder="Ingrese la marca"><br>
             </div>
           </div>
           <div class="col-md-4">

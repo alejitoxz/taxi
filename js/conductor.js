@@ -78,6 +78,10 @@ function listar_conductor(){
             {
                 "targets": [ 15 ],
                 "visible": false
+            },
+            {
+                "targets": [ 16 ],
+                "visible": false
             }
         ],
        /* "createdRow": function( row, data, dataIndex){
@@ -86,6 +90,7 @@ function listar_conductor(){
             }
         },*/
         "columns": [
+            { "data": "codigo_bar" },
             { "data": "vTecnomecanica" },
             { "data": "url_foto" },
             { "data": "nInterno" },
@@ -116,7 +121,7 @@ function listar_conductor(){
             { "data": "vLicencia" },
             { "data": "placa" },
             {"defaultContent":
-            "<button style='font-size:13px;' type='button' class='eliminar btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editar btn btn-info'><i class='fa fa-edit'></i></button><button style='font-size:13px;' type='button' class='tarjeton btn btn-success'><i class='fa fa-file-pdf'></i></button>"}
+            "<button style='font-size:13px;' type='button' class='eliminar btn btn-danger'><i class='fa fa-trash'></i></button><button style='font-size:13px;' type='button' class='editar btn btn-info'><i class='fa fa-edit'></i></button><button style='font-size:13px;' type='button' class='tarjeton btn btn-success'><i class='fa fa-file-pdf'></i></button><button style='font-size:13px;' type='button' class='barras btn btn-warning'><i class='fa fa-barcode'></i></button>"}
         ],
         "language":idioma_espanol,
        select: true
@@ -196,7 +201,8 @@ function modificar_datos_conductor(){
         lista_img.append('img_extra[]', img);
         }
     }
- 
+    var fechaActual = moment().format('YYYY-MM-DD');
+
     var id = $("#id").val()
     var idPersonaC =  $("#idPersonaC").val();
     var nombre = $("#txt_nom_edit").val();
@@ -214,6 +220,9 @@ function modificar_datos_conductor(){
     var vLicencia = $("#txt_lic_edit").val();
     
 
+    vLicenca = moment(vLicencia).format('YYYY-MM-DD');
+    vSeguridad = moment(vSeguridad).format('YYYY-MM-DD');
+    console.log(fechaActual+" - "+vLicenca+" - "+vSeguridad)
     if( 
         nombre == '' ||
         apellido == '' ||
@@ -233,6 +242,18 @@ function modificar_datos_conductor(){
             idVehiculo == 0){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }
+        if(email.indexOf('@', 0) == -1 || email.indexOf('.', 0) == -1) {
+            $("#btnGuardarSol").prop('disabled', false);
+            swal.fire("Correo no valido", "Por favor utilice un correo valido", "warning");
+            return;
+        }if (vLicencia < fechaActual )  {
+            swal.fire("Mensaje De Advertencia", "Por favor modifique la fecha de la licencia", "warning");
+            return;
+        }if(vSeguridad < fechaActual )  {
+            swal.fire("Mensaje De Advertencia", "Por favor modifique la fecha de seguridad", "warning");
+            return;        
+        }
+    
 
     lista_img.append('id', id);
     lista_img.append('idPersonaC', idPersonaC);
@@ -350,8 +371,8 @@ $('#tabla_conductor').on('click','.tarjeton',function(){
     } else if(vSoat < fechaActual )  {
         swal.fire("Mensaje De Advertencia", "Su Soat se encuentra vencido, por favor esté al día", "warning");
         return;        
-    }else if(vMovilizacion < fechaActual )  {
-        swal.fire("Mensaje De Advertencia", "Su Movilizacion se encuentra vencido, por favor esté al día", "warning");
+    }else if(vSeguridad < fechaActual )  {
+        swal.fire("Mensaje De Advertencia", "Su Seguridad se encuentra vencido, por favor esté al día", "warning");
         return;        
     }
 
@@ -460,7 +481,7 @@ function registrar_conductor(){
     var fondoPension = $("#txt_pen").val();
     var vLicencia = $("#txt_lic").val();
     var placa = $("#sel_placa_vehiculo").val();
-
+    var fechaActual = moment().format('YYYY-MM-DD');
     lista_img.append('id', id);
     lista_img.append('nombre', nombre);
     lista_img.append('apellido', apellido);
@@ -477,7 +498,10 @@ function registrar_conductor(){
     lista_img.append('vLicencia', vLicencia);
     lista_img.append('direccion', direccion);
 
-   /* if( nombre == '' ||
+    vLicencia = moment(vLicencia).format('YYYY-MM-DD');
+    vSeguridad = moment(vSeguridad).format('YYYY-MM-DD');
+
+   if( nombre == '' ||
         apellido == '' ||
         cedula == '' ||
         telefono == '' ||
@@ -496,7 +520,19 @@ function registrar_conductor(){
     if(
         placa == 0 ){
         return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
-    }*/
+    }
+    if(email.indexOf('@', 0) == -1 || email.indexOf('.', 0) == -1) {
+        $("#btnGuardarSol").prop('disabled', false);
+        swal.fire("Correo no valido", "Por favor utilice un correo valido", "warning");
+        return;
+    }if (vLicencia < fechaActual )  {
+            swal.fire("Mensaje De Advertencia", "Por favor modifique la fecha de la licencia", "warning");
+            return;
+        }if(vSeguridad < fechaActual )  {
+            swal.fire("Mensaje De Advertencia", "Por favor modifique la fecha de seguridad", "warning");
+            return;        
+        }
+
 
     $.ajax({
         "url": "../controlador/conductor/controlador_conductor_registro.php",
@@ -636,3 +672,46 @@ function listar_con(){
         }
     })
 }
+// FUNCION PARA EDITAR REGISTRO
+$('#tabla_conductor').on('click','.barras',function(){
+    
+    if(table.row(this).child.isShown()){
+        var datosConductor = table.row(this).data();
+    }else{
+        var datosConductor = table.row($(this).parents('tr')).data();
+    }
+    
+    var fechaActual = moment().format('YYYY-MM-DD');
+    var vLicencia = datosConductor.vLicencia;
+    var vMovilizacion = datosConductor.vMovilizacion;
+    var vSoat = datosConductor.vSoat;
+    var vSeguridad = datosConductor.vSeguridad;
+    var codigo_bar = datosConductor.codigo_bar;
+
+    vLicencia = moment(vLicencia).format('YYYY-MM-DD');
+    vSoat = moment(vSoat).format('YYYY-MM-DD');
+    vMovilizacion = moment(vMovilizacion).format('YYYY-MM-DD');
+    vSeguridad = moment(vSeguridad).format('YYYY-MM-DD');
+
+    if (vLicencia < fechaActual )  {
+        swal.fire("Mensaje De Advertencia", "Su Licencia se encuentra vencida, por favor esté al día", "warning");
+        return;
+    } else if(vSoat < fechaActual )  {
+        swal.fire("Mensaje De Advertencia", "Su Soat se encuentra vencido, por favor esté al día", "warning");
+        return;        
+    }else if(vMovilizacion < fechaActual )  {
+        swal.fire("Mensaje De Advertencia", "Su Movilizacion se encuentra vencido, por favor esté al día", "warning");
+        return;        
+    }
+
+    var url = "../controlador/barras/controlador_exportar_barras.php?vSeguridad="+vSeguridad
+    +"&fechaActual="+fechaActual
+    +"&codigo_bar="+codigo_bar
+    ;
+    window.open(url,'_blank');
+})
+
+function mayus(e) {
+    e.value = e.value.toUpperCase();
+    //e.value = e.value.toLowerCase(); minuscula
+  }

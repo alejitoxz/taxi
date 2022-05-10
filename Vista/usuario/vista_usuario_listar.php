@@ -68,20 +68,20 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Cedula</label>
-              <input type="text" class="form-control" id="txt_ced" placeholder="Ingrese la cedula" onchange="buscarPersona(this.value)"><br>
+              <input type="text" maxlength="13" class="form-control" id="txt_ced" placeholder="Ingrese la cedula" onchange="buscarPersona(this.value)"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Nombres</label>
               <input type="hidden" id="idPersonaR">
-              <input type="text" class="form-control" id="txt_nom" placeholder="Ingrese los nombres"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_nom" placeholder="Ingrese los nombres"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Apellidos</label>
-              <input type="text" class="form-control" id="txt_ape" placeholder="Ingrese los apellidos"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_ape" placeholder="Ingrese los apellidos"><br>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Direccion</label>
-              <input type="text" class="form-control" id="txt_dir" placeholder="Ingrese la direccion"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_dir" placeholder="Ingrese la direccion"><br>
             </div>
           </div>
           </div>
@@ -165,19 +165,19 @@
           <input type="hidden" id="idPersona" >
             <div class="form-group">
               <label for="">Nombres</label>
-              <input type="text" class="form-control" id="txt_nom_edit" placeholder="Ingrese los Nombres"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_nom_edit" placeholder="Ingrese los Nombres"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Apellidos</label>
-              <input type="text" class="form-control" id="txt_ape_edit" placeholder="Ingrese los apellidos"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_ape_edit" placeholder="Ingrese los apellidos"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Cedula</label>
-              <input type="text" class="form-control" id="txt_ced_edit" placeholder="Ingrese la cedula"><br>
+              <input type="text" maxlength="13" onkeyup="mayus(this)" class="form-control" id="txt_ced_edit" placeholder="Ingrese la cedula"><br>
             </div>
           </div>
         </div>

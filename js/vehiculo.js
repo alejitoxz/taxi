@@ -71,6 +71,7 @@ function listar_pro(){
 }
 
 function registrar_vehiculo(){
+    var fechaActual = moment().format('YYYY-MM-DD');
     var placa = $("#txt_pla").val();
     var marca = $("#txt_mar").val();
     var modelo = $("#txt_mod").val();
@@ -81,6 +82,9 @@ function registrar_vehiculo(){
     var nMovilizacion = $("#txt_nmov").val();
     var vTecnomecanica = $("#vTecnomecanica").val();
 
+    vSoat = moment(vSoat).format('YYYY-MM-DD');
+    vMovilizacion = moment(vMovilizacion).format('YYYY-MM-DD');
+    vTecnomecanica = moment(vTecnomecanica).format('YYYY-MM-DD');
 
     if( placa == '' ||
         marca == '' ||
@@ -95,6 +99,15 @@ function registrar_vehiculo(){
         }if(
             idPropietario == 0 ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
+        }else if(vSoat < fechaActual )  {
+            swal.fire("Mensaje De Advertencia", "Por favor modifique la fecha del SOAT", "warning");
+            return;        
+        }else if(vMovilizacion < fechaActual )  {
+            swal.fire("Mensaje De Advertencia", "Por favor modifique la fecha de movilizacion", "warning");
+            return;        
+        }else if(vTecnomecanica < fechaActual )  {
+            swal.fire("Mensaje De Advertencia", "Por favor modifique la fecha de la tecnomecanica", "warning");
+            return;        
         }
 
     $.ajax({
@@ -219,6 +232,7 @@ $('#tabla_vehiculo').on('click','.editarv',function(){
 
 })
 function modificar_vehiculo(){
+    var fechaActual = moment().format('YYYY-MM-DD');
     var id = $("#id").val();
     var placa = $("#txt_pla_edit").val();
     var marca = $("#txt_mar_edit").val();
@@ -229,21 +243,30 @@ function modificar_vehiculo(){
     var vSoat = $("#txt_soa_edit").val();
     var nMovilizacion = $("#txt_nmov_edit").val();
     var vTecnomecanica = $("#vTecnomecanica_edit").val();
-
+    vSoat = moment(vSoat).format('YYYY-MM-DD');
+    vMovilizacion = moment(vMovilizacion).format('YYYY-MM-DD');
     if( placa == '' ||
         marca == '' ||
         modelo == '' ||
         nInterno == '' ||
         vMovilizacion == '' ||
         vSoat == ''||
-        vMovilizacion == '' 
-        ||
+        nMovilizacion == ''||
         vTecnomecanica == '' 
     ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }if(
             idPropietario == 0 ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
+        } else if(vSoat < fechaActual )  {
+            swal.fire("Mensaje De Advertencia", "Por favor modifique la fecha", "warning");
+            return;        
+        }else if(vMovilizacion < fechaActual )  {
+            swal.fire("Mensaje De Advertencia", "Por favor modifique la fecha", "warning");
+            return;        
+        }else if(vTecnomecanica < fechaActual )  {
+            swal.fire("Mensaje De Advertencia", "Por favor modifique la fecha", "warning");
+            return;        
         }
 
     $.ajax({
@@ -304,3 +327,8 @@ function limpiarRegistro(){
     $("#txt_nmov").val("");
     
 }
+
+function mayus(e) {
+    e.value = e.value.toUpperCase();
+    //e.value = e.value.toLowerCase(); minuscula
+  }

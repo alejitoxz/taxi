@@ -199,3 +199,7 @@ function modificar_company(){
     })
 
 }
+function mayus(e) {
+    e.value = e.value.toUpperCase();
+    //e.value = e.value.toLowerCase(); minuscula
+  }

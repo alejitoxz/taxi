@@ -21,13 +21,14 @@
                 <div class="col-lg-10">
                     <div class="col-lg-2">
                     <button type="button"  class="btn btn-primary"  onclick="AbrirModalRegistroConductor()" ><i class="fas fa-plus"></i> Registrar</button>                  
-                    <button type="button"  class="btn btn-primary"  onclick="editarVencimiento()" ><i class="fas fa-tasks" ></i> Editar</button>
+                    <!--<button type="button"  class="btn btn-primary"  onclick="editarVencimiento()" ><i class="fas fa-tasks" ></i> Editar</button>-->
                     </div> 
                 </div>
             </div>
             <table id="tabla_conductor" class="display responsive nowrap" style="width:100%">
                     <thead>
                         <tr>
+                          <th style="display:none"></th>
                           <th style="display:none"></th>
                           <th style="display:none"></th>
                           <th style="display:none"></th>
@@ -120,7 +121,7 @@
           <div class="col-md-4">
                 <div class="form-group">
                     <label for="">Cedula</label>
-                    <input type="text" class="form-control" id="txt_ced" placeholder="Ingrese cedula" onchange="buscarPersona(this.value)" ><br>
+                    <input type="text" maxlength="13" class="form-control" id="txt_ced" placeholder="Ingrese cedula" onchange="buscarPersona(this.value)" ><br>
                 </div>
             </div>
           <div class="col-md-4">
@@ -128,13 +129,13 @@
               <label for="">Nombres</label>
               <input type="hidden" id="idPersonaC">
               <input type="hidden" id="id">
-              <input type="text" class="form-control" id="txt_nom" placeholder="Ingrese nombres"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_nom" placeholder="Ingrese nombres"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Apellidos</label>
-              <input type="text" class="form-control" id="txt_ape" placeholder="Ingrese apellidos"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_ape" placeholder="Ingrese apellidos"><br>
             </div>
           </div>
         </div>
@@ -148,7 +149,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Direccion</label>
-              <input type="text" class="form-control" id="txt_dir" placeholder="Ingrese direccion"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_dir" placeholder="Ingrese direccion"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -162,7 +163,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">EPS</label>
-              <input type="text" class="form-control" id="txt_eps" placeholder="Ingrese la eps"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_eps" placeholder="Ingrese la eps"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -174,19 +175,19 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">ARL</label>
-              <input type="text" class="form-control" id="txt_arl" placeholder="Ingrese la arl"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_arl" placeholder="Ingrese la arl"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">GS.RH</label>
-              <input type="text" class="form-control" id="txt_rh" placeholder="Ingrese el RH"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_rh" placeholder="Ingrese el RH"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Fondo Pension</label>
-              <input type="text" class="form-control" id="txt_pen" placeholder="Ingrese el fondo Pension"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_pen" placeholder="Ingrese el fondo Pension"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -271,13 +272,13 @@
             <div class="form-group">
               <label for="">Nombres</label>
               <input type="hidden" id="idVehiculo">
-              <input type="text" class="form-control" id="txt_nom_edit" placeholder="Ingrese nombres"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_nom_edit" placeholder="Ingrese nombres"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Apellidos</label>
-              <input type="text" class="form-control" id="txt_ape_edit" placeholder="Ingrese apellidos"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_ape_edit" placeholder="Ingrese apellidos"><br>
             </div>
           </div>
         </div>
@@ -291,7 +292,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Direccion</label>
-              <input type="text" class="form-control" id="txt_dir_edit" placeholder="Ingrese direccion"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_dir_edit" placeholder="Ingrese direccion"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -305,7 +306,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">EPS</label>
-              <input type="text" class="form-control" id="txt_eps_edit" placeholder="Ingrese la eps"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_eps_edit" placeholder="Ingrese la eps"><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -317,19 +318,19 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">ARL</label>
-              <input type="text" class="form-control" id="txt_arl_edit" placeholder="Ingrese la arl"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_arl_edit" placeholder="Ingrese la arl"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">GS.RH</label>
-              <input type="text" class="form-control" id="txt_rh_edit" placeholder="Ingrese el RH"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_rh_edit" placeholder="Ingrese el RH"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Fondo Pension</label>
-              <input type="text" class="form-control" id="txt_pen_edit" placeholder="Ingrese fondo de pension"><br>
+              <input type="text" onkeyup="mayus(this)" class="form-control" id="txt_pen_edit" placeholder="Ingrese fondo de pension"><br>
             </div>
           </div>
           <div class="col-md-4">

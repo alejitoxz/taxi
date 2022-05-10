@@ -62,20 +62,20 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Cedula</label>
-              <input type="text" class="form-control" id="txt_cedp" placeholder="Ingrese la cedula" onchange="buscarPersonaP(this.value)"><br>
+              <input type="text" maxlength="13" class="form-control" id="txt_cedp"  placeholder="Ingrese la cedula" onchange="buscarPersonaP(this.value)"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Nombres</label>
               <input type="hidden" id="idPersona">
-              <input type="text" class="form-control" id="txt_nomp" placeholder="Ingrese los nombres"><br>
+              <input type="text" class="form-control" onkeyup="mayus(this)" id="txt_nomp" name="txt_nomp" placeholder="Ingrese los nombres" ><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Apellidos</label>
-              <input type="text" class="form-control" id="txt_apep" placeholder="Ingrese los apellidos"><br>
+              <input type="text" class="form-control" onkeyup="mayus(this)" id="txt_apep" placeholder="Ingrese los apellidos"><br>
             </div>
           </div>
         </div>
@@ -90,13 +90,13 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Email</label>
-              <input type="text" class="form-control" id="txt_emap" placeholder="Ingrese el email"><br>
+              <input type="email" class="form-control"  id="txt_emap" placeholder="Ingrese el email"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Direccion</label>
-              <input type="text" class="form-control" id="txt_dirp" placeholder="Ingrese la direccion"><br>
+              <input type="text" class="form-control" onkeyup="mayus(this)" id="txt_dirp" placeholder="Ingrese la direccion"><br>
             </div>
           </div>
           </div>
@@ -127,19 +127,19 @@
           <input type="hidden" id="id" >
             <div class="form-group">
               <label for="">Nombres</label>
-              <input type="text" class="form-control" id="txt_nomp_edit" placeholder="Ingrese los Nombres"><br>
+              <input type="text" class="form-control" onkeyup="mayus(this)" id="txt_nomp_edit" placeholder="Ingrese los Nombres"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Apellidos</label>
-              <input type="text" class="form-control" id="txt_apep_edit" placeholder="Ingrese los apellidos"><br>
+              <input type="text" class="form-control" onkeyup="mayus(this)" id="txt_apep_edit" placeholder="Ingrese los apellidos"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Cedula</label>
-              <input type="text" class="form-control" id="txt_cedp_edit" placeholder="Ingrese la cedula"><br>
+              <input type="text" maxlength="13" class="form-control" id="txt_cedp_edit" placeholder="Ingrese la cedula"><br>
             </div>
           </div>
         </div>
@@ -154,13 +154,13 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Email</label>
-              <input type="text" class="form-control" id="txt_emap_edit" placeholder="Ingrese el email"><br>
+              <input type="email" class="form-control" id="txt_emap_edit" placeholder="Ingrese el email"><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Direccion</label>
-              <input type="text" class="form-control" id="txt_dirp_edit" placeholder="Ingrese la direccion"><br>
+              <input type="text" class="form-control" onkeyup="mayus(this)" id="txt_dirp_edit" placeholder="Ingrese la direccion"><br>
             </div>
           </div>
           </div>
@@ -177,6 +177,9 @@
 <script type="text/javascript" src="../js/propietario.js"></script>
 
 <script>
+
+
+
   $(document).ready(function(){
     listar_propietario();
     $('#txt_cedp').on('input', function () { 
@@ -185,13 +188,14 @@
     $('#txt_cedp_edit').on('input', function () { 
         this.value = this.value.replace(/[^0-9]/g,'');
     });
-$('#txt_cedp').on('input', function () { 
+    $('#txt_cedp').on('input', function () { 
         this.value = this.value.replace(/[^0-9]/g,'');
     });
+    
+
     $("#modal_registro_propietario").on('shown.bs.modal',function(){
 
     });
   });
-    
 
 </script>

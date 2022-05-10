@@ -50,6 +50,7 @@ session_start();
             con.arl,
             con.rh,
             con.fondoPension,
+            con.codigo_bar,
             con.url_foto,
             CONVERT ( VARCHAR, con.vLicencia ) AS vLicencia,
             CONVERT ( VARCHAR, v.vSoat ) AS vSoat,
@@ -171,6 +172,7 @@ session_start();
             $idCompany = $_SESSION['COMPANY'];
             $idUsuario = $_SESSION['S_ID'];
             $cadena = "";
+            $codigo_bar = rand();
 
             if($ext){
                 $url = $ext;
@@ -180,16 +182,18 @@ session_start();
 
             if($id){
                 $cadena = "
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vSeguridad,idUsuario,url_foto) 
-                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vSeguridad',$idUsuario,'$url')";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vSeguridad,idUsuario,codigo_bar,url_foto) 
+                VALUES($id,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vSeguridad',$idUsuario,'$codigo_bar','$url')";
             }else{
                 
+                
+
                 $cadena = "DECLARE @idPersona int
                 INSERT INTO persona(nombre,apellido,cedula,telefono,email,direccion)
                 VALUES('$nombre','$apellido','$cedula','$telefono','$email','$direccion')
                 SET @idPersona = SCOPE_IDENTITY()
-                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vSeguridad,idUsuario,url_foto) 
-                VALUES(@idPersona,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vSeguridad',$idUsuario,'$url')";
+                INSERT INTO conductor(idPersona,vLicencia,idVehiculo,estatus,eps,arl,rh,fondoPension,idCompany,vSeguridad,idUsuario,codigo_bar,url_foto) 
+                VALUES(@idPersona,'$vLicencia','$placa',1,'$eps','$arl','$rh','$fondoPension',$idCompany,'$vSeguridad',$idUsuario,'$codigo_bar','$url')";
             }
             
             $conn = $this->conexion->conectar();
@@ -203,7 +207,7 @@ session_start();
                      BEGIN CATCH
                      ROLLBACK TRAN
                      END CATCH";
-                     //echo $sql;
+                     //echo $sql;exit;
             $resp = sqlsrv_query($conn, $sql);            
             $dir = "../../Vista/imagenes/foto/";
             // consulta
@@ -337,6 +341,7 @@ session_start();
         function modificar_datos_conductor($id,$idPersonaC,$nombre,$apellido,$cedula,$telefono,$email,$direccion,$idVehiculo,$eps,$arl,$rh,$fondoPension,$vLicencia,$vSeguridad,$ext,$imagen){
             $conn = $this->conexion->conectar();
             $idCompany = $_SESSION['COMPANY'];
+            $codigo_bar = rand();
   
 
             if($ext){
@@ -364,7 +369,8 @@ session_start();
                     rh = '$rh',
                     fondoPension = '$fondoPension',
                     idCompany = $idCompany,
-                    vSeguridad= '$vSeguridad'
+                    vSeguridad= '$vSeguridad',
+                    codigo_bar = '$codigo_bar'
                     $url
                     WHERE id=$id
 
@@ -433,3 +439,7 @@ session_start();
 
 
 }
+
+
+
+

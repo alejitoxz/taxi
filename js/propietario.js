@@ -89,6 +89,12 @@ function registrar_propietario(){
         ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }
+        if(email.indexOf('@', 0) == -1 || email.indexOf('.', 0) == -1) {
+            $("#btnGuardarSol").prop('disabled', false);
+            swal.fire("Correo no valido", "Por favor utilice un correo valido", "warning");
+            return;
+        }
+    
     
 
     $.ajax({
@@ -236,6 +242,12 @@ function modificar_propietario(){
         ){
             return swal.fire("Mensaje De Advertencia", "llene los campos vacios", "warning");
         }
+        if(email.indexOf('@', 0) == -1 || email.indexOf('.', 0) == -1) {
+            $("#btnGuardarSol").prop('disabled', false);
+            swal.fire("Correo no valido", "Por favor utilice un correo valido", "warning");
+            return;
+        }
+    
     $.ajax({
         "url": "../controlador/propietario/controlador_propietario_modificar.php",
         "type": "POST",
@@ -281,3 +293,8 @@ function contarPropietario(){
             
     })
 }
+
+function mayus(e) {
+    e.value = e.value.toUpperCase();
+    //e.value = e.value.toLowerCase(); minuscula
+  }

@@ -216,6 +216,11 @@ function modificar_usuario(){
     if(clave != clave2){
         return Swal.fire("Mensaje De Advertencia", "Las contraseñas no coinciden", "warning");
     }
+    if(email.indexOf('@', 0) == -1 || email.indexOf('.', 0) == -1) {
+        $("#btnGuardarSol").prop('disabled', false);
+        swal.fire("Correo no valido", "Por favor utilice un correo valido", "warning");
+        return;
+    }
 
     $.ajax({
         "url": "../controlador/usuario/controlador_usuario_modificar.php",
@@ -367,6 +372,11 @@ function registrar_usuario(){
     if(clave != clave2){
         return Swal.fire("Mensaje De Advertencia", "Las contraseñas no coinciden", "warning");
     }
+    if(email.indexOf('@', 0) == -1 || email.indexOf('.', 0) == -1) {
+        $("#btnGuardarSol").prop('disabled', false);
+        swal.fire("Correo no valido", "Por favor utilice un correo valido", "warning");
+        return;
+    }
 
     $.ajax({
         "url": "../controlador/usuario/controlador_usuario_registro.php",
@@ -434,3 +444,7 @@ function limpiarRegistro(){
 }
 
 
+function mayus(e) {
+    e.value = e.value.toUpperCase();
+    //e.value = e.value.toLowerCase(); minuscula
+  }
